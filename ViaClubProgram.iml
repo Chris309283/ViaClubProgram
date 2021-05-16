@@ -7,6 +7,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="JavaFx" level="application" />
+    <orderEntry type="library" exported="" name="JavaFx" level="application" />
+    <orderEntry type="library" name="lib" level="application" />
   </component>
 </module>
