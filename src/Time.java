@@ -1,8 +1,21 @@
 import java.time.LocalTime;
 
+/**
+ * A class for creating time objects.
+ * @author Christopher Gadgaard
+ * @version 1.0
+ */
+
 public class Time
 {
   private int hour, minute, second;
+
+  /**
+   * A three-argument constructor initializing the Time.
+   * @param h sets the hour of the day.
+   * @param m sets the minute of the hour.
+   * @param s sets the second of the minute.
+   */
 
   public Time(int h, int m, int s)
   {
@@ -10,6 +23,11 @@ public class Time
     this.minute = m;
     this.second = s;
   }
+
+  /**
+   * A one-argument constructor initializing the Time.
+   * @param totalTimeInSeconds sets the time of the day from total seconds.
+   */
 
   public Time(int totalTimeInSeconds)
   {
@@ -20,11 +38,21 @@ public class Time
     second = totalTimeInSeconds;
   }
 
+  /**
+   * A method for converting the time into seconds.
+   * @return An integer where hours & minutes have turned into seconds.
+   */
+
   public int convertToSeconds()
   {
     return (hour * 3600) + (minute * 60) + second;
   }
 
+  /**
+   * A boolean that checks if a time is before another time.
+   * @param time2 sets second time.
+   * @return
+   */
   public boolean isBefore(Time time2)
   {
     return time2.convertToSeconds() > convertToSeconds();
