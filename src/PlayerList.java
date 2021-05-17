@@ -11,7 +11,25 @@ public class PlayerList
   }
   public void addPlayer(Player player)
   {
-     player.add(players);
+     players.add(player);
+  }
+  public void removePlayer( Player player)
+  {
+    players.remove(player);
+  }
+
+  public ArrayList<Player> getPlayersAvailable()
+  {
+    return players;
+  }
+  public ArrayList<Player> getPlayersUnAvailable()
+  {
+    return players;
+  }
+
+  public ArrayList<Player> getPlayersByName( String name)
+  {
+    return players;
   }
 
 }
