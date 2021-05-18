@@ -1,9 +1,21 @@
 import java.util.GregorianCalendar;
 
+/**
+ * A class for creating Date objects.
+ *
+ * @author Java Gods
+ * @version 1.0
+ */
 public class Date
 {
 private int day, month, year;
 
+  /**
+   * A three-argument constructor initializing the Date.
+   * @param day sets the day of the month.
+   * @param month sets the month of the year.
+   * @param year sets the year.
+   */
   public Date(int day, int month, int year)
   {
     this.day = day;
@@ -11,9 +23,14 @@ private int day, month, year;
     this.year = year;
   }
 
+  /**
+   * A method that checks if a this date is before date2.
+   *
+   * @param date2 sets the second date.
+   * @return whether or not this date is before date2
+   */
   public boolean isBefore(Date date2)
   {
-
     if (year < date2.year)
     {
       return true;
@@ -35,12 +52,20 @@ private int day, month, year;
     return false;
   }
 
+  /**
+   * A method that checks if this year is a leap year.
+   * @return true if this year is a leap year, false otherwise.
+   */
   private boolean isLeapYear()
   {
     return ((this.year % 4 == 0) && (this.year % 100 != 0)) || (this.year % 400
         == 0);
   }
 
+  /**
+   * A method that returns how many days there are in a given month.
+   * @return An integer with days in given month.
+   */
   private int daysInMonth()
   {
     if (month == 1 || month == 3 || month == 5 || month == 7 || month == 8
@@ -66,6 +91,9 @@ private int day, month, year;
     }
   }
 
+  /**
+   * A method that sets the day to the day after.
+   */
   private void nextDay()
   {
     if (this.day < daysInMonth())
@@ -87,6 +115,12 @@ private int day, month, year;
     }
   }
 
+  /**
+   * A method that calculates from this date until date2.
+   *
+   * @param date2 Sets the second date.
+   * @return A time object with the days, months and years between the two dates.
+   */
   public int daysUntil(Date date2)
   {
     Date date1 = copy();
@@ -108,7 +142,12 @@ private int day, month, year;
     }
   }
 
-
+  /**
+   * A method that calculates from this date since date2.
+   *
+   * @param date2 Sets the second date.
+   * @return A time object with the days, months and years between the two dates.
+   */
   public int daysSince(Date date2)
   {
     Date date1 = copy();
@@ -131,6 +170,10 @@ private int day, month, year;
     }
   }
 
+  /**
+   * A method that gets you the current date.
+   * @return A Date object with the current date.
+   */
   public static Date today()
   {
     GregorianCalendar currentDate = new GregorianCalendar();
@@ -140,11 +183,24 @@ private int day, month, year;
     return new Date(currentDay, currentMonth, currentYear);
   }
 
+  /**
+   * A method for making a copy of the Date object.
+   *
+   * @return A copy Date object.
+   */
   public Date copy()
   {
     return new Date(day, month, year);
   }
 
+  /**
+   * Compares this Date to the specified object.
+   * The result is true if and only if the argument is not null and
+   * is a Date object that represents the same parameters as this object.
+   *
+   * @param obj The object to compare this Date against.
+   * @return true if the given object represents a Date equivalent to this date, false otherwise.
+   */
   public boolean equals(Object obj)
   {
     if (!(obj instanceof Date))
@@ -157,6 +213,10 @@ private int day, month, year;
     return day == other.day && month == other.month && year == other.year;
   }
 
+  /**
+   * A method that gives a string representation of the object.
+   * @return A string representation of the object.
+   */
   public String toString()
   {
     return String.format("%02d/%02d/%04d", day, month, year);

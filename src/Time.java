@@ -39,9 +39,9 @@ public class Time
   }
 
   /**
-   * A method for converting the time into seconds.
+   * A method for converting this time into seconds.
    *
-   * @return An integer where hours & minutes have turned into seconds.
+   * @return An integer with the sum of hour, minute and second as seconds.
    */
   public int convertToSeconds()
   {
@@ -49,10 +49,10 @@ public class Time
   }
 
   /**
-   * A method that checks if a time is before another time.
+   * A method that checks if a this time is before time2.
    *
    * @param time2 sets the second time.
-   * @return whether or not time is before time2
+   * @return whether or not this time is before time2
    */
   public boolean isBefore(Time time2)
   {
@@ -60,7 +60,7 @@ public class Time
   }
 
   /**
-   * A method that calculates from one time until another.
+   * A method that calculates from this time until time2.
    *
    * @param time2 Sets the second time.
    * @return A time object with the hours, minutes and seconds between the two times.
@@ -82,7 +82,7 @@ public class Time
   }
 
   /**
-   * A method that calculates from one time since another.
+   * A method that calculates from this time since time2.
    *
    * @param time2 Sets the second time.
    * @return A time object with the hours, minutes and seconds between the two times.
@@ -126,7 +126,7 @@ public class Time
   /**
    * Compares this Time to the specified object.
    * The result is true if and only if the argument is not null and
-   * is Time object the represents the same parameters as this object.
+   * is a Time object that represents the same parameters as this object.
    *
    * @param obj The object to compare this Time against.
    * @return true if the given object represents a Time equivalent to this time, false otherwise.
