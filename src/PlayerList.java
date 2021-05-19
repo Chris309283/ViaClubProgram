@@ -4,6 +4,7 @@ public class PlayerList
 {
   private ArrayList<Player> players;
 
+
   public PlayerList()
   {
     players = new ArrayList<Player>();
@@ -19,17 +20,21 @@ public class PlayerList
         players.remove(player);
       }
 
-
   public ArrayList<Player> getPlayersAvailable()
   {
-    ArrayList<Player> PlayerAvailable = new  ArrayList<Player>();
-    {
-      for (int i = 0; i < players.size(); i++)
-      {
-        if ()
-      }
+   ArrayList<Player>  PlayersAvailable new ArrayList<Player>();
+   for ( int i = 0; i < players.size(); i++)
+   {
+     if (players.get(i).)
 
-
-    }
+   }
+    return players;
   }
+  public ArrayList<Player> getPlayersUnAvailable()
+  {
+    ArrayList<Player>  PlayersUnAvailable new ArrayList<Player>();
+    for ( int i = 0; i < players.size(); i++)
+    {
+      if (players.get(i).isSuspended()|| players.get(i).is )
+
 }
