@@ -1,4 +1,3 @@
-import java.util.GregorianCalendar;
 
 /**
  * a class for creating unavailability objects
@@ -14,24 +13,28 @@ public class Unavailability
 
   /**
    * Three-argument constructor initializing the Unavailability
-   * @param type sets the type of Unavailability either Suspended or Injured
    * @param start sets the start date of the Unavailability
    * @param numberOfGames sets the number of games the Unavailability is for
+   * isAvailable method is set initially to false
    */
-  public Unavailability(String type,Date start, int numberOfGames){
-    this.type=type;
+  public Unavailability(Date start, int numberOfGames){
+    this.type="Suspended";
     this.start=start.copy();
     this.numberOfGames=numberOfGames;
+    isAvailable=false;
   }
 
   /**
    *Two-argument constructor initializing the Unavailability
    * @param type sets the type of Unavailability either Suspended or Injured
    * @param start sets the start date of the Unavailability
+   * isAvailable method is set initially to false
    */
   public Unavailability(String type, Date start){
     this.type=type;
     this.start=start.copy();
+    isAvailable=false;
+    numberOfGames=-1;
 
   }
 
@@ -47,13 +50,9 @@ public class Unavailability
    * @param end sets the end of the Unavailability as the current date
    */
   public void setAvailable(Date end){
-    GregorianCalendar currentDate = new GregorianCalendar();
-    int currentDay = currentDate.get(GregorianCalendar.DATE);
-    int currentMonth = currentDate.get(GregorianCalendar.MONTH) + 1;
-    int currentYear = currentDate.get(GregorianCalendar.YEAR);
-    end= new Date(currentDay, currentMonth, currentYear);
 
     this.end=end;
+    isAvailable=true;
   }
 
   /**
@@ -97,3 +96,4 @@ public class Unavailability
    return start.daysUntil(end);
   }
 }
+

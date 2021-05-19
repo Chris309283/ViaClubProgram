@@ -1,5 +1,11 @@
 import java.util.ArrayList;
 
+/**
+ * A class for creating player objects
+ *
+ * @author Java Gods
+ * @version 1.0
+ */
 public class Player
 {
   private String name;
@@ -7,6 +13,13 @@ public class Player
   private ArrayList<String> positions;
   private ArrayList<Unavailability> unavailabilities;
 
+  /**
+   * Two argument constructor for creating a player object
+   *
+   * @param name   sets the name of the player
+   * @param number sets the jersey number of the player
+   *               the positions and unavailabilities Array lists are created
+   */
   public Player(String name, int number)
   {
     this.name = name;
@@ -15,25 +28,54 @@ public class Player
     unavailabilities = new ArrayList<Unavailability>();
   }
 
+  /**
+   * Returns the name of the player
+   *
+   * @return the name of the player
+   */
   public String getName()
   {
     return name;
   }
+
+  /**
+   * Returns the jersey number of the player
+   *
+   * @return the jersey number of the player
+   */
 
   public int getNumber()
   {
     return number;
   }
 
+  /**
+   * sets the jersey number of the player
+   *
+   * @param number sets the jersey number of the player
+   */
+
   public void setNumber(int number)
   {
     this.number = number;
   }
 
+  /**
+   * adds a position the positions array list
+   *
+   * @param position the position added to the array list
+   */
+
   public void addPosition(String position)
   {
     positions.add(position);
   }
+
+  /**
+   * removes the position from the positions array list
+   *
+   * @param position the position that is removed
+   */
 
   public void removePosition(String position)
   {
@@ -43,6 +85,11 @@ public class Player
     }
   }
 
+  /**
+   * Checks if the player is currently suspended
+   *
+   * @return true if the player's last suspension type is "Suspended" and date is not before today's date. False otherwise
+   */
   public boolean isSuspended()
   {
     //add today date
@@ -58,10 +105,20 @@ public class Player
     }
   }
 
+  /**
+   * adds a unavailability to the unavailabilities array list
+   * @param unavailability is added the the unavaliabilities array list
+   */
+
   public void addUnavailability(Unavailability unavailability)
   {
     unavailabilities.add(unavailability);
   }
+
+  /**
+   * Remove the unavailability from the unavailabilities array list
+   * @param unavailability is removed form the unavailabilities array list
+   */
 
   public void removeUnavailability(Unavailability unavailability)
   {
@@ -69,10 +126,19 @@ public class Player
     unavailabilities.remove(unavailability);
   }
 
+  /**
+   * Gets the history of the player's unavailabilities
+   * @return all unavailability objects from unavailabilites array list
+   */
   public ArrayList<Unavailability> getAllUnavailabilities()
   {
     return unavailabilities;
   }
+
+  /**
+   *
+   * @return
+   */
 
   public ArrayList<String> getPositions()
   {
@@ -117,13 +183,19 @@ public class Player
   {
     return "name: " + name + " number: " + number + " positions: " + positions;
   }
-  public int getBenchedInARow(){
+
+  public int getBenchedInARow()
+  {
     return benchedInARow;
   }
-  public void setBenchedInARow(int games){
-    benchedInARow=games;
+
+  public void setBenchedInARow(int games)
+  {
+    benchedInARow = games;
   }
-  public void incrementBenchedInARow(){
+
+  public void incrementBenchedInARow()
+  {
     benchedInARow++;
   }
 
