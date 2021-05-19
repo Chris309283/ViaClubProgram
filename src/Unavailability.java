@@ -36,6 +36,13 @@ public class Unavailability
   }
 
   /**
+   * Gets the type of Unavailability
+   * @return the type of Unavailability
+   */
+  public String getType(){
+    return type;
+}
+  /**
    * ends the Unavailability and sets the end to the current date
    * @param end sets the end of the Unavailability as the current date
    */
