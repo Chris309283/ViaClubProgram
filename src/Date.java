@@ -8,13 +8,14 @@ import java.util.GregorianCalendar;
  */
 public class Date
 {
-private int day, month, year;
+  private int day, month, year;
 
   /**
    * A three-argument constructor initializing the Date.
-   * @param day sets the day of the month.
+   *
+   * @param day   sets the day of the month.
    * @param month sets the month of the year.
-   * @param year sets the year.
+   * @param year  sets the year.
    */
   public Date(int day, int month, int year)
   {
@@ -54,6 +55,7 @@ private int day, month, year;
 
   /**
    * A method that checks if this year is a leap year.
+   *
    * @return true if this year is a leap year, false otherwise.
    */
   private boolean isLeapYear()
@@ -64,6 +66,7 @@ private int day, month, year;
 
   /**
    * A method that returns how many days there are in a given month.
+   *
    * @return An integer with days in given month.
    */
   private int daysInMonth()
@@ -128,8 +131,8 @@ private int day, month, year;
 
     if (isBefore(date2))
     {
-      while (!(date1.day == date2.day && date1.month == date2.month &&
-          date1.year == date2.year))
+      while (!(date1.day == date2.day && date1.month == date2.month
+          && date1.year == date2.year))
       {
         date1.nextDay();
         days++;
@@ -156,8 +159,8 @@ private int day, month, year;
 
     if (!(isBefore(date2)))
     {
-      while (!(date3.day == date1.day && date3.month == date1.month &&
-          date3.year == date1.year))
+      while (!(date3.day == date1.day && date3.month == date1.month
+          && date3.year == date1.year))
       {
         date3.nextDay();
         days++;
@@ -172,6 +175,7 @@ private int day, month, year;
 
   /**
    * A method that gets you the current date.
+   *
    * @return A Date object with the current date.
    */
   public static Date today()
@@ -215,6 +219,7 @@ private int day, month, year;
 
   /**
    * A method that gives a string representation of the object.
+   *
    * @return A string representation of the object.
    */
   public String toString()
