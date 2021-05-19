@@ -115,10 +115,6 @@ public class Match
     return matchType;
   }
 
-  public Match copy()
-  {
-    return new Match(start,end,opponent,matchType);
-  }
 
   public boolean equals(Object obj)
   {
