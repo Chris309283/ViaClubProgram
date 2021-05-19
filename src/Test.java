@@ -7,6 +7,7 @@ public class Test
     Time t3 = new Time(11,0,0);
     Time t4 = new Time(12,0,0);
 
+
     System.out.println(t1.convertToSeconds());
     System.out.println(t1.isBefore(t2));
     System.out.println(t1.isBefore(t3));
@@ -20,5 +21,7 @@ public class Test
 
     System.out.println(t1.equals(t2));
     System.out.println(t1.equals(t4));
+    Unavailability u1= new Unavailability("Suspended", Date.today(), 5);
+    u1.setAvailable(Date.today());
   }
 }

@@ -1,39 +1,37 @@
-import java.util.ArrayList;
-import java.util.Locale;
 
 public class Match
 {
-  private Time start, end;
+  private Time startTime, endTime;
   private Date date;
-  private ArrayList<Player> bench, lineUp;
+  private PlayerList bench, lineUp;
   private String opponent, matchType;
   private int scoreHomeTeam, scoreOpponent, benchSize, teamSize;
   private boolean isAwayGame;
 
-  public Match(Time start, Time end, Date date, String opponent,
-      String matchType)
+  public Match(Time startTime, Time endTime, Date date, String opponent,
+      String matchType, boolean isAwayGame)
   {
-    this.start = start;
-    this.end = end;
+    this.startTime = startTime;
+    this.endTime = endTime;
     this.date = date;
     this.opponent = opponent;
     this.matchType = matchType;
-    this.bench = new ArrayList<>();
-    this.lineUp = new ArrayList<>();
+    this.bench = null;
+    this.lineUp = null;
     this.scoreHomeTeam = 0;
     this.scoreOpponent = 0;
     this.teamSize = 11;
-    this.isAwayGame = false;
+    this.isAwayGame = isAwayGame;
 
     switch (matchType.toLowerCase())
     {
-      case "cup":
+      case "Cup":
         this.benchSize = 6;
         break;
-      case "league":
+      case "League":
         this.benchSize = 5;
         break;
-      case "friendly":
+      case "Friendly":
         this.benchSize = 100;
         break;
       default: this.benchSize = 0;
@@ -47,7 +45,7 @@ public class Match
 
   public void setScoreHomeTeam(int goals)
   {
-    this.scoreHomeTeam = scoreHomeTeam;
+    this.scoreHomeTeam = goals;
   }
 
   public int getScoreOpponent()
@@ -57,7 +55,7 @@ public class Match
 
   public void setScoreOpponent(int goals)
   {
-    this.scoreOpponent = scoreOpponent;
+    this.scoreOpponent = goals;
   }
 
   public String getMatchScore()
@@ -65,44 +63,9 @@ public class Match
     return scoreHomeTeam + " - " + scoreOpponent;
   }
 
-  public void setIsAwayGame(boolean status)
+  public String getMatchType()
   {
-    isAwayGame=status;
-  }
-
-  public boolean getIsAwayGame()
-  {
-    return isAwayGame;
-  }
-
-  public void addToLineUp(Player player)
-  {
-    lineUp.add(player.copy());
-  }
-
-  public void addToBench(Player player)
-  {
-    bench.add(player.copy());
-  }
-
-  public void removeFromLineUp(Player player)
-  {
-    lineUp.remove(player);
-  }
-
-  public void removeFromBench(Player player)
-  {
-    bench.remove(player);
-  }
-
-  public ArrayList<Player> getLineUp()
-  {
-    return lineUp;
-  }
-
-  public ArrayList<Player> getBench()
-  {
-    return bench;
+    return matchType;
   }
 
   public void setMatchType(String matchType)
@@ -110,11 +73,55 @@ public class Match
     this.matchType = matchType;
   }
 
-  public String getMatchType()
+  public Date getDate()
   {
-    return matchType;
+    return date;
   }
 
+  public void setDate(Date date)
+  {
+    this.date = date;
+  }
+
+  public Time getStartTime()
+  {
+    return startTime;
+  }
+
+  public void setStartTime(Time startTime)
+  {
+    this.startTime = startTime;
+  }
+
+  public Time getEndTime()
+  {
+    return endTime;
+  }
+
+  public void setEndTime(Time endTime)
+  {
+    this.endTime = endTime;
+  }
+
+  public boolean getIsAwayGame()
+  {
+    return isAwayGame;
+  }
+
+  public void setIsAwayGame(boolean status)
+  {
+    isAwayGame=status;
+  }
+
+  public void addLineUp(PlayerList lineUp)
+  {
+    this.lineUp=lineUp;
+  }
+
+  public void addBench(PlayerList bench)
+  {
+    this.bench=bench;
+  }
 
   public boolean equals(Object obj)
   {
@@ -124,8 +131,15 @@ public class Match
     }
 
     Match other = (Match) obj;
-    return start.equals(other.start) && end.equals(other.end) && date.equals(other.date) && lineUp
+    return startTime.equals(other.startTime) && endTime.equals(other.endTime) && date.equals(other.date) && lineUp
         .equals(other.lineUp) && bench.equals(other.bench) && opponent.equals(other.opponent) && matchType.equals(other.matchType) && scoreHomeTeam == other.scoreHomeTeam && scoreOpponent == other
         .getScoreOpponent() && benchSize == other.benchSize && teamSize == other.teamSize && isAwayGame == other.isAwayGame;
+  }
+
+  public String toString()
+  {
+    String returnStr = matchType + " Match\n" + "Opponent: " + opponent + "\nDate: " + date + "\nTime: ";
+
+
   }
 }
