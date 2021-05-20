@@ -78,6 +78,16 @@ public class Match
     return date;
   }
 
+  public String getOpponent()
+  {
+    return opponent;
+  }
+
+  public void setOpponent(String opponent)
+  {
+    this.opponent = opponent;
+  }
+
   public void setDate(Date date)
   {
     this.date = date;
@@ -133,13 +143,18 @@ public class Match
     Match other = (Match) obj;
     return startTime.equals(other.startTime) && endTime.equals(other.endTime) && date.equals(other.date) && lineUp
         .equals(other.lineUp) && bench.equals(other.bench) && opponent.equals(other.opponent) && matchType.equals(other.matchType) && scoreHomeTeam == other.scoreHomeTeam && scoreOpponent == other
-        .getScoreOpponent() && benchSize == other.benchSize && teamSize == other.teamSize && isAwayGame == other.isAwayGame;
+        .scoreOpponent && benchSize == other.benchSize && teamSize == other.teamSize && isAwayGame == other.isAwayGame;
   }
 
   public String toString()
   {
-    String returnStr = matchType + " Match\n" + "Opponent: " + opponent + "\nDate: " + date + "\nTime: ";
+    String returnStr = matchType + " Match\n" + "Opponent: " + opponent + "\nDate: " + date + "\nTime: " + startTime + " - " + endTime + "\nScore: " + getMatchScore() + "\nStarting line up:";
+    for (int i = 0; i <lineUp.size; i++)
+    {
+
+    }
 
 
   }
+
 }
