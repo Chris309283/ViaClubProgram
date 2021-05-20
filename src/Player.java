@@ -90,16 +90,33 @@ public class Player
   /**
    * Checks if the player is currently suspended
    *
-   * @return true if the player's last suspension type is "Suspended" and date is not before today's date. False otherwise
+   * @return true if the player's last unavailability type is "Suspended" and date is not before today's date. False otherwise
    */
   public boolean isSuspended()
   {
     //add today date
     if (unavailabilities.get((unavailabilities.size() - 1)).getType()
-        .equals("Suspended") && !(unavailabilities
-        .get((unavailabilities.size() - 1)).getEnd().isBefore(Date.today())))
+        .equals("Suspended") && unavailabilities.get(unavailabilities.size()-1).isActive())
     {
 
+      return true;
+    }
+    else
+    {
+      return false;
+    }
+  }
+
+  /**
+   * Checks if the player is currently injured
+   *
+   * @return true if the player's last unavailability type is "Injured" and the unavailability end date is after today's date. False otherwise
+   */
+  public boolean isInjured()
+  {
+    if ((unavailabilities.get(unavailabilities.size() - 1).getType()
+        .equals("Injured")) && unavailabilities.get(unavailabilities.size()-1).isActive())
+    {
       return true;
     }
     else
@@ -129,6 +146,23 @@ public class Player
   {
     //add contains
     unavailabilities.remove(unavailability);
+  }
+
+  /**
+   * gets a specific unavailability from the unavailabilities array list
+   *
+   * @param unavailability is returned from the unavailabilities array list
+   * @return the unavailability from the unavailabilities array list
+   */
+  public Unavailability getUnavailability(Unavailability unavailability)
+  {
+    if (unavailabilities.contains(unavailability))
+    {
+      return unavailability;
+    }
+    else {
+      return null;
+    }
   }
 
   /**

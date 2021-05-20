@@ -95,5 +95,21 @@ public class Unavailability
   public int lasted(){
    return start.daysUntil(end);
   }
+
+  /**
+   * checks if the unavailability end date is not before today's date
+   * @return true if the unavailability end is not before doday's date. False otherwise
+   */
+  public boolean isActive(){
+    if(Date.today().isBefore(end)){
+      return true;
+    }
+    else {
+      return false;
+    }
 }
+
+
+}
+
 
