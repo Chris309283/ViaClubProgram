@@ -157,4 +157,9 @@ public class Match
 
   }
 
+  public PlayerList getLineUp(){
+
+    return getLineUp();
+  }
+
 }
