@@ -66,22 +66,37 @@ public class MatchList
     }
     return gettingMatchesBetweenDates;
   }
-  /*
-  public ArrayList<Match> getMatchesAgainst(String opponent){
 
+  public ArrayList<Match> getMatchesAgainst(String opponent){
+    // it searches acrross all matches and if it find the input opponent then it will be putted to our array
     ArrayList<Match> gettingMatchesAgainst = new ArrayList<Match>();
     for (int i = 0; i < matches.size(); i++){
-      gettingMatchesAgainst.add(matches.setOponent(opponent));
+      if (matches.get(i).getOpponent().equals(opponent)){
+        gettingMatchesAgainst.add(matches.get(i));
+      }
     }
     return gettingMatchesAgainst;
 
   }
 
-   */
+
   public ArrayList<Match> getMatchesPlayedBy(Player player){
     ArrayList<Match> gettingMatchesPlayedBy = new ArrayList<Match>();
+
     for (int i = 0; i < matches.size(); i++){
-      if (matches.contains())
+      //first get all players for current match
+      ArrayList<Player> = matches.get(i).getLineUP;
+      //PlayerList.getAllPlayers
+
+      //we use for loop again to get a list of players
+      for (int j = 0; j < matches.size(); j++){
+      if (matches.get(i).equals(player)){
+        gettingMatchesPlayedBy.add(matches.get(i));
+      }
+
+
+      }
+
     }
   }
   public ArrayList<Match> getMatchesWon(){
