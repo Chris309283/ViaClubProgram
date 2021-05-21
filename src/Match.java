@@ -149,7 +149,7 @@ public class Match
   public String toString()
   {
     String returnStr = matchType + " Match\n" + "Opponent: " + opponent + "\nDate: " + date + "\nTime: " + startTime + " - " + endTime + "\nScore: " + getMatchScore() + "\nStarting line up:";
-    for (int i = 0; i <lineUp.size; i++)
+    for (int i = 0; i <lineUp; i++)
     {
 
     }
