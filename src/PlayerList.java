@@ -22,16 +22,16 @@ public class PlayerList
   public ArrayList<Player> getPlayersAvailable()
   {
     ArrayList<Player> PlayersAvailable = new ArrayList<Player>();
+
     for ( int i = 0; i < players.size(); i++)
     {
-      if (players.get(i).)
-
+      if (players.get(i).is)
     }
     return players;
   }
   public ArrayList<Player> getPlayersUnAvailable()
   {
-    ArrayList<Player>  PlayersUnAvailable new ArrayList<Player>();
+    ArrayList<Player>  PlayersUnAvailable = new ArrayList<Player>();
     for ( int i = 0; i < players.size(); i++)
     {
       if (players.get(i).isSuspended()|| players.get(i).is )

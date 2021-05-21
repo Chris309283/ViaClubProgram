@@ -43,6 +43,16 @@ public class Unavailability
   }
 
   /**
+   *
+   * @return
+   */
+
+
+  public boolean getIsAvailable(){
+    return isAvailable;
+  }
+
+  /**
    * Gets the type of Unavailability
    *
    * @return the type of Unavailability
