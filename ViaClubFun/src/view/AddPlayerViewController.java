@@ -23,7 +23,7 @@ public class AddPlayerViewController
   @FXML private TextField nameField;
   @FXML private TextField numberField;
 
-  @FXML private TextArea positionsArea;
+  @FXML private ListView<String> positionsList;
 
   @FXML private ComboBox positionsBox;
 
