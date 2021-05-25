@@ -218,4 +218,14 @@ public class Player implements Serializable
     }
   }
 
+  public boolean isAvailable()
+  {
+    if (!isSuspended() && !isInjured())
+    {
+      return true;
+   }
+    return  false;
+  }
+
 }
+

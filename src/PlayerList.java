@@ -79,9 +79,12 @@ public class PlayerList
     ArrayList<Player> PlayersByName = new ArrayList<Player>();
     for (int i = 0; i < players.size(); i++)
     {
-      if (players.contains(name));
+      if (players.get(i).getName().equals(name))
+      {
+        PlayersByName.add(players.get(i));
+      }
     }
-    return players;
+    return PlayersByName;
   }
 
   public ArrayList<Player> getPlayersByNumber( int number)
@@ -89,11 +92,13 @@ public class PlayerList
     ArrayList<Player> PlayersByNumber = new ArrayList<Player>();
     for (int i = 0; i < players.size(); i++)
     {
-      if (players.get(i).equals(PlayersByNumber));
-    }
-    return players;
+      if (players.get(i).getNumber() == number)
+      {
+        PlayersByNumber.add(players.get(i));
+      }
   }
-
+    return PlayersByNumber;
+  }
   public ArrayList<Player> getAllPlayers()
   {
     return players;
@@ -116,6 +121,6 @@ public class PlayerList
       if (players.get(i).isSuspended());
     }
     return SuspendedPlayers;
-
   }
+
 }
