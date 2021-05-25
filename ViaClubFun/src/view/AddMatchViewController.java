@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.Region;
+import model.Player;
 import model.ViaClubModelManager;
 
 public class AddMatchViewController
@@ -26,9 +27,9 @@ public class AddMatchViewController
   @FXML private TextField searchField;
   @FXML private MenuItem exitMenuItem;
 
-  @FXML private TextArea allPlayersArea;
-  @FXML private TextArea lineUpArea;
-  @FXML private TextArea benchArea;
+  @FXML private ListView<Player> allPlayersList;
+  @FXML private ListView<Player> lineUpList;
+  @FXML private ListView<Player> benchList;
 
   @FXML private RadioButton fieldRadio;
   @FXML private RadioButton benchRadio;
@@ -87,6 +88,5 @@ public class AddMatchViewController
         System.exit(0);
       }
     }
-
   }
 }
