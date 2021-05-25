@@ -42,7 +42,7 @@ public class AddPlayerViewController
 
   public void reset()
   {
-
+   updatePositionsBox();
   }
 
   public Region getRoot()
@@ -64,7 +64,10 @@ public class AddPlayerViewController
     else if (e.getSource()==saveButton)
     {
       Player temp = new Player(nameField.getText());
-      temp.setNumber(Integer.parseInt(numberField.getText()));
+      if (!(numberField.getText().equals("")))
+      {
+        temp.setNumber(Integer.parseInt(numberField.getText()));
+      }
       for (int i = 0; i < positionsList.getItems().size(); i++)
       {
         temp.addPosition(positionsList.getItems().get(i));
@@ -131,7 +134,16 @@ public class AddPlayerViewController
 
   private void updatePositionsBox()
   {
-
+    positionsBox.getItems().add("Goalkeeper");
+    positionsBox.getItems().add("Sweeper");
+    positionsBox.getItems().add("Centre-Back");
+    positionsBox.getItems().add("Full-Back");
+    positionsBox.getItems().add("Defensive Midfielder");
+    positionsBox.getItems().add("Central Midfielder");
+    positionsBox.getItems().add("Attacking Midfielder");
+    positionsBox.getItems().add("Forward");
+    positionsBox.getItems().add("Winger");
+    positionsBox.getItems().add("Striker");
   }
 
   private class MyListListener implements ChangeListener<String>

@@ -86,6 +86,10 @@ public class MainViewController
     {
       viewHandler.openView("UnavailabilityView");
     }
+    else if (e.getSource()==searchPlayersField)
+    {
+
+    }
 
 
 

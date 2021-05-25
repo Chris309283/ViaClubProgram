@@ -192,7 +192,19 @@ public class Player implements Serializable
 
   public String toString()
   {
-    return "name: " + name + " number: " + number + " positions: " + positions;
+    String returnStr = "Name: " + name + " Number: " + number + " Positions: ";
+    for (int i = 0; i < positions.size(); i++)
+    {
+      if (i+1!=positions.size())
+      {
+        returnStr += positions.get(i) + ", ";
+      }
+      else
+      {
+        returnStr += positions.get(i);
+      }
+    }
+    return returnStr;
   }
 
   public int getBenchedInARow()
