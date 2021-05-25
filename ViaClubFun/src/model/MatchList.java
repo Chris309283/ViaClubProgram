@@ -6,19 +6,32 @@ public class MatchList
 {
   private ArrayList<Match> matches;
 
-  public MatchList(){
-    matches= new ArrayList<Match>();
+  public MatchList()
+  {
+    matches = new ArrayList<Match>();
   }
-  public void addMatch(Match match){
+
+  public void add(Match match)
+  {
     matches.add(match);
   }
-  public void removeMatch(Match match){
-    if(matches.contains(match)){
+
+  public void remove(Match match)
+  {
+    if (matches.contains(match))
+    {
       matches.remove(match);
     }
   }
-  public int getSize(){
+
+  public int Size()
+  {
     return matches.size();
+  }
+
+  public Match get(int index)
+  {
+    return matches.get(index);
   }
 
 }

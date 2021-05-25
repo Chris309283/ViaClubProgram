@@ -63,6 +63,35 @@ public class ViaClubModelManager
     return allMatches;
   }
 
+  public MatchList getMatchesOnDate(Date date)
+  {
+    MatchList temp = new MatchList();
+    for (int i = 0; i < getAllMatches().Size(); i++)
+    {
+      if (getAllMatches().get(i).getDate().equals(date))
+      {
+        temp.add(getAllMatches().get(i));
+      }
+    }
+    return temp;
+  }
+
+  public void saveMatches(MatchList matches)
+  {
+    try
+    {
+      MyFileHandler.writeToBinaryFile(matchFileName,matches);
+    }
+    catch (FileNotFoundException e)
+    {
+      System.out.println("Match file not found");
+    }
+    catch (IOException e)
+    {
+      System.out.println("IO Error writing to match file");
+    }
+  }
+
   public void savePlayers(PlayerList players)
   {
     try
@@ -71,11 +100,11 @@ public class ViaClubModelManager
     }
     catch (FileNotFoundException e)
     {
-      System.out.println("File not found");
+      System.out.println("Player file not found");
     }
     catch (IOException e)
     {
-      System.out.println("IO Error writing to file");
+      System.out.println("IO Error writing to player file");
     }
   }
 }
