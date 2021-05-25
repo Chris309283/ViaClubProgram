@@ -6,5 +6,7 @@ public class test
   {
     ViaClubModelManager m = new ViaClubModelManager("C:\\Users\\Christopher\\IdeaProjects\\Workspace\\ViaClubPlayGround\\src\\players.bin","C:\\Users\\Christopher\\IdeaProjects\\Workspace\\ViaClubPlayGround\\src\\matches.bin");
     System.out.println(m.getAllPlayers());
+
+
   }
 }

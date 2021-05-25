@@ -1,5 +1,7 @@
 package view;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -7,6 +9,8 @@ import javafx.scene.layout.Region;
 import model.Player;
 import model.PlayerList;
 import model.ViaClubModelManager;
+
+
 
 public class AddPlayerViewController
 {
@@ -25,13 +29,14 @@ public class AddPlayerViewController
 
   @FXML private ListView<String> positionsList;
 
-  @FXML private ComboBox positionsBox;
+  @FXML private ComboBox<String> positionsBox;
 
   public void init(ViewHandler viewHandler, ViaClubModelManager modelManager, Region root)
   {
     this.modelManager = modelManager;
     this.root = root;
     this.viewHandler = viewHandler;
+    positionsList.getSelectionModel().selectedItemProperty().addListener((new MyListListener()));
     reset();
   }
 
@@ -47,17 +52,23 @@ public class AddPlayerViewController
 
   public void handleActions(ActionEvent e)
   {
+
     if (e.getSource()==addButton)
     {
-
+      positionsList.getItems().add(positionsBox.getSelectionModel().getSelectedItem());
     }
     else if (e.getSource()==removeButton)
     {
-
+      positionsList.getItems().remove(positionsList.getSelectionModel().getSelectedItem());
     }
     else if (e.getSource()==saveButton)
     {
       Player temp = new Player(nameField.getText());
+      temp.setNumber(Integer.parseInt(numberField.getText()));
+      for (int i = 0; i < positionsList.getItems().size(); i++)
+      {
+        temp.addPosition(positionsList.getItems().get(i));
+      }
       PlayerList tempList = new PlayerList();
 
       for (int i = 0; i < modelManager.getAllPlayers().size(); i++)
@@ -92,9 +103,42 @@ public class AddPlayerViewController
     }
   }
 
+  private void updatePositionsList(Player player)
+  {
+    if (modelManager!=null)
+    {
+      positionsList.getItems().clear();
+      for (int i = 0; i < player.getPositions().size(); i++)
+      {
+        positionsList.getItems().add(player.getPositions().get(i));
+      }
+    }
+  }
+
   public void setFields(Player player)
   {
     nameField.setText(player.getName());
     numberField.setText(player.getNumber()+"");
+    if (player.getPositions().size()>0)
+    {
+      positionsList.getItems().clear();
+      for (int i = 0; i < player.getPositions().size(); i++)
+      {
+        positionsList.getItems().add(player.getPositions().get(i));
+      }
+    }
+  }
+
+  private void updatePositionsBox()
+  {
+
+  }
+
+  private class MyListListener implements ChangeListener<String>
+  {
+    public void changed(ObservableValue<? extends String> position, String oldPosition, String newPosition)
+    {
+      removeButton.setDisable(false);
+    }
   }
 }

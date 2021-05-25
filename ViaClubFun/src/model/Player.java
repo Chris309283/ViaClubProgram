@@ -210,7 +210,7 @@ public class Player implements Serializable
     benchedInARow++;
   }
 
-  public boolean isAvailable()
+  /*public boolean isAvailable()
   {
     for (int i = 0; i < unavailabilities.size(); i++)
     {
@@ -226,6 +226,8 @@ public class Player implements Serializable
    }
     return  false;
   }
+
+   */
 
 }
 

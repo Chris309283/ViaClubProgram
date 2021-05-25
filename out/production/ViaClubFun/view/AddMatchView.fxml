@@ -38,25 +38,15 @@
       </MenuBar>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
          <children>
-            <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="300.0">
-               <children>
-                  <HBox alignment="CENTER" prefHeight="98.0" prefWidth="340.0" spacing="5.0">
-                     <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Date">
-                           <HBox.margin>
-                              <Insets />
-                           </HBox.margin>
-                        </Text>
-                        <DatePicker>
-                           <HBox.margin>
-                              <Insets />
-                           </HBox.margin>
-                        </DatePicker>
-                     </children>
-                  </HBox>
-               </children>
-            </VBox>
-            <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="200.0">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Date">
+               <HBox.margin>
+                  <Insets right="10.0" />
+               </HBox.margin></Text>
+            <DatePicker>
+               <HBox.margin>
+                  <Insets right="50.0" />
+               </HBox.margin></DatePicker>
+            <VBox prefHeight="100.0" prefWidth="147.0">
                <children>
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="2.0">
                      <children>
@@ -82,26 +72,11 @@
                   </HBox>
                </children>
             </VBox>
-            <VBox prefHeight="98.0" prefWidth="300.0">
-               <children>
-                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="5.0">
-                     <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Opponent">
-                           <HBox.margin>
-                              <Insets />
-                           </HBox.margin>
-                        </Text>
-                        <TextField />
-                     </children>
-                  </HBox>
-                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
-                     <children>
-                        <RadioButton mnemonicParsing="false" text="Home Game" />
-                        <RadioButton mnemonicParsing="false" text="Away Game" />
-                     </children>
-                  </HBox>
-               </children>
-            </VBox>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Opponent">
+               <HBox.margin>
+                  <Insets left="50.0" right="10.0" />
+               </HBox.margin></Text>
+            <TextField />
          </children>
       </HBox>
       <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="440.0" prefWidth="800.0">

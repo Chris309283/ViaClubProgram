@@ -30,6 +30,8 @@ public class MainViewController
   @FXML private Button removeMatchButton;
   @FXML private Button editPlayerButton;
   @FXML private Button editMatchButton;
+  @FXML private Button playerAvailability;
+
   @FXML private MenuItem exitMenuItem;
 
   @FXML private Tab playerListTab;
@@ -41,9 +43,9 @@ public class MainViewController
   @FXML private TextField searchPlayersField;
   @FXML private TextField searchMatchesField;
 
-  @FXML private ComboBox playerSearchComboBox;
-  @FXML private ComboBox matchSearchComboBox;
-  @FXML private ComboBox matchDateComboBox;
+  @FXML private ComboBox<String> playerSearchComboBox;
+  @FXML private ComboBox<String> matchSearchComboBox;
+  @FXML private ComboBox<String> matchDateComboBox;
 
   public void init(ViewHandler viewHandler,ViaClubModelManager modelManager, Region root)
   {
@@ -75,12 +77,14 @@ public class MainViewController
     {
       viewHandler.openView("AddMatchView");
     }
-
-
     else if (e.getSource()== editPlayerButton)
     {
       viewHandler.openView("AddPlayerView");
       viewHandler.getAddPlayerViewController().setFields(allPlayersList.getSelectionModel().getSelectedItem());
+    }
+    else if (e.getSource() == playerAvailability)
+    {
+      viewHandler.openView("UnavailabilityView");
     }
 
 
@@ -136,9 +140,10 @@ public class MainViewController
 
   private class MyListListener implements ChangeListener<Player>
   {
-    public void changed(ObservableValue<? extends Player> player, Player oldplayer, Player newplayer)
+    public void changed(ObservableValue<? extends Player> player, Player oldPlayer, Player newPlayer)
     {
       editPlayerButton.setDisable(false);
+      removeMatchButton.setDisable(false);
     }
   }
 }
