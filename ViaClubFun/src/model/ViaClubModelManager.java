@@ -76,6 +76,20 @@ public class ViaClubModelManager
     return temp;
   }
 
+  public PlayerList getPlayersAvailable()
+  {
+    PlayerList temp = new PlayerList();
+    for (int i = 0; i < getAllPlayers().size(); i++)
+    {
+      if (getAllPlayers().get(i).isAvailable)
+      {
+      temp.add(getAllPlayers().get(i));
+      }
+
+    }
+  return temp;
+  }
+
   public void saveMatches(MatchList matches)
   {
     try
