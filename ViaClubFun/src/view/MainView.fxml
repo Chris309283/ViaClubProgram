@@ -57,7 +57,7 @@
                            <children>
                               <ButtonBar prefHeight="40.0" prefWidth="800.0">
                                  <buttons>
-                                    <Button fx:id="playerAvailability" mnemonicParsing="false" onAction="#handleActions" text="Player Availability" />
+                                    <Button fx:id="playerAvailability" disable="true" mnemonicParsing="false" onAction="#handleActions" text="Player Availability" />
                                     <Button fx:id="addPlayerButton" mnemonicParsing="false" onAction="#handleActions" text="Add Player" />
                                     <Button fx:id="removePlayerButton" disable="true" mnemonicParsing="false" text="Remove Player" />
                                     <Button fx:id="editPlayerButton" disable="true" mnemonicParsing="false" onAction="#handleActions" text="Edit Player" />

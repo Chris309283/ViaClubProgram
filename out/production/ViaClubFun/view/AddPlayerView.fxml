@@ -58,7 +58,7 @@
          <children>
             <VBox alignment="TOP_CENTER" prefHeight="226.0" prefWidth="196.0">
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Positons" wrappingWidth="59.31770706176758">
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Positions" wrappingWidth="60.31770706176758">
                      <font>
                         <Font size="15.0" />
                      </font>
@@ -68,7 +68,7 @@
             </VBox>
             <VBox alignment="TOP_RIGHT" prefHeight="146.0" prefWidth="151.0">
                <children>
-                  <ComboBox fx:id="positionsBox" editable="true" prefHeight="25.0" prefWidth="160.0" />
+                  <ComboBox fx:id="positionsBox" editable="true" prefHeight="25.0" prefWidth="160.0" promptText="Positions" />
                   <HBox prefHeight="47.0" prefWidth="157.0">
                      <children>
                         <ButtonBar prefHeight="47.0" prefWidth="148.0">

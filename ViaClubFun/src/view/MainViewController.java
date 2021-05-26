@@ -110,7 +110,7 @@ public class MainViewController
     }
   }
 
-  //private or public
+
   private void updatePlayerList()
   {
    if(modelManager!=null)
@@ -147,7 +147,9 @@ public class MainViewController
     public void changed(ObservableValue<? extends Player> player, Player oldPlayer, Player newPlayer)
     {
       editPlayerButton.setDisable(false);
-      removeMatchButton.setDisable(false);
+      removePlayerButton.setDisable(false);
+      playerAvailability.setDisable(false);
     }
   }
+
 }

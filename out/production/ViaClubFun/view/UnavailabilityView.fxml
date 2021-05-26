@@ -19,7 +19,7 @@
         <menus>
           <Menu mnemonicParsing="false" text="File">
             <items>
-              <MenuItem mnemonicParsing="false" text="Close" />
+              <MenuItem fx:id="exitMenuItem" mnemonicParsing="false" onAction="#handleActions" text="Close" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Edit">
@@ -47,14 +47,14 @@
                <children>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Unavailability" wrappingWidth="73.55859375" />
                   <ListView prefHeight="196.0" prefWidth="212.0" />
-                  <Button disable="true" mnemonicParsing="false" text="Remove" />
+                  <Button fx:id="removeButton" disable="true" mnemonicParsing="false" onAction="#handleActions" text="Remove" />
                </children>
             </VBox>
             <VBox alignment="TOP_CENTER" prefHeight="237.0" prefWidth="197.0">
                <children>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Add Suspension" />
                   <ComboBox prefWidth="150.0" promptText="Number Of Games" />
-                  <Button mnemonicParsing="false" text="Add Suspension" />
+                  <Button fx:id="addSuspensionButton" mnemonicParsing="false" onAction="#handleActions" text="Add Suspension" />
                </children>
             </VBox>
             <VBox alignment="TOP_CENTER" prefHeight="237.0" prefWidth="190.0">
@@ -64,15 +64,15 @@
                   <DatePicker />
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="To Date" />
                   <DatePicker promptText="Only if know" />
-                  <Button mnemonicParsing="false" text="Add injury" />
+                  <Button fx:id="addInjuryButton" mnemonicParsing="false" onAction="#handleActions" text="Add injury" />
                </children>
             </VBox>
          </children>
       </HBox>
       <ButtonBar prefHeight="40.0" prefWidth="200.0">
         <buttons>
-          <Button mnemonicParsing="false" text="Save" />
-            <Button mnemonicParsing="false" text="Cancel" />
+          <Button fx:id="saveButton" mnemonicParsing="false" onAction="#handleActions" text="Save" />
+            <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#handleActions" text="Cancel" />
         </buttons>
       </ButtonBar>
    </children>
