@@ -43,7 +43,7 @@ public class MatchList implements Serializable
     matches.set(index, match);
   }
 
- /* public int getIndex(String name, int number)
+  /*public int getIndex(Date date, int number)
   {
     for (int i = 0; i < matches.size(); i++)
     {
@@ -57,7 +57,7 @@ public class MatchList implements Serializable
     return -1;
   }
 
-  */
+   */
 
   public String toString()
   {

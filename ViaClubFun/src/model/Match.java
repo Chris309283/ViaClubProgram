@@ -1,6 +1,8 @@
 package model;
 
-public class Match
+import java.io.Serializable;
+
+public class Match implements Serializable
 {
   private Time startTime, endTime;
   private Date date;
@@ -161,6 +163,4 @@ public class Match
     }
     return returnStr;
   }
-
-
 }
