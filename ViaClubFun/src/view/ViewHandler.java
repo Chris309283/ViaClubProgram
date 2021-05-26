@@ -15,6 +15,7 @@ public class ViewHandler
   private MainViewController mainViewController;
   private AddPlayerViewController addPlayerViewController;
   private AddMatchViewController addMatchViewController;
+  private UnavailabilityViewController unavailabilityViewController;
 
   private ViaClubModelManager modelManager;
 
@@ -27,6 +28,7 @@ public class ViewHandler
   public void start(Stage window)
   {
     this.window = window;
+    window.setResizable(false);
     openView("MainView");
   }
 
@@ -43,6 +45,9 @@ public class ViewHandler
         break;
       case "AddMatchView":
         root = loadViewAddMatch();
+        break;
+      case "UnavailabilityView":
+        root = loadViewUnavailability();
         break;
     }
     scene.setRoot(root);
@@ -132,6 +137,30 @@ public class ViewHandler
     }
 
     return addMatchViewController.getRoot();
+  }
+
+  private Region loadViewUnavailability()
+  {
+    if (unavailabilityViewController == null)
+    {
+      try
+      {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("UnavailabilityView.fxml"));
+        Region root = loader.load();
+        unavailabilityViewController = loader.getController();
+        unavailabilityViewController.init(this, modelManager, root);
+      }
+      catch (IOException e)
+      {
+        e.printStackTrace();
+      }
+    }
+    else
+    {
+      unavailabilityViewController.reset();
+    }
+    return unavailabilityViewController.getRoot();
   }
 
   public AddPlayerViewController getAddPlayerViewController()

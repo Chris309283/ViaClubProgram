@@ -27,11 +27,11 @@ public class ViaClubModelManager
     }
     catch (FileNotFoundException e)
     {
-      System.out.println("File not found");
+      System.out.println("Player file not found");
     }
     catch (IOException e)
     {
-      System.out.println("IO Error reading file");
+      System.out.println("IO Error reading player file");
     }
     catch (ClassNotFoundException e)
     {
@@ -76,7 +76,7 @@ public class ViaClubModelManager
     return temp;
   }
 
-  public PlayerList getPlayersAvailable()
+ /* public PlayerList getPlayersAvailable()
   {
     PlayerList temp = new PlayerList();
     for (int i = 0; i < getAllPlayers().size(); i++)
@@ -89,6 +89,8 @@ public class ViaClubModelManager
     }
   return temp;
   }
+
+  */
 
   public void saveMatches(MatchList matches)
   {
