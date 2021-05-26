@@ -39,7 +39,7 @@
          <children>
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Player:" />
             <TextField fx:id="nameField" editable="false" />
-            <Button mnemonicParsing="false" text="Force Available" />
+            <Button fx:id="forceAvailableButton" mnemonicParsing="false" text="Force Available" />
          </children>
       </HBox>
       <HBox prefHeight="438.0" prefWidth="780.0" spacing="100.0">
@@ -47,14 +47,14 @@
             <VBox alignment="TOP_CENTER" prefHeight="237.0" prefWidth="214.0" spacing="10.0">
                <children>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Unavailability" wrappingWidth="73.55859375" />
-                  <ListView prefHeight="196.0" prefWidth="212.0" />
+                  <ListView fx:id="unavailabilityListView" prefHeight="196.0" prefWidth="212.0" />
                   <Button fx:id="removeButton" disable="true" mnemonicParsing="false" onAction="#handleActions" text="Remove" />
                </children>
             </VBox>
             <VBox alignment="TOP_CENTER" prefHeight="237.0" prefWidth="200.0" spacing="30.0">
                <children>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Add Suspension" />
-                  <ComboBox prefHeight="25.0" prefWidth="149.0" promptText="Number Of Games" />
+                  <ComboBox fx:id="numberOfGamesBox" editable="true" prefHeight="25.0" prefWidth="149.0" promptText="Number Of Games" />
                   <Button fx:id="addSuspensionButton" mnemonicParsing="false" onAction="#handleActions" prefHeight="25.0" prefWidth="153.0" text="Add Suspension" />
                </children>
             </VBox>
@@ -62,9 +62,9 @@
                <children>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Add injury" />
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="From date" wrappingWidth="54.19921875" />
-                  <DatePicker />
+                  <DatePicker fx:id="fromDatePicker" />
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="To Date" />
-                  <DatePicker promptText="Only if know" />
+                  <DatePicker fx:id="toDatePicker" promptText="Only if know" />
                   <Button fx:id="addInjuryButton" mnemonicParsing="false" onAction="#handleActions" text="Add injury" />
                </children>
             </VBox>

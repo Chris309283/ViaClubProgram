@@ -54,6 +54,14 @@ public class test
 
     System.out.println(m.getAllMatches());
 
+    Unavailability u1= new Unavailability(Date.today(),10);
+    pl1.addUnavailability(u1);
 
+  pl1.addUnavailability(u1);
+    System.out.println(u1);
+
+    System.out.println(pl1.getAllUnavailabilities());
+
+    System.out.println(pl2.getAllUnavailabilities()==null);
   }
 }

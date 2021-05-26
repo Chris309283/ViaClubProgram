@@ -5,7 +5,10 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.Region;
 import model.Player;
+import model.Unavailability;
 import model.ViaClubModelManager;
+
+import java.util.ArrayList;
 
 public class UnavailabilityViewController
 {
@@ -18,9 +21,16 @@ public class UnavailabilityViewController
   @FXML private Button removeButton;
   @FXML private Button saveButton;
   @FXML private Button cancelButton;
-  @FXML private MenuItem exitMenuItem;
+  @FXML private Button forceAvailableButton;
 
+  @FXML private MenuItem exitMenuItem;
+  @FXML private ListView<Unavailability> unavailabilityListView;
+  @FXML private DatePicker fromDatePicker;
+  @FXML private DatePicker toDatePicker;
+  @FXML private ComboBox<Integer> numberOfGamesBox;
   @FXML private TextField nameField;
+
+  private Player player;
 
   public void init(ViewHandler viewHandler, ViaClubModelManager modelManager,
       Region root)
@@ -33,7 +43,9 @@ public class UnavailabilityViewController
 
   public void reset()
   {
-
+    setNumberOfGamesBox();
+    player=null;
+    updateUnavailabilityList();
   }
 
   public Region getRoot()
@@ -51,11 +63,12 @@ public class UnavailabilityViewController
     {
       viewHandler.openView("MainView");
     }
-    else if(e.getSource()==exitMenuItem){
+    else if (e.getSource() == exitMenuItem)
+    {
 
       Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
-          "Do you really want to exit the program?",
-          ButtonType.YES, ButtonType.NO);
+          "Do you really want to exit the program?", ButtonType.YES,
+          ButtonType.NO);
       alert.setTitle("Exit");
       alert.setHeaderText(null);
 
@@ -66,9 +79,41 @@ public class UnavailabilityViewController
         System.exit(0);
       }
     }
-  }
-public void setName(Player player){
-    nameField.setText(player.getName());
-}
+    else if (e.getSource() == addSuspensionButton)
+    {
 
+    }
+  }
+
+  public void setFields(Player player)
+  {
+    if(){
+
+    }
+    nameField.setText(player.getName());
+    this.player = player;
+  }
+
+  public void setNumberOfGamesBox()
+  {
+    for (int i = 0; i < 10; i++)
+    {
+      numberOfGamesBox.getItems().add(i + 1);
+    }
+  }
+
+  public void updateUnavailabilityList()
+  {
+    if (modelManager != null &&player!=null)
+    {
+      unavailabilityListView.getItems().clear();
+      ArrayList<Unavailability> unavailabilities = player
+          .getAllUnavailabilities();
+      for (int i = 0; i < unavailabilities.size(); i++)
+      {
+        unavailabilityListView.getItems().add(unavailabilities.get(i));
+      }
+    }
+
+  }
 }

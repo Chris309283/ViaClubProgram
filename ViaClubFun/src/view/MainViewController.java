@@ -90,7 +90,7 @@ public class MainViewController
     {
       viewHandler.openView("UnavailabilityView");
       viewHandler.getUnavailabilityViewController()
-          .setName(allPlayersList.getSelectionModel().getSelectedItem());
+          .setFields(allPlayersList.getSelectionModel().getSelectedItem());
     }
     else if (e.getSource() == searchPlayersField)
     {
@@ -160,6 +160,7 @@ public class MainViewController
       }
     }
   }
+
 
   private void updateMatchArea()
   {
