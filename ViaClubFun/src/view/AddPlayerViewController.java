@@ -29,7 +29,6 @@ public class AddPlayerViewController
 
   @FXML private ComboBox<String> positionsBox;
 
-  //  private boolean editPlayer;
   private Player editPlayer;
 
   public void init(ViewHandler viewHandler, ViaClubModelManager modelManager,

@@ -7,6 +7,8 @@ import javafx.scene.layout.Region;
 import model.Player;
 import model.ViaClubModelManager;
 
+import java.time.LocalDate;
+
 public class AddMatchViewController
 {
   private Region root;
@@ -21,30 +23,41 @@ public class AddMatchViewController
 
   @FXML private DatePicker datePicker;
 
-  @FXML private TextField startTimeField;
-  @FXML private TextField endTimeField;
+  @FXML private ComboBox<Integer> startTimeHourBox;
+  @FXML private ComboBox<Integer> endTimeHourBox;
+  @FXML private ComboBox<Integer> startTimeMinuteBox;
+  @FXML private ComboBox<Integer> endTimeMinuteBox;
+  @FXML private ComboBox<String> searchBox;
+
   @FXML private TextField opponentField;
   @FXML private TextField searchField;
+
   @FXML private MenuItem exitMenuItem;
 
   @FXML private ListView<Player> allPlayersList;
-  @FXML private ListView<Player> lineUpList;
-  @FXML private ListView<Player> benchList;
+  @FXML private ListView<Player> lineUpAndBenchList;
 
+  @FXML private ToggleGroup fieldAndBenchGroup;
   @FXML private RadioButton fieldRadio;
   @FXML private RadioButton benchRadio;
+
+  @FXML private ToggleGroup gamePlaceGroup;
+  @FXML private RadioButton homeRadio;
+  @FXML private RadioButton awayRadio;
 
   public void init(ViewHandler viewHandler, ViaClubModelManager modelManager, Region root)
   {
     this.modelManager=modelManager;
     this.root=root;
     this.viewHandler=viewHandler;
+    datePicker.setValue(LocalDate.now());
     reset();
   }
 
   public void reset()
   {
-
+    updateTimeBoxes();
+    setToggle();
   }
 
   public Region getRoot()
@@ -74,6 +87,10 @@ public class AddMatchViewController
     {
       viewHandler.openView("MainView");
     }
+
+
+
+
     else if(e.getSource()==exitMenuItem){
       Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
           "Do you really want to exit the program?",
@@ -89,4 +106,27 @@ public class AddMatchViewController
       }
     }
   }
+
+  public void updateTimeBoxes()
+  {
+    for (int i = 0; i < 24; i++)
+    {
+      startTimeHourBox.getItems().add(i);
+      endTimeHourBox.getItems().add(i);
+    }
+    for (int i = 0; i < 60; i++)
+    {
+      startTimeMinuteBox.getItems().add(i);
+      endTimeMinuteBox.getItems().add(i);
+    }
+  }
+
+  public void setToggle()
+  {
+    fieldRadio.setSelected(true);
+
+    homeRadio.setSelected(true);
+  }
+
+
 }
