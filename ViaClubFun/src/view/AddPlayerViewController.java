@@ -10,8 +10,6 @@ import model.Player;
 import model.PlayerList;
 import model.ViaClubModelManager;
 
-
-
 public class AddPlayerViewController
 {
   private Region root;
@@ -31,18 +29,27 @@ public class AddPlayerViewController
 
   @FXML private ComboBox<String> positionsBox;
 
-  public void init(ViewHandler viewHandler, ViaClubModelManager modelManager, Region root)
+  //  private boolean editPlayer;
+  private Player editPlayer;
+
+  public void init(ViewHandler viewHandler, ViaClubModelManager modelManager,
+      Region root)
   {
     this.modelManager = modelManager;
     this.root = root;
     this.viewHandler = viewHandler;
-    positionsList.getSelectionModel().selectedItemProperty().addListener((new MyListListener()));
+    positionsList.getSelectionModel().selectedItemProperty()
+        .addListener((new MyListListener()));
     reset();
   }
 
   public void reset()
   {
-   updatePositionsBox();
+    updatePositionsBox();
+    editPlayer = null;
+    nameField.clear();
+    numberField.clear();
+    positionsList.getItems().clear();
   }
 
   public Region getRoot()
@@ -53,15 +60,17 @@ public class AddPlayerViewController
   public void handleActions(ActionEvent e)
   {
 
-    if (e.getSource()==addButton)
+    if (e.getSource() == addButton)
     {
-      positionsList.getItems().add(positionsBox.getSelectionModel().getSelectedItem());
+      positionsList.getItems()
+          .add(positionsBox.getSelectionModel().getSelectedItem());
     }
-    else if (e.getSource()==removeButton)
+    else if (e.getSource() == removeButton)
     {
-      positionsList.getItems().remove(positionsList.getSelectionModel().getSelectedItem());
+      positionsList.getItems()
+          .remove(positionsList.getSelectionModel().getSelectedItem());
     }
-    else if (e.getSource()==saveButton)
+    else if (e.getSource() == saveButton)
     {
       Player temp = new Player(nameField.getText());
       if (!(numberField.getText().equals("")))
@@ -73,23 +82,31 @@ public class AddPlayerViewController
         temp.addPosition(positionsList.getItems().get(i));
       }
       PlayerList tempList = modelManager.getAllPlayers();
-
-      tempList.add(temp);
-      modelManager.savePlayers(tempList);
+      if (editPlayer != null)
+      {
+        tempList.set(modelManager.getAllPlayers()
+            .getIndex(editPlayer.getName(), editPlayer.getNumber()), temp);
+      }
+      else
+      {
+        tempList.add(temp);
+      } modelManager.savePlayers(tempList);
       viewHandler.openView("MainView");
+
     }
-    else if (e.getSource()==cancelButton)
+    else if (e.getSource() == cancelButton)
     {
       viewHandler.openView("MainView");
     }
-    else if (e.getSource()==positionsBox)
+    else if (e.getSource() == positionsBox)
     {
 
     }
-    else if(e.getSource()==exitMenuItem){
+    else if (e.getSource() == exitMenuItem)
+    {
       Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
-          "Do you really want to exit the program?",
-          ButtonType.YES, ButtonType.NO);
+          "Do you really want to exit the program?", ButtonType.YES,
+          ButtonType.NO);
       alert.setTitle("Exit");
       alert.setHeaderText(null);
 
@@ -104,7 +121,7 @@ public class AddPlayerViewController
 
   private void updatePositionsList(Player player)
   {
-    if (modelManager!=null)
+    if (modelManager != null)
     {
       positionsList.getItems().clear();
       for (int i = 0; i < player.getPositions().size(); i++)
@@ -114,11 +131,13 @@ public class AddPlayerViewController
     }
   }
 
+
   public void setFields(Player player)
   {
+
     nameField.setText(player.getName());
-    numberField.setText(player.getNumber()+"");
-    if (player.getPositions().size()>0)
+    numberField.setText(player.getNumber() + "");
+    if (player.getPositions().size() > 0)
     {
       positionsList.getItems().clear();
       for (int i = 0; i < player.getPositions().size(); i++)
@@ -126,6 +145,8 @@ public class AddPlayerViewController
         positionsList.getItems().add(player.getPositions().get(i));
       }
     }
+
+    editPlayer = player;
   }
 
   private void updatePositionsBox()
@@ -144,7 +165,8 @@ public class AddPlayerViewController
 
   private class MyListListener implements ChangeListener<String>
   {
-    public void changed(ObservableValue<? extends String> position, String oldPosition, String newPosition)
+    public void changed(ObservableValue<? extends String> position,
+        String oldPosition, String newPosition)
     {
       removeButton.setDisable(false);
     }
