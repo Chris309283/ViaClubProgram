@@ -204,6 +204,13 @@ public class Player implements Serializable
         returnStr += positions.get(i);
       }
     }
+    if(unavailabilities.size()==0){
+      returnStr+=" Status: Available";
+    }
+    else if(unavailabilities.get(unavailabilities.size()-1).getType().equals("Suspended")&&
+        unavailabilities.get(unavailabilities.size()-1).isActive()){
+      returnStr+=" Status: Suspended";
+    }
     return returnStr;
   }
 

@@ -1,13 +1,12 @@
 package view;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.Region;
-import model.Date;
-import model.Player;
-import model.Unavailability;
-import model.ViaClubModelManager;
+import model.*;
 
 import java.util.ArrayList;
 
@@ -39,6 +38,9 @@ public class UnavailabilityViewController
     this.modelManager = modelManager;
     this.root = root;
     this.viewHandler = viewHandler;
+    unavailabilityListView.getSelectionModel().selectedItemProperty()
+        .addListener((new MyListListener()));
+
     reset();
   }
 
@@ -46,6 +48,11 @@ public class UnavailabilityViewController
   {
     setNumberOfGamesBox();
     player = null;
+    unavailabilityListView.getItems().clear();
+    removeButton.setDisable(true);
+    toDatePicker.setValue(null);
+    fromDatePicker.setValue(null);
+    numberOfGamesBox.setValue(null);
   }
 
   public Region getRoot()
@@ -66,18 +73,37 @@ public class UnavailabilityViewController
 
     else if (e.getSource() == addSuspensionButton)
     {
-      unavailabilityListView.getItems().add(
-          new Unavailability(Date.today(),numberOfGamesBox.getSelectionModel().getSelectedItem()));
+      unavailabilityListView.getItems().add(new Unavailability(Date.today(),
+          numberOfGamesBox.getSelectionModel().getSelectedItem()));
     }
 
     else if (e.getSource() == addInjuryButton)
     {
-      unavailabilityListView.getItems().add(new Unavailability("Injured",new Date(fromDatePicker.getValue().getDayOfMonth(),
+
+      Date tempStart = new Date(fromDatePicker.getValue().getDayOfMonth(),
           fromDatePicker.getValue().getMonthValue(),
-          fromDatePicker.getValue().getYear())));
+          fromDatePicker.getValue().getYear());
+      Date tempEnd = new Date(toDatePicker.getValue().getDayOfMonth(),
+          toDatePicker.getValue().getMonthValue(),
+          toDatePicker.getValue().getYear());
+      if (tempStart != null && tempEnd != null && tempStart.isBefore(tempEnd))
+      {
+        unavailabilityListView.getItems()
+            .add(new Unavailability("Injured", tempStart, tempEnd));
+      }
+      else{
+        Alert alert = new Alert(Alert.AlertType.INFORMATION,
+            "The start date should be before the end date.", ButtonType.OK);
+        alert.setTitle("Exit");
+        alert.setHeaderText(null);
+
+        alert.showAndWait();
+        if(alert.getResult()==ButtonType.OK){
+          fromDatePicker.setValue(null);
+          toDatePicker.setValue(null);
+        }
+      }
     }
-
-
 
     else if (e.getSource() == exitMenuItem)
     {
@@ -95,7 +121,11 @@ public class UnavailabilityViewController
         System.exit(0);
       }
     }
-
+    else if (e.getSource() == removeButton)
+    {
+      unavailabilityListView.getItems()
+          .remove(unavailabilityListView.getSelectionModel().getSelectedItem());
+    }
   }
 
   public void setFields(Player player)
@@ -121,9 +151,9 @@ public class UnavailabilityViewController
     }
   }
 
- /* public void updateUnavailabilityList()
+  public void updateUnavailabilityList()
   {
-    if (modelManager != null &&player!=null)
+    if (modelManager != null && player != null)
     {
       unavailabilityListView.getItems().clear();
       ArrayList<Unavailability> unavailabilities = player
@@ -136,5 +166,14 @@ public class UnavailabilityViewController
 
   }
 
-  */
+  private class MyListListener implements ChangeListener<Unavailability>
+  {
+    public void changed(
+        ObservableValue<? extends Unavailability> unavailability,
+        Unavailability oldUnavailability, Unavailability newUnavailability)
+    {
+      removeButton.setDisable(false);
+
+    }
+  }
 }
