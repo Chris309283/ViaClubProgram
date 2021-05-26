@@ -155,11 +155,15 @@ public class AddMatchViewController
       startTimeHourBox.getItems().add(i);
       endTimeHourBox.getItems().add(i);
     }
+    startTimeHourBox.getSelectionModel().select(12);
+    endTimeHourBox.getSelectionModel().select(12);
     for (int i = 0; i < 60; i++)
     {
       startTimeMinuteBox.getItems().add(i);
       endTimeMinuteBox.getItems().add(i);
     }
+    startTimeMinuteBox.getSelectionModel().select(30);
+    endTimeMinuteBox.getSelectionModel().select(30);
   }
 
   public void setToggle()
