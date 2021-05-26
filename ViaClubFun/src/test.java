@@ -1,6 +1,4 @@
-import model.Player;
-import model.PlayerList;
-import model.ViaClubModelManager;
+import model.*;
 
 import java.util.ArrayList;
 
@@ -35,6 +33,12 @@ public class test
 
     System.out.println(p1.getIndex("bob2",32));
     System.out.println(p1.size());
+
+    Match m1 = new Match(new Time(12,12,0),new Time(14,12,0),Date.today(),"test","Cup",true);
+    m1.addBench(p1);
+    m1.addLineUp(p1);
+
+    System.out.println(m1);
 
   }
 }

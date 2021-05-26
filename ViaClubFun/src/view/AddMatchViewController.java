@@ -105,11 +105,19 @@ public class AddMatchViewController
 
       MatchList tempList = modelManager.getAllMatches();
 
-      tempList.add(temp);
+      if (editMatch != null)
+      {
+       // tempList.set(modelManager.getAllMatches().getIndex())
+      }
 
+      else
+      {
+        tempList.add(temp);
+      }
       modelManager.saveMatches(tempList);
       viewHandler.openView("MainView");
     }
+
     else if (e.getSource() == cancelButton)
     {
       viewHandler.openView("MainView");

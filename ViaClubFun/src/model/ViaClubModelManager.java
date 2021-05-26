@@ -1,6 +1,6 @@
 package model;
 
-import model.PlayerList;
+
 import utils.MyFileHandler;
 
 import java.io.FileNotFoundException;
@@ -50,11 +50,11 @@ public class ViaClubModelManager
     }
     catch (FileNotFoundException e)
     {
-      System.out.println("File not found");
+      System.out.println("Match file not found");
     }
     catch (IOException e)
     {
-      System.out.println("IO Error reading file");
+      System.out.println("IO Error reading match file");
     }
     catch (ClassNotFoundException e)
     {
@@ -66,7 +66,7 @@ public class ViaClubModelManager
   public MatchList getMatchesOnDate(Date date)
   {
     MatchList temp = new MatchList();
-    for (int i = 0; i < getAllMatches().Size(); i++)
+    for (int i = 0; i < getAllMatches().size(); i++)
     {
       if (getAllMatches().get(i).getDate().equals(date))
       {

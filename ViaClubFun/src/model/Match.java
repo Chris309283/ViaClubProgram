@@ -147,12 +147,12 @@ public class Match
         .scoreOpponent && benchSize == other.benchSize && teamSize == other.teamSize && isAwayGame == other.isAwayGame;
   }
 
- public String toString()
+  public String toString()
   {
-    String returnStr = matchType + " model.Match\n" + "Opponent: " + opponent + "\nmodel.Date: " + date + "\nmodel.Time: " + startTime + " - " + endTime + "\nScore: " + getMatchScore() + "\nStarting line up:";
+    String returnStr = matchType + " Match\n" + "Opponent: " + opponent + "\nDate: " + date + "\nTime: " + startTime + " - " + endTime + "\nScore: " + getMatchScore() + "\nStarting line up:";
     for (int i = 0; i <lineUp.size(); i++)
     {
-     returnStr += "\n" + lineUp.get(i);
+      returnStr += "\n" + lineUp.get(i);
     }
     returnStr += "\nBench:";
     for (int i = 0; i <bench.size(); i++)

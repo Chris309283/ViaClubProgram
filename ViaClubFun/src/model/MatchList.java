@@ -19,22 +19,49 @@ public class MatchList implements Serializable
 
   public void remove(Match match)
   {
-      matches.remove(match);
+    matches.remove(match);
   }
 
-  public int Size()
+  public int size()
   {
     return matches.size();
   }
 
   public Match get(int index)
   {
-    return matches.get(index);
+    if (index < matches.size())
+    {
+      return matches.get(index);
+    }
+    else
+    {
+      return null;
+    }
   }
+  public void set(int index, Match match)
+  {
+    matches.set(index, match);
+  }
+
+ /* public int getIndex(String name, int number)
+  {
+    for (int i = 0; i < matches.size(); i++)
+    {
+      Match temp = matches.get(i);
+
+      if (temp.getName().equals(name) && temp.getNumber() == number)
+      {
+        return i;
+      }
+    }
+    return -1;
+  }
+
+  */
 
   public String toString()
   {
-    String returnStr ="";
+    String returnStr = "";
     for (int i = 0; i < matches.size(); i++)
     {
       Match temp = matches.get(i);
