@@ -48,6 +48,11 @@ public class UnavailabilityViewController
   {
     setNumberOfGamesBox();
     player = null;
+    unavailabilityListView.getItems().clear();
+    removeButton.setDisable(true);
+    toDatePicker.setValue(null);
+    fromDatePicker.setValue(null);
+    numberOfGamesBox.setValue(null);
   }
 
   public Region getRoot()
