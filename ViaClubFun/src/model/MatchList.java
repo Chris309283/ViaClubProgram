@@ -50,7 +50,8 @@ public class MatchList implements Serializable
     {
       Match temp = matches.get(i);
 
-      if (temp.getStartTime().equals(startTime))
+      if (temp.getStartTime().equals(startTime) && temp.getEndTime().equals(endTime) && temp.getDate().equals(date)&&temp.getOpponent().equals(opponent)&&temp.getMatchType().equals(matchType)&& temp
+          .getIsAwayGame()==isAwayGame)
       {
         return i;
       }

@@ -48,6 +48,8 @@ public class AddMatchViewController
   private Match editMatch;
   private boolean gamePlaceBoolean;
   private boolean lineUpListBoolean;
+  private PlayerList tempField;
+  private PlayerList tempBench;
 
   public void init(ViewHandler viewHandler, ViaClubModelManager modelManager,
       Region root)
@@ -61,6 +63,7 @@ public class AddMatchViewController
 
   public void reset()
   {
+    updatePlayerList();
     updateTimeBoxes();
     setToggle();
     setMatchTypeBox();
@@ -80,12 +83,31 @@ public class AddMatchViewController
     }
     else if (e.getSource() == addButton)
     {
-
+      if (lineUpListBoolean)
+      {
+        tempField.add(allPlayersList.getSelectionModel().getSelectedItem());
+        updateFieldList();
+      }
+      else
+      {
+        tempBench.add(allPlayersList.getSelectionModel().getSelectedItem());
+        updateBenchList();
+      }
     }
+
     else if (e.getSource() == removeButton)
     {
+      if (lineUpListBoolean)
+      {
+        tempField.remove(allPlayersList.getSelectionModel().getSelectedItem());
+      }
+      else
+      {
+        tempBench.add(allPlayersList.getSelectionModel().getSelectedItem());
+      }
 
     }
+
     else if (e.getSource() == saveButton)
     {
       Time stTemp = new Time(
@@ -103,11 +125,17 @@ public class AddMatchViewController
       Match temp = new Match(stTemp, etTemp, dTemp, opponentField.getText(),
           matchTypeBox.getSelectionModel().getSelectedItem(), gamePlaceBoolean);
 
+      temp.addBench(tempBench);
+      temp.addLineUp(tempField);
+
       MatchList tempList = modelManager.getAllMatches();
 
       if (editMatch != null)
       {
-       // tempList.set(modelManager.getAllMatches().getIndex())
+        tempList.set(modelManager.getAllMatches()
+            .getIndex(editMatch.getStartTime(), editMatch.getEndTime(),
+                editMatch.getDate(), editMatch.getOpponent(),
+                editMatch.getMatchType(), editMatch.getIsAwayGame()), temp);
       }
 
       else
@@ -122,21 +150,27 @@ public class AddMatchViewController
     {
       viewHandler.openView("MainView");
     }
+
     else if (awayRadio.isSelected())
     {
       gamePlaceBoolean = true;
     }
+
     else if (homeRadio.isSelected())
     {
       gamePlaceBoolean = false;
     }
+
     else if (fieldRadio.isSelected())
     {
       lineUpListBoolean = true;
+      updateFieldList();
     }
+
     else if (benchRadio.isSelected())
     {
       lineUpListBoolean = false;
+      updateBenchList();
     }
 
     else if (e.getSource() == exitMenuItem)
@@ -186,5 +220,35 @@ public class AddMatchViewController
     matchTypeBox.getItems().add("League");
     matchTypeBox.getItems().add("Cup");
     matchTypeBox.getItems().add("Friendly");
+  }
+
+  private void updatePlayerList()
+  {
+    if (modelManager != null)
+    {
+      allPlayersList.getItems().clear();
+      PlayerList players = modelManager.getAllPlayers();
+      for (int i = 0; i < players.size(); i++)
+      {
+        allPlayersList.getItems().add(players.get(i));
+      }
+    }
+  }
+
+  private void updateFieldList()
+  {
+    lineUpAndBenchList.getItems().clear();
+    for (int i = 0; i < tempField.size(); i++)
+    {
+      lineUpAndBenchList.getItems().add(tempField.get(i));
+    }
+  }
+  private void updateBenchList()
+  {
+    lineUpAndBenchList.getItems().clear();
+    for (int i = 0; i < tempBench.size(); i++)
+    {
+      lineUpAndBenchList.getItems().add(tempBench.get(i));
+    }
   }
 }
