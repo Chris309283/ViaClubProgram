@@ -89,6 +89,8 @@ public class MainViewController
     else if (e.getSource() == playerAvailability)
     {
       viewHandler.openView("UnavailabilityView");
+      viewHandler.getUnavailabilityViewController()
+          .setName(allPlayersList.getSelectionModel().getSelectedItem());
     }
     else if (e.getSource() == searchPlayersField)
     {
@@ -115,8 +117,8 @@ public class MainViewController
     else if (e.getSource() == removePlayerButton)
     {
       Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
-          "Are you sure you want to permanently delete this player?", ButtonType.YES,
-          ButtonType.NO);
+          "Are you sure you want to permanently delete this player?",
+          ButtonType.YES, ButtonType.NO);
       alert.setTitle("Exit");
       alert.setHeaderText(null);
 
@@ -129,18 +131,18 @@ public class MainViewController
         {
           temp.add(modelManager.getAllPlayers().get(i));
         }
-        temp
-            .remove(allPlayersList.getSelectionModel().getSelectedItem());
+        temp.remove(allPlayersList.getSelectionModel().getSelectedItem());
         modelManager.savePlayers(temp);
 
         updatePlayerList();
         disableButtons();
       }
 
-
     }
   }
-  private void disableButtons(){
+
+  private void disableButtons()
+  {
     editPlayerButton.setDisable(true);
     removePlayerButton.setDisable(true);
     playerAvailability.setDisable(true);
