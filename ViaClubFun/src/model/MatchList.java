@@ -1,8 +1,9 @@
 package model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class MatchList
+public class MatchList implements Serializable
 {
   private ArrayList<Match> matches;
 
@@ -18,10 +19,7 @@ public class MatchList
 
   public void remove(Match match)
   {
-    if (matches.contains(match))
-    {
       matches.remove(match);
-    }
   }
 
   public int Size()
@@ -34,4 +32,14 @@ public class MatchList
     return matches.get(index);
   }
 
+  public String toString()
+  {
+    String returnStr ="";
+    for (int i = 0; i < matches.size(); i++)
+    {
+      Match temp = matches.get(i);
+      returnStr += temp + "\n";
+    }
+    return returnStr;
+  }
 }

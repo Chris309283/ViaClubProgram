@@ -55,6 +55,12 @@
                         </DatePicker>
                      </children>
                   </HBox>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="5.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Match Type" />
+                        <ComboBox fx:id="matchTypeBox" prefHeight="25.0" prefWidth="135.0" />
+                     </children>
+                  </HBox>
                </children>
             </VBox>
             <VBox prefHeight="100.0" prefWidth="200.0">
