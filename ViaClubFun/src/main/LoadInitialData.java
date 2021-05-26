@@ -16,7 +16,7 @@ public class LoadInitialData
 
       try
       {
-         playerArray = MyFileHandler.readArrayFromTextFile("src\\players.txt");
+         playerArray = MyFileHandler.readArrayFromTextFile("ViaClubFun\\src\\players.txt");
                       
          for(int i = 0; i<playerArray.length; i++)
          {
@@ -37,7 +37,7 @@ public class LoadInitialData
      
       try
       {
-         MyFileHandler.writeToBinaryFile("src\\players.bin", players);
+         MyFileHandler.writeToBinaryFile("ViaClubFun\\src\\players.bin", players);
       }
       catch (FileNotFoundException e)
       {
