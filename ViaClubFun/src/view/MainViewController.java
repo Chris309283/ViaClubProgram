@@ -113,19 +113,36 @@ public class MainViewController
 
     else if (e.getSource() == removePlayerButton)
     {
+      Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
+          "Are you sure you want to permanently delete this player?", ButtonType.YES,
+          ButtonType.NO);
+      alert.setTitle("Exit");
+      alert.setHeaderText(null);
 
+      alert.showAndWait();
 
-      PlayerList temp = new PlayerList();
-      for (int i = 0; i < modelManager.getAllPlayers().size(); i++)
+      if (alert.getResult() == ButtonType.YES)
       {
-        temp.add(modelManager.getAllPlayers().get(i));
-      }
-      temp
-          .remove(allPlayersList.getSelectionModel().getSelectedItem());
-      modelManager.savePlayers(temp);
+        PlayerList temp = new PlayerList();
+        for (int i = 0; i < modelManager.getAllPlayers().size(); i++)
+        {
+          temp.add(modelManager.getAllPlayers().get(i));
+        }
+        temp
+            .remove(allPlayersList.getSelectionModel().getSelectedItem());
+        modelManager.savePlayers(temp);
 
-      updatePlayerList();
+        updatePlayerList();
+        disableButtons();
+      }
+
+
     }
+  }
+  private void disableButtons(){
+    editPlayerButton.setDisable(true);
+    removePlayerButton.setDisable(true);
+    playerAvailability.setDisable(true);
   }
 
   private void updatePlayerList()
@@ -152,9 +169,7 @@ public class MainViewController
     if (playerListTab.isSelected())
     {
       updatePlayerList();
-      editPlayerButton.setDisable(true);
-      removePlayerButton.setDisable(true);
-      playerAvailability.setDisable(true);
+      disableButtons();
     }
     else if (matchListTab.isSelected())
     {
