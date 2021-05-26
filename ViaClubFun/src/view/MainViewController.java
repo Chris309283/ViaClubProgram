@@ -47,12 +47,14 @@ public class MainViewController
   @FXML private ComboBox<String> matchSearchComboBox;
   @FXML private ComboBox<String> matchDateComboBox;
 
-  public void init(ViewHandler viewHandler,ViaClubModelManager modelManager, Region root)
+  public void init(ViewHandler viewHandler, ViaClubModelManager modelManager,
+      Region root)
   {
-    this.modelManager=modelManager;
+    this.modelManager = modelManager;
     this.root = root;
-    this.viewHandler=viewHandler;
-    allPlayersList.getSelectionModel().selectedItemProperty().addListener((new MyListListener()));
+    this.viewHandler = viewHandler;
+    allPlayersList.getSelectionModel().selectedItemProperty()
+        .addListener((new MyListListener()));
     reset();
   }
 
@@ -77,27 +79,27 @@ public class MainViewController
     {
       viewHandler.openView("AddMatchView");
     }
-    else if (e.getSource()== editPlayerButton)
+    else if (e.getSource() == editPlayerButton)
     {
       viewHandler.openView("AddPlayerView");
-      viewHandler.getAddPlayerViewController().setFields(allPlayersList.getSelectionModel().getSelectedItem());
+      viewHandler.getAddPlayerViewController()
+          .setFields(allPlayersList.getSelectionModel().getSelectedItem());
     }
     else if (e.getSource() == playerAvailability)
     {
       viewHandler.openView("UnavailabilityView");
     }
-    else if (e.getSource()==searchPlayersField)
+    else if (e.getSource() == searchPlayersField)
     {
 
     }
 
-
-
-    else if( e.getSource()==exitMenuItem){
+    else if (e.getSource() == exitMenuItem)
+    {
 
       Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
-          "Do you really want to exit the program?",
-          ButtonType.YES, ButtonType.NO);
+          "Do you really want to exit the program?", ButtonType.YES,
+          ButtonType.NO);
       alert.setTitle("Exit");
       alert.setHeaderText(null);
 
@@ -108,20 +110,35 @@ public class MainViewController
         System.exit(0);
       }
     }
-  }
 
+    else if (e.getSource() == removePlayerButton)
+    {
+
+
+      PlayerList temp = new PlayerList();
+      for (int i = 0; i < modelManager.getAllPlayers().size(); i++)
+      {
+        temp.add(modelManager.getAllPlayers().get(i));
+      }
+      temp
+          .remove(allPlayersList.getSelectionModel().getSelectedItem());
+      modelManager.savePlayers(temp);
+
+      updatePlayerList();
+    }
+  }
 
   private void updatePlayerList()
   {
-   if(modelManager!=null)
-   {
-     allPlayersList.getItems().clear();
-     PlayerList players = modelManager.getAllPlayers();
-     for (int i = 0; i < players.size(); i++)
-     {
-       allPlayersList.getItems().add(players.get(i));
-     }
-   }
+    if (modelManager != null)
+    {
+      allPlayersList.getItems().clear();
+      PlayerList players = modelManager.getAllPlayers();
+      for (int i = 0; i < players.size(); i++)
+      {
+        allPlayersList.getItems().add(players.get(i));
+      }
+    }
   }
 
   private void updateMatchArea()
@@ -147,7 +164,8 @@ public class MainViewController
 
   private class MyListListener implements ChangeListener<Player>
   {
-    public void changed(ObservableValue<? extends Player> player, Player oldPlayer, Player newPlayer)
+    public void changed(ObservableValue<? extends Player> player,
+        Player oldPlayer, Player newPlayer)
     {
       editPlayerButton.setDisable(false);
       removePlayerButton.setDisable(false);
