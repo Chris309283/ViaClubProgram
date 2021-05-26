@@ -53,6 +53,25 @@ public class PlayerList implements Serializable
     return null;
   }
 
+  public void set(int index, Player player)
+  {
+    players.set(index, player);
+  }
+
+  public int getIndex(String name, int number)
+  {
+    for (int i = 0; i < players.size(); i++)
+    {
+      Player temp = players.get(i);
+
+      if (temp.getName().equals(name) && temp.getNumber() == number)
+      {
+        return i;
+      }
+    }
+    return -1;
+  }
+
   public String toString()
   {
     String returnStr = "";
@@ -64,4 +83,6 @@ public class PlayerList implements Serializable
     }
     return returnStr;
   }
+
+  //method that checks the number
 }
