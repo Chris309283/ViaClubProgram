@@ -61,6 +61,15 @@ public class Unavailability
     isAvailable=true;
   }
 
+  public boolean isActive(){
+    if(!(end.isBefore(Date.today()))){
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
+
   /**
    *Gets the start date of the model.Unavailability
    * @return the start date of the model.Unavailability

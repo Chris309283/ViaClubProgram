@@ -60,7 +60,7 @@
                   </ListView>
                </children>
             </VBox>
-            <Button fx:id="removeButton" alignment="BOTTOM_LEFT" contentDisplay="TOP" disable="true" mnemonicParsing="false" text="Remove">
+            <Button fx:id="removeButton" alignment="BOTTOM_LEFT" contentDisplay="TOP" disable="true" mnemonicParsing="false" onAction="#handleActions" text="Remove">
                <HBox.margin>
                   <Insets top="100.0" />
                </HBox.margin>

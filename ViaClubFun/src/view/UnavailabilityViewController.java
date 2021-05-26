@@ -1,13 +1,12 @@
 package view;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.Region;
-import model.Date;
-import model.Player;
-import model.Unavailability;
-import model.ViaClubModelManager;
+import model.*;
 
 import java.util.ArrayList;
 
@@ -39,6 +38,9 @@ public class UnavailabilityViewController
     this.modelManager = modelManager;
     this.root = root;
     this.viewHandler = viewHandler;
+    unavailabilityListView.getSelectionModel().selectedItemProperty()
+        .addListener((new MyListListener()));
+
     reset();
   }
 
@@ -58,6 +60,7 @@ public class UnavailabilityViewController
     if (e.getSource() == saveButton)
     {
 
+
     }
     else if (e.getSource() == cancelButton)
     {
@@ -66,18 +69,17 @@ public class UnavailabilityViewController
 
     else if (e.getSource() == addSuspensionButton)
     {
-      unavailabilityListView.getItems().add(
-          new Unavailability(Date.today(),numberOfGamesBox.getSelectionModel().getSelectedItem()));
+      unavailabilityListView.getItems().add(new Unavailability(Date.today(),
+          numberOfGamesBox.getSelectionModel().getSelectedItem()));
     }
 
     else if (e.getSource() == addInjuryButton)
     {
-      unavailabilityListView.getItems().add(new Unavailability("Injured",new Date(fromDatePicker.getValue().getDayOfMonth(),
-          fromDatePicker.getValue().getMonthValue(),
-          fromDatePicker.getValue().getYear())));
+      unavailabilityListView.getItems().add(new Unavailability("Injured",
+          new Date(fromDatePicker.getValue().getDayOfMonth(),
+              fromDatePicker.getValue().getMonthValue(),
+              fromDatePicker.getValue().getYear())));
     }
-
-
 
     else if (e.getSource() == exitMenuItem)
     {
@@ -95,7 +97,11 @@ public class UnavailabilityViewController
         System.exit(0);
       }
     }
-
+    else if (e.getSource() == removeButton)
+    {
+      unavailabilityListView.getItems()
+          .remove(unavailabilityListView.getSelectionModel().getSelectedItem());
+    }
   }
 
   public void setFields(Player player)
@@ -121,9 +127,9 @@ public class UnavailabilityViewController
     }
   }
 
- /* public void updateUnavailabilityList()
+  public void updateUnavailabilityList()
   {
-    if (modelManager != null &&player!=null)
+    if (modelManager != null && player != null)
     {
       unavailabilityListView.getItems().clear();
       ArrayList<Unavailability> unavailabilities = player
@@ -136,5 +142,14 @@ public class UnavailabilityViewController
 
   }
 
-  */
+  private class MyListListener implements ChangeListener<Unavailability>
+  {
+    public void changed(
+        ObservableValue<? extends Unavailability> unavailability,
+        Unavailability oldUnavailability, Unavailability newUnavailability)
+    {
+      removeButton.setDisable(false);
+
+    }
+  }
 }
