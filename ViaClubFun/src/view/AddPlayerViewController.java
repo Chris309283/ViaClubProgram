@@ -72,12 +72,8 @@ public class AddPlayerViewController
       {
         temp.addPosition(positionsList.getItems().get(i));
       }
-      PlayerList tempList = new PlayerList();
+      PlayerList tempList = modelManager.getAllPlayers();
 
-      for (int i = 0; i < modelManager.getAllPlayers().size(); i++)
-      {
-        tempList.add(modelManager.getAllPlayers().get(i));
-      }
       tempList.add(temp);
       modelManager.savePlayers(tempList);
       viewHandler.openView("MainView");
