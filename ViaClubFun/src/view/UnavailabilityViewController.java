@@ -2,11 +2,9 @@ package view;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.MenuItem;
+import javafx.scene.control.*;
 import javafx.scene.layout.Region;
+import model.Player;
 import model.ViaClubModelManager;
 
 public class UnavailabilityViewController
@@ -21,6 +19,8 @@ public class UnavailabilityViewController
   @FXML private Button saveButton;
   @FXML private Button cancelButton;
   @FXML private MenuItem exitMenuItem;
+
+  @FXML private TextField nameField;
 
   public void init(ViewHandler viewHandler, ViaClubModelManager modelManager,
       Region root)
@@ -67,6 +67,8 @@ public class UnavailabilityViewController
       }
     }
   }
-
+public void setName(Player player){
+    nameField.setText(player.getName());
+}
 
 }
