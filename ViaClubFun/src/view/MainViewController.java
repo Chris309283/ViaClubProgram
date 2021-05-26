@@ -135,6 +135,9 @@ public class MainViewController
     if (playerListTab.isSelected())
     {
       updatePlayerList();
+      editPlayerButton.setDisable(true);
+      removePlayerButton.setDisable(true);
+      playerAvailability.setDisable(true);
     }
     else if (matchListTab.isSelected())
     {
