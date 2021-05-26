@@ -40,7 +40,14 @@ public class Unavailability
     numberOfGames=-1;
 
   }
-
+  public Unavailability(String type, Date start, Date end)
+  {
+    this.type = type;
+    this.start = start.copy();
+    this.end = end.copy();
+    isAvailable = false;
+    numberOfGames = -1;
+  }
   /**
    * Gets the type of model.Unavailability
    * @return the type of model.Unavailability

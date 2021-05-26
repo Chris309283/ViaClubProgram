@@ -60,7 +60,6 @@ public class UnavailabilityViewController
     if (e.getSource() == saveButton)
     {
 
-
     }
     else if (e.getSource() == cancelButton)
     {
@@ -75,10 +74,30 @@ public class UnavailabilityViewController
 
     else if (e.getSource() == addInjuryButton)
     {
-      unavailabilityListView.getItems().add(new Unavailability("Injured",
-          new Date(fromDatePicker.getValue().getDayOfMonth(),
-              fromDatePicker.getValue().getMonthValue(),
-              fromDatePicker.getValue().getYear())));
+
+      Date tempStart = new Date(fromDatePicker.getValue().getDayOfMonth(),
+          fromDatePicker.getValue().getMonthValue(),
+          fromDatePicker.getValue().getYear());
+      Date tempEnd = new Date(toDatePicker.getValue().getDayOfMonth(),
+          toDatePicker.getValue().getMonthValue(),
+          toDatePicker.getValue().getYear());
+      if (tempStart != null && tempEnd != null && tempStart.isBefore(tempEnd))
+      {
+        unavailabilityListView.getItems()
+            .add(new Unavailability("Injured", tempStart, tempEnd));
+      }
+      else{
+        Alert alert = new Alert(Alert.AlertType.INFORMATION,
+            "The start date should be before the end date.", ButtonType.OK);
+        alert.setTitle("Exit");
+        alert.setHeaderText(null);
+
+        alert.showAndWait();
+        if(alert.getResult()==ButtonType.OK){
+          fromDatePicker.setValue(null);
+          toDatePicker.setValue(null);
+        }
+      }
     }
 
     else if (e.getSource() == exitMenuItem)
