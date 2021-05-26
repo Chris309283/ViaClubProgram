@@ -54,7 +54,7 @@
             <VBox alignment="TOP_CENTER" prefHeight="237.0" prefWidth="200.0" spacing="30.0">
                <children>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Add Suspension" />
-                  <ComboBox fx:id="numberOfGamesBox" editable="true" prefHeight="25.0" prefWidth="149.0" promptText="Number Of Games" />
+                  <ComboBox fx:id="numberOfGamesBox" prefHeight="25.0" prefWidth="149.0" promptText="Number Of Games" />
                   <Button fx:id="addSuspensionButton" mnemonicParsing="false" onAction="#handleActions" prefHeight="25.0" prefWidth="153.0" text="Add Suspension" />
                </children>
             </VBox>

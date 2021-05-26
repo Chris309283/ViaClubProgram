@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.Region;
+import model.Date;
 import model.Player;
 import model.Unavailability;
 import model.ViaClubModelManager;
@@ -44,8 +45,7 @@ public class UnavailabilityViewController
   public void reset()
   {
     setNumberOfGamesBox();
-    player=null;
-    updateUnavailabilityList();
+    player = null;
   }
 
   public Region getRoot()
@@ -63,6 +63,22 @@ public class UnavailabilityViewController
     {
       viewHandler.openView("MainView");
     }
+
+    else if (e.getSource() == addSuspensionButton)
+    {
+      unavailabilityListView.getItems().add(
+          new Unavailability(Date.today(),numberOfGamesBox.getSelectionModel().getSelectedItem()));
+    }
+
+    else if (e.getSource() == addInjuryButton)
+    {
+      unavailabilityListView.getItems().add(new Unavailability("Injured",new Date(fromDatePicker.getValue().getDayOfMonth(),
+          fromDatePicker.getValue().getMonthValue(),
+          fromDatePicker.getValue().getYear())));
+    }
+
+
+
     else if (e.getSource() == exitMenuItem)
     {
 
@@ -79,18 +95,21 @@ public class UnavailabilityViewController
         System.exit(0);
       }
     }
-    else if (e.getSource() == addSuspensionButton)
-    {
 
-    }
   }
 
   public void setFields(Player player)
   {
-    if(){
-
-    }
     nameField.setText(player.getName());
+    if (player.getAllUnavailabilities().size() > 0)
+    {
+      unavailabilityListView.getItems().clear();
+      for (int i = 0; i < player.getAllUnavailabilities().size(); i++)
+      {
+        unavailabilityListView.getItems()
+            .add(player.getAllUnavailabilities().get(i));
+      }
+    }
     this.player = player;
   }
 
@@ -102,7 +121,7 @@ public class UnavailabilityViewController
     }
   }
 
-  public void updateUnavailabilityList()
+ /* public void updateUnavailabilityList()
   {
     if (modelManager != null &&player!=null)
     {
@@ -116,4 +135,6 @@ public class UnavailabilityViewController
     }
 
   }
+
+  */
 }

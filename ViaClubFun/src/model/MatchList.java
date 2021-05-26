@@ -43,13 +43,14 @@ public class MatchList implements Serializable
     matches.set(index, match);
   }
 
-  /*public int getIndex(Date date, int number)
+  public int getIndex(Time startTime, Time endTime, Date date, String opponent,
+      String matchType, boolean isAwayGame)
   {
     for (int i = 0; i < matches.size(); i++)
     {
       Match temp = matches.get(i);
 
-      if (temp.getName().equals(name) && temp.getNumber() == number)
+      if (temp.getStartTime().equals(startTime))
       {
         return i;
       }
@@ -57,7 +58,6 @@ public class MatchList implements Serializable
     return -1;
   }
 
-   */
 
   public String toString()
   {
