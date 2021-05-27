@@ -100,12 +100,13 @@ public class AddMatchViewController
       if (lineUpListBoolean)
       {
         tempField.remove(lineUpAndBenchList.getSelectionModel().getSelectedItem());
+        updateFieldList();
       }
       else
       {
         tempBench.remove(lineUpAndBenchList.getSelectionModel().getSelectedItem());
+        updateBenchList();
       }
-
     }
 
     else if (e.getSource() == saveButton)
