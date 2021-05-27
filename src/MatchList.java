@@ -54,8 +54,10 @@ public class MatchList
   }
 
   /**
-   * the methods is
-   *
+   * the method has first date and second date, we need to get all matches between our first and second date.
+   * @param date is input, which is the first date
+   * @param date2 is input, which is the second date
+   * @return it will return gettingMatchesBetweenDates
    */
   public ArrayList<Match> getMatchesBetweenDates(Date date, Date date2){
     ArrayList<Match> gettingMatchesBetweenDates = new ArrayList<Match>();
@@ -66,6 +68,7 @@ public class MatchList
     }
     return gettingMatchesBetweenDates;
   }
+
 
   public ArrayList<Match> getMatchesAgainst(String opponent){
     // it searches acrross all matches and if it find the input opponent then it will be putted to our array
@@ -110,7 +113,7 @@ public class MatchList
     return gettingMatchesWon;
   }
 
-  public ArrayList<Match> getMatcheslost(){
+  public ArrayList<Match> getMatchesLost(){
     ArrayList<Match> gettingMatchesWon = new ArrayList<Match>();
 
     for (int i = 0; i < matches.size(); i++){
