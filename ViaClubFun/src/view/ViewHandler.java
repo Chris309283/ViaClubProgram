@@ -170,4 +170,9 @@ public class ViewHandler
   public UnavailabilityViewController getUnavailabilityViewController(){
     return unavailabilityViewController;
   }
+
+  public AddMatchViewController getAddMatchViewController()
+  {
+    return addMatchViewController;
+  }
 }

@@ -27,6 +27,21 @@ public class Date implements Serializable
     this.year = year;
   }
 
+  public int getDay()
+  {
+    return day;
+  }
+
+  public int getMonth()
+  {
+    return month;
+  }
+
+  public int getYear()
+  {
+    return year;
+  }
+
   /**
    * A method that checks if a this date is before date2.
    *

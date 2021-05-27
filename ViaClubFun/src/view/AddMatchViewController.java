@@ -69,7 +69,7 @@ public class AddMatchViewController
     updateTimeBoxes();
     setToggle();
     setMatchTypeBox();
-
+    updateFieldList();
   }
 
   public Region getRoot()
@@ -195,6 +195,11 @@ public class AddMatchViewController
 
   public void updateTimeBoxes()
   {
+    startTimeHourBox.getItems().clear();
+    startTimeMinuteBox.getItems().clear();
+    endTimeHourBox.getItems().clear();
+    endTimeMinuteBox.getItems().clear();
+
     for (int i = 0; i < 24; i++)
     {
       startTimeHourBox.getItems().add(i);
@@ -202,6 +207,7 @@ public class AddMatchViewController
     }
     startTimeHourBox.getSelectionModel().select(12);
     endTimeHourBox.getSelectionModel().select(12);
+
     for (int i = 0; i < 60; i++)
     {
       startTimeMinuteBox.getItems().add(i);
@@ -220,6 +226,7 @@ public class AddMatchViewController
 
   public void setMatchTypeBox()
   {
+    matchTypeBox.getItems().clear();
     matchTypeBox.getItems().add("League");
     matchTypeBox.getItems().add("Cup");
     matchTypeBox.getItems().add("Friendly");
@@ -230,6 +237,7 @@ public class AddMatchViewController
     if (modelManager != null)
     {
       allPlayersList.getItems().clear();
+
       PlayerList players = modelManager.getAllPlayers();
       for (int i = 0; i < players.size(); i++)
       {
@@ -241,6 +249,7 @@ public class AddMatchViewController
   private void updateFieldList()
   {
     lineUpAndBenchList.getItems().clear();
+
     for (int i = 0; i < tempField.size(); i++)
     {
       lineUpAndBenchList.getItems().add(tempField.get(i));
@@ -249,9 +258,40 @@ public class AddMatchViewController
   private void updateBenchList()
   {
     lineUpAndBenchList.getItems().clear();
+
     for (int i = 0; i < tempBench.size(); i++)
     {
       lineUpAndBenchList.getItems().add(tempBench.get(i));
     }
+  }
+
+  public void setFields(Match match)
+  {
+    datePicker.setValue(LocalDate.of((match.getDate().getYear()),(match.getDate().getMonth()),(match.getDate().getDay())));
+
+    matchTypeBox.getSelectionModel().select(match.getMatchType());
+
+    startTimeHourBox.getSelectionModel().select(match.getStartTime().getHour());
+
+    endTimeHourBox.getSelectionModel().select(match.getEndTime().getHour());
+
+    startTimeMinuteBox.getSelectionModel().select(match.getStartTime().getMinute());
+
+    endTimeMinuteBox.getSelectionModel().select(match.getEndTime().getMinute());
+
+    opponentField.setText(match.getOpponent());
+
+    tempField = match.getLineUp();
+
+    tempBench = match.getBench();
+
+    updateFieldList();
+
+    if (match.getIsAwayGame())
+    {
+      awayRadio.setSelected(true);
+    }
+
+    editMatch= match;
   }
 }
