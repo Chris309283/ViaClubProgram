@@ -125,46 +125,53 @@ public class AddMatchViewController
 
     else if (e.getSource() == saveButton)
     {
-      Time stTemp = new Time(
-          startTimeHourBox.getSelectionModel().getSelectedItem(),
-          startTimeMinuteBox.getSelectionModel().getSelectedItem(), 0);
-
-      Time etTemp = new Time(
-          endTimeHourBox.getSelectionModel().getSelectedItem(),
-          endTimeMinuteBox.getSelectionModel().getSelectedItem(), 0);
-
-      Date dTemp = new Date(datePicker.getValue().getDayOfMonth(),
-          datePicker.getValue().getMonthValue(),
-          datePicker.getValue().getYear());
-
-      Match temp = new Match(stTemp, etTemp, dTemp, opponentField.getText(),
-          matchTypeBox.getSelectionModel().getSelectedItem(), gamePlaceBoolean);
-
-      temp.addBench(tempBench);
-      temp.addLineUp(tempField);
-
-
-      temp.setScoreHomeTeam(homeScoreSpinner.getValue());
-      temp.setScoreOpponent(opponentScoreSpinner.getValue());
-
-
-
-      MatchList tempList = modelManager.getAllMatches();
-
-      if (editMatch != null)
+      if (matchTypeBox.getSelectionModel().getSelectedIndex()!=1&&matchTypeBox.getSelectionModel().getSelectedIndex()!=2&&matchTypeBox.getSelectionModel().getSelectedIndex()!=3)
       {
-        tempList.set(modelManager.getAllMatches()
-            .getIndex(editMatch.getStartTime(), editMatch.getEndTime(),
-                editMatch.getDate(), editMatch.getOpponent(),
-                editMatch.getMatchType(), editMatch.getIsAwayGame()), temp);
-      }
+        Alert alert = new Alert(Alert.AlertType.ERROR,
+            "Please Input a Match Type", ButtonType.CLOSE);
+        alert.setTitle("Error");
+        alert.setHeaderText(null);
 
-      else
-      {
-        tempList.add(temp);
+        alert.showAndWait();
       }
-      modelManager.saveMatches(tempList);
-      viewHandler.openView("MainView");
+      else {
+        Time stTemp = new Time(
+            startTimeHourBox.getSelectionModel().getSelectedItem(),
+            startTimeMinuteBox.getSelectionModel().getSelectedItem(), 0);
+
+        Time etTemp = new Time(
+            endTimeHourBox.getSelectionModel().getSelectedItem(),
+            endTimeMinuteBox.getSelectionModel().getSelectedItem(), 0);
+
+        Date dTemp = new Date(datePicker.getValue().getDayOfMonth(),
+            datePicker.getValue().getMonthValue(),
+            datePicker.getValue().getYear());
+
+        Match temp = new Match(stTemp, etTemp, dTemp, opponentField.getText(),
+            matchTypeBox.getSelectionModel().getSelectedItem(), gamePlaceBoolean);
+
+        temp.addBench(tempBench);
+        temp.addLineUp(tempField);
+
+        temp.setScoreHomeTeam(homeScoreSpinner.getValue());
+        temp.setScoreOpponent(opponentScoreSpinner.getValue());
+
+        MatchList tempList = modelManager.getAllMatches();
+
+        if (editMatch != null)
+        {
+          tempList.set(modelManager.getAllMatches()
+              .getIndex(editMatch.getStartTime(), editMatch.getEndTime(),
+                  editMatch.getDate(), editMatch.getOpponent(),
+                  editMatch.getMatchType(), editMatch.getIsAwayGame()), temp);
+        }
+        else
+        {
+          tempList.add(temp);
+        }
+        modelManager.saveMatches(tempList);
+        viewHandler.openView("MainView");
+      }
     }
 
     else if (e.getSource() == cancelButton)
