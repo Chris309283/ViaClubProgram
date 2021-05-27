@@ -162,7 +162,7 @@ public class Unavailability implements Serializable
           "Type: Injured; Start Date: " + start + "; End Date: " + end;
     }
 
-    finalString += " is active: " + isActive();
+    finalString += "; is active: " + isActive();
     return finalString;
   }
 }

@@ -41,7 +41,7 @@ public class UnavailabilityViewController
     this.viewHandler = viewHandler;
     unavailabilityListView.getSelectionModel().selectedItemProperty()
         .addListener((new MyListListener()));
-  tempUnavailabilities= new ArrayList<Unavailability>();
+    tempUnavailabilities = new ArrayList<Unavailability>();
     reset();
   }
 
@@ -53,7 +53,10 @@ public class UnavailabilityViewController
     toDatePicker.setValue(null);
     fromDatePicker.setValue(null);
     numberOfGamesBox.setValue(null);
+    tempUnavailabilities.clear();
+    unavailabilityListView.getItems().clear();
     setUnavailabilityList();
+
   }
 
   public Region getRoot()
@@ -65,10 +68,17 @@ public class UnavailabilityViewController
   {
     if (e.getSource() == saveButton)
     {
-      for (int i = 0; i < unavailabilityListView.getItems().size(); i++)
+      for (int i = 0; i < tempUnavailabilities.size(); i++)
       {
-        player.addUnavailability(unavailabilityListView.getItems().get(i));
+        player.addUnavailability(tempUnavailabilities.get(i));
       }
+      PlayerList tempPlayerList = modelManager.getAllPlayers();
+      int index = tempPlayerList.getIndex(player.getName(), player.getNumber());
+      tempPlayerList.set(index, player);
+
+      modelManager.savePlayers(tempPlayerList);
+
+      viewHandler.openView("MainView");
     }
     else if (e.getSource() == cancelButton)
     {
@@ -95,9 +105,9 @@ public class UnavailabilityViewController
           toDatePicker.getValue().getYear());
       if (tempStart != null && tempEnd != null && tempStart.isBefore(tempEnd))
       {
-        tempUnavailabilities
+        tempUnavailabilities.add(new Unavailability(tempStart, tempEnd));
+        unavailabilityListView.getItems()
             .add(new Unavailability(tempStart, tempEnd));
-        unavailabilityListView.getItems().add(new Unavailability(tempStart, tempEnd));
       }
       else
       {
@@ -163,6 +173,8 @@ public class UnavailabilityViewController
 
   public void setFields(Player player)
   {
+    reset();
+
     nameField.setText(player.getName());
     if (player.getAllUnavailabilities().size() > 0)
     {
@@ -177,7 +189,6 @@ public class UnavailabilityViewController
 
   }
 
-
   public void setNumberOfGamesBox()
   {
     for (int i = 0; i < 10; i++)
@@ -186,8 +197,10 @@ public class UnavailabilityViewController
     }
   }
 
-  public void updateUnavailabilityList(){
-    if(modelManager!= null && player!=null){
+  public void updateUnavailabilityList()
+  {
+    if (modelManager != null && player != null)
+    {
       unavailabilityListView.getItems().clear();
       for (int i = 0; i < tempUnavailabilities.size(); i++)
       {
@@ -197,6 +210,7 @@ public class UnavailabilityViewController
     }
 
   }
+
   public void setUnavailabilityList()
   {
     if (modelManager != null && player != null)
