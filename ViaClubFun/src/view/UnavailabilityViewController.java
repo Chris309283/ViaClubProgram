@@ -49,7 +49,7 @@ public class UnavailabilityViewController
   {
     setNumberOfGamesBox();
     player = null;
-    removeButton.setDisable(true);
+    disableButtons();
     toDatePicker.setValue(null);
     fromDatePicker.setValue(null);
     numberOfGamesBox.setValue(null);
@@ -57,6 +57,13 @@ public class UnavailabilityViewController
     unavailabilityListView.getItems().clear();
     setUnavailabilityList();
 
+  }
+
+  public void disableButtons()
+  {
+    removeButton.setDisable(true);
+    addInjuryButton.setDisable(true);
+    addSuspensionButton.setDisable(true);
   }
 
   public Region getRoot()
@@ -68,6 +75,8 @@ public class UnavailabilityViewController
   {
     if (e.getSource() == saveButton)
     {
+      System.out.println(tempUnavailabilities.size());
+      player.getAllUnavailabilities().clear();
       for (int i = 0; i < tempUnavailabilities.size(); i++)
       {
         player.addUnavailability(tempUnavailabilities.get(i));
@@ -161,13 +170,18 @@ public class UnavailabilityViewController
             tempUnavailabilities.get(i).setAvailable(Date.today());
           }
         }
-        for (int i = 0; i < tempUnavailabilities.size(); i++)
-        {
-          unavailabilityListView.getItems().add(tempUnavailabilities.get(i));
-        }
+
 
       }
-      updateUnavailabilityList();
+      updateUnavailabilityListView();
+    }
+    else if (e.getSource() == numberOfGamesBox)
+    {
+      addSuspensionButton.setDisable(false);
+    }
+    else if (e.getSource() == fromDatePicker)
+    {
+      addInjuryButton.setDisable(false);
     }
   }
 
@@ -183,6 +197,12 @@ public class UnavailabilityViewController
       {
         unavailabilityListView.getItems()
             .add(player.getAllUnavailabilities().get(i));
+
+      }
+      tempUnavailabilities.clear();
+      for (int i = 0; i < unavailabilityListView.getItems().size(); i++)
+      {
+        tempUnavailabilities.add(unavailabilityListView.getItems().get(i));
       }
     }
     this.player = player;
@@ -197,11 +217,13 @@ public class UnavailabilityViewController
     }
   }
 
-  public void updateUnavailabilityList()
+  public void updateUnavailabilityListView()
   {
     if (modelManager != null && player != null)
     {
       unavailabilityListView.getItems().clear();
+
+      System.out.println(tempUnavailabilities.size());
       for (int i = 0; i < tempUnavailabilities.size(); i++)
       {
 
@@ -215,6 +237,7 @@ public class UnavailabilityViewController
   {
     if (modelManager != null && player != null)
     {
+      System.out.println(tempUnavailabilities.size());
       unavailabilityListView.getItems().clear();
       tempUnavailabilities = player.getAllUnavailabilities();
       for (int i = 0; i < tempUnavailabilities.size(); i++)
@@ -235,4 +258,10 @@ public class UnavailabilityViewController
 
     }
   }
+
+  /*private class MyListener2 implements  ChangeListener<Integer>{
+    public void changed(
+        ObservableValue<? extends Integer >
+    )
+  }*/
 }

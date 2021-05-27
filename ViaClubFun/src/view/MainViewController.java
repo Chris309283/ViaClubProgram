@@ -52,7 +52,8 @@ public class MainViewController
     this.viewHandler = viewHandler;
     allPlayersList.getSelectionModel().selectedItemProperty()
         .addListener((new MyListListener()));
-    allMatchesList.getSelectionModel().selectedItemProperty().addListener(new MyListListener2());
+    allMatchesList.getSelectionModel().selectedItemProperty()
+        .addListener(new MyListListener2());
     reset();
   }
 
@@ -95,10 +96,11 @@ public class MainViewController
 
     }
 
-    else if (e.getSource()==editMatchButton)
+    else if (e.getSource() == editMatchButton)
     {
       viewHandler.openView("AddMatchView");
-      viewHandler.getAddMatchViewController().setFields(allMatchesList.getSelectionModel().getSelectedItem());
+      viewHandler.getAddMatchViewController()
+          .setFields(allMatchesList.getSelectionModel().getSelectedItem());
     }
 
     else if (e.getSource() == exitMenuItem)
@@ -165,7 +167,6 @@ public class MainViewController
     }
   }
 
-
   private void updateMatchList()
   {
     if (modelManager != null)
@@ -202,10 +203,11 @@ public class MainViewController
       playerAvailability.setDisable(false);
     }
   }
+
   private class MyListListener2 implements ChangeListener<Match>
   {
-    public void changed(ObservableValue<? extends Match> match,
-        Match oldMatch, Match newMatch)
+    public void changed(ObservableValue<? extends Match> match, Match oldMatch,
+        Match newMatch)
     {
       editMatchButton.setDisable(false);
     }
