@@ -63,5 +63,9 @@ public class test
     System.out.println(pl1.getAllUnavailabilities());
 
     System.out.println(pl2.getAllUnavailabilities()==null);
+
+  u1.setAvailable(Date.today());
+
+    System.out.println(u1);
   }
 }
