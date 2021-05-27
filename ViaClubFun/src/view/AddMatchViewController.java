@@ -99,11 +99,11 @@ public class AddMatchViewController
     {
       if (lineUpListBoolean)
       {
-        tempField.remove(allPlayersList.getSelectionModel().getSelectedItem());
+        tempField.remove(lineUpAndBenchList.getSelectionModel().getSelectedItem());
       }
       else
       {
-        tempBench.add(allPlayersList.getSelectionModel().getSelectedItem());
+        tempBench.remove(lineUpAndBenchList.getSelectionModel().getSelectedItem());
       }
 
     }
