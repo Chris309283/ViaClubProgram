@@ -26,14 +26,14 @@
               <MenuItem fx:id="exitMenuItem" mnemonicParsing="false" onAction="#handleActions" text="Close" />
             </items>
           </Menu>
-          <Menu mnemonicParsing="false" text="Edit">
+          <Menu mnemonicParsing="false" text="About">
             <items>
-              <MenuItem mnemonicParsing="false" text="Delete" />
+              <MenuItem fx:id="aboutMenuItem" mnemonicParsing="false" onAction="#handleActions" text="Match View" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Help">
             <items>
-              <MenuItem mnemonicParsing="false" text="About" />
+              <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleActions" text="Client Support" />
             </items>
           </Menu>
         </menus>
