@@ -68,7 +68,7 @@
             </VBox>
             <VBox alignment="TOP_RIGHT" prefHeight="146.0" prefWidth="151.0" spacing="10.0">
                <children>
-                  <ComboBox fx:id="positionsBox" editable="true" prefHeight="25.0" prefWidth="160.0" promptText="Positions">
+                  <ComboBox fx:id="positionsBox" editable="true" onAction="#handleActions" prefHeight="25.0" prefWidth="160.0" promptText="Positions">
                      <VBox.margin>
                         <Insets top="100.0" />
                      </VBox.margin></ComboBox>

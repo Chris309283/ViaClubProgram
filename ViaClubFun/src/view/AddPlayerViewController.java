@@ -69,11 +69,14 @@ public class AddPlayerViewController
     {
       positionsList.getItems()
           .add(positionsBox.getSelectionModel().getSelectedItem());
+      positionsBox.getItems().clear();
+      updatePositionsBox();
     }
     else if (e.getSource() == removeButton)
     {
       positionsList.getItems()
           .remove(positionsList.getSelectionModel().getSelectedItem());
+      updatePositionsBox();
     }
     else if (e.getSource() == saveButton)
     {
@@ -189,16 +192,31 @@ public class AddPlayerViewController
 
   private void updatePositionsBox()
   {
-    positionsBox.getItems().add("Goalkeeper");
-    positionsBox.getItems().add("Sweeper");
-    positionsBox.getItems().add("Centre-Back");
-    positionsBox.getItems().add("Full-Back");
-    positionsBox.getItems().add("Defensive Midfielder");
-    positionsBox.getItems().add("Central Midfielder");
-    positionsBox.getItems().add("Attacking Midfielder");
-    positionsBox.getItems().add("Forward");
-    positionsBox.getItems().add("Winger");
-    positionsBox.getItems().add("Striker");
+
+
+    ArrayList<String> positions= new ArrayList<String>();
+    positions.add("Goalkeeper");
+    positions.add("Sweeper");
+    positions.add("Centre-Back");
+    positions.add("Full-Back");
+    positions.add("Defensive Midfielder");
+    positions.add("Central Midfielder");
+    positions.add("Attacking Midfielder");
+    positions.add("Forward");
+    positions.add("Winger");
+    positions.add("Striker");
+
+    ArrayList<String> usedPositions= new ArrayList<String>();
+    for (int i = 0; i < positionsList.getItems().size(); i++)
+    {
+      usedPositions.add(positionsList.getItems().get(i));
+    }
+    for (int j = 0; j < positions.size(); j++)
+    {
+      if(!(usedPositions.contains(positions.get(j)))){
+        positionsBox.getItems().add(positions.get(j));
+      }
+    }
   }
 
   private class MyListListener implements ChangeListener<String>
