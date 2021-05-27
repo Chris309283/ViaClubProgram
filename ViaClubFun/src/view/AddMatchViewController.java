@@ -58,6 +58,8 @@ public class AddMatchViewController
     this.root = root;
     this.viewHandler = viewHandler;
     datePicker.setValue(LocalDate.now());
+    tempField = new PlayerList();
+    tempBench = new PlayerList();
     reset();
   }
 
