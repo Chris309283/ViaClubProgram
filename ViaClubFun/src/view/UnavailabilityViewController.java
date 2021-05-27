@@ -138,16 +138,16 @@ public class UnavailabilityViewController
     }
     else if (e.getSource() == forceAvailableButton)
     {
-      System.out.println("1");
+
       if (tempUnavailabilities != null)
       {
-        System.out.println("2");
+
         for (int i = 0; i < tempUnavailabilities.size(); i++)
         {
-          System.out.println("3");
+
           if (tempUnavailabilities.get(i).isActive())
           {
-            System.out.println("4");
+
             tempUnavailabilities.get(i).setAvailable(Date.today());
           }
         }
@@ -174,7 +174,7 @@ public class UnavailabilityViewController
       }
     }
     this.player = player;
-    System.out.println("5");
+
   }
 
 
