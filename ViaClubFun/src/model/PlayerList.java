@@ -72,6 +72,11 @@ public class PlayerList implements Serializable
     return -1;
   }
 
+  public void clear()
+  {
+  players.clear();
+  }
+
   public String toString()
   {
     String returnStr = "";

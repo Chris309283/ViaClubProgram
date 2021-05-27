@@ -32,6 +32,9 @@ public class AddMatchViewController
   @FXML private TextField opponentField;
   @FXML private TextField searchField;
 
+  @FXML private Spinner<Integer> homeScoreSpinner;
+  @FXML private Spinner<Integer> opponentScoreSpinner;
+
   @FXML private MenuItem exitMenuItem;
   @FXML private MenuItem aboutMenuItem;
   @FXML private MenuItem helpMenuItem;
@@ -67,11 +70,15 @@ public class AddMatchViewController
 
   public void reset()
   {
+    tempBench.clear();
+    tempField.clear();
+    setSpinners();
     updatePlayerList();
     updateTimeBoxes();
     setToggle();
     setMatchTypeBox();
     updateFieldList();
+    lineUpListBoolean=true;
   }
 
   public Region getRoot()
@@ -81,7 +88,7 @@ public class AddMatchViewController
 
   public void handleActions(ActionEvent e)
   {
-    System.out.println("test");
+
     if (e.getSource() == searchButton)
     {
 
@@ -136,6 +143,12 @@ public class AddMatchViewController
       temp.addBench(tempBench);
       temp.addLineUp(tempField);
 
+
+      temp.setScoreHomeTeam(homeScoreSpinner.getValue());
+      temp.setScoreOpponent(opponentScoreSpinner.getValue());
+
+
+
       MatchList tempList = modelManager.getAllMatches();
 
       if (editMatch != null)
@@ -173,14 +186,12 @@ public class AddMatchViewController
     {
       lineUpListBoolean = true;
       updateFieldList();
-      System.out.println("field");
     }
 
     else if (e.getSource() == benchRadio)
     {
       lineUpListBoolean = false;
       updateBenchList();
-      System.out.println("bench");
     }
 
     else if (e.getSource() == exitMenuItem)
@@ -286,6 +297,14 @@ public class AddMatchViewController
     {
       lineUpAndBenchList.getItems().add(tempBench.get(i));
     }
+  }
+
+  private void setSpinners()
+  {
+    SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(0,40,0);
+    SpinnerValueFactory<Integer> valueFactory2 = new SpinnerValueFactory.IntegerSpinnerValueFactory(0,40,0);
+    homeScoreSpinner.setValueFactory(valueFactory);
+    opponentScoreSpinner.setValueFactory(valueFactory2);
   }
 
   public void setFields(Match match)

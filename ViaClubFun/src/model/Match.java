@@ -161,18 +161,19 @@ public class Match implements Serializable
 
   public String toString()
   {
-    String returnStr = matchType + " Match\n" + "Opponent: " + opponent + "\nDate: " + date + "\nTime: " + startTime + " - " + endTime + "\nScore: " + getMatchScore() + "\nStarting line up:";
+    String returnStr = matchType + " Match\n" + "Opponent: " + opponent + "\nDate: " + date + "\nTime: " + startTime + " - " + endTime + "\nScore: " + getMatchScore() ;
 
-    if (lineUp!=null)
+    if (lineUp.size()>0)
     {
+      returnStr += "\nStarting line up:";
       for (int i = 0; i <lineUp.size(); i++)
       {
         returnStr += "\n" + lineUp.get(i);
       }
-      returnStr += "\nBench:";
     }
-    if (bench!=null)
+    if (bench.size()>0)
     {
+      returnStr += "\nBench:";
       for (int i = 0; i <bench.size(); i++)
       {
         returnStr += "\n" + bench.get(i);
