@@ -10,6 +10,8 @@ import model.Player;
 import model.PlayerList;
 import model.ViaClubModelManager;
 
+import java.util.ArrayList;
+
 public class AddPlayerViewController
 {
   private Region root;
@@ -23,7 +25,7 @@ public class AddPlayerViewController
   @FXML private MenuItem exitMenuItem;
 
   @FXML private TextField nameField;
-  @FXML private TextField numberField;
+  @FXML private ComboBox<Integer> numberBox;
 
   @FXML private ListView<String> positionsList;
 
@@ -44,10 +46,11 @@ public class AddPlayerViewController
 
   public void reset()
   {
+    setNumberBox();
     updatePositionsBox();
     editPlayer = null;
     nameField.clear();
-    numberField.clear();
+    numberBox.setValue(null);
     positionsList.getItems().clear();
   }
 
@@ -72,9 +75,9 @@ public class AddPlayerViewController
     else if (e.getSource() == saveButton)
     {
       Player temp = new Player(nameField.getText());
-      if (!(numberField.getText().equals("")))
+      if (numberBox.getSelectionModel().getSelectedItem()!=null)
       {
-        temp.setNumber(Integer.parseInt(numberField.getText()));
+        temp.setNumber(numberBox.getSelectionModel().getSelectedItem());
       }
 
       for (int i = 0; i < positionsList.getItems().size(); i++)
@@ -123,6 +126,20 @@ public class AddPlayerViewController
     }
   }
 
+  public void setNumberBox(){
+    ArrayList<Integer> usedNumbers= new ArrayList<Integer>();
+    for (int i = 0; i < modelManager.getAllPlayers().size(); i++)
+    {
+      usedNumbers.add(modelManager.getAllPlayers().get(i).getNumber());
+    }
+    for (int i = 0; i < 99; i++)
+    {
+      if(!(usedNumbers.contains(i+1))){
+      numberBox.getItems().add(i+1);
+      }
+    }
+  }
+
   private void updatePositionsList(Player player)
   {
     if (modelManager != null)
@@ -139,7 +156,8 @@ public class AddPlayerViewController
   {
 
     nameField.setText(player.getName());
-    numberField.setText(player.getNumber() + "");
+    numberBox.setValue(player.getNumber());
+
     if (player.getPositions().size() > 0)
     {
       positionsList.getItems().clear();

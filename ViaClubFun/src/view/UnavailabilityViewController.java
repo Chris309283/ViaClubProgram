@@ -259,9 +259,5 @@ public class UnavailabilityViewController
     }
   }
 
-  /*private class MyListener2 implements  ChangeListener<Integer>{
-    public void changed(
-        ObservableValue<? extends Integer >
-    )
-  }*/
+
 }
