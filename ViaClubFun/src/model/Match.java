@@ -131,9 +131,19 @@ public class Match implements Serializable
     this.lineUp=lineUp;
   }
 
+  public PlayerList getLineUp()
+  {
+    return lineUp;
+  }
+
   public void addBench(PlayerList bench)
   {
     this.bench=bench;
+  }
+
+  public PlayerList getBench()
+  {
+    return bench;
   }
 
   public boolean equals(Object obj)
@@ -152,14 +162,22 @@ public class Match implements Serializable
   public String toString()
   {
     String returnStr = matchType + " Match\n" + "Opponent: " + opponent + "\nDate: " + date + "\nTime: " + startTime + " - " + endTime + "\nScore: " + getMatchScore() + "\nStarting line up:";
-    for (int i = 0; i <lineUp.size(); i++)
+
+    if (lineUp!=null)
     {
-      returnStr += "\n" + lineUp.get(i);
+      for (int i = 0; i <lineUp.size(); i++)
+      {
+        returnStr += "\n" + lineUp.get(i);
+      }
+      returnStr += "\nBench:";
     }
-    returnStr += "\nBench:";
-    for (int i = 0; i <bench.size(); i++)
+    if (bench!=null)
     {
-      returnStr += "\n" + bench.get(i);
+      for (int i = 0; i <bench.size(); i++)
+      {
+        returnStr += "\n" + bench.get(i);
+      }
+      return returnStr;
     }
     return returnStr;
   }

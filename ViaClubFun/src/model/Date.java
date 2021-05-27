@@ -1,5 +1,6 @@
 package model;
 
+import java.io.Serializable;
 import java.util.GregorianCalendar;
 
 /**
@@ -8,7 +9,7 @@ import java.util.GregorianCalendar;
  * @author Java Gods
  * @version 1.0
  */
-public class Date
+public class Date implements Serializable
 {
   private int day, month, year;
 
