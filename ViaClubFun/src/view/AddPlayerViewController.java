@@ -22,7 +22,10 @@ public class AddPlayerViewController
   @FXML private Button removeButton;
   @FXML private Button saveButton;
   @FXML private Button cancelButton;
+
   @FXML private MenuItem exitMenuItem;
+  @FXML private MenuItem aboutMenuItem;
+  @FXML private MenuItem helpMenuItem;
 
   @FXML private TextField nameField;
   @FXML private ComboBox<Integer> numberBox;
@@ -123,6 +126,20 @@ public class AddPlayerViewController
       {
         System.exit(0);
       }
+    }
+    else if(e.getSource()==aboutMenuItem){
+      Alert alert = new Alert(Alert.AlertType.INFORMATION,
+          "Here you can add or edit a player.", ButtonType.OK);
+      alert.setTitle("About");
+      alert.setHeaderText(null);
+      alert.showAndWait();
+    }
+    else if(e.getSource()==helpMenuItem){
+      Alert alert = new Alert(Alert.AlertType.INFORMATION,
+          "For client support, please refer to JavaGods.", ButtonType.OK);
+      alert.setTitle("About");
+      alert.setHeaderText(null);
+      alert.showAndWait();
     }
   }
 
