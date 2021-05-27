@@ -44,13 +44,18 @@ public class MatchList implements Serializable
 
   /**
    * the method which gets the size of matches
-   * @return it return the size of matches
+   * @return it returns the int of the size of matches
    */
   public int size()
   {
     return matches.size();
   }
 
+  /**
+   * the method gets the match from a specific index, if it exist.
+   * @param index which is a specific location of list
+   * @return if match does not exist it returns null.
+   */
   public Match get(int index)
   {
     if (index < matches.size())
@@ -62,13 +67,29 @@ public class MatchList implements Serializable
       return null;
     }
   }
+
+  /**
+   * the method sets a match to a specific index
+   * @param index is a location in the list
+   * @param match is match to that index
+   */
   public void set(int index, Match match)
   {
     matches.set(index, match);
   }
 
-  public int getIndex(Time startTime, Time endTime, Date date, String opponent,
-      String matchType, boolean isAwayGame)
+  /**
+   * the method has 6 parameter and a loop and inside it there is temp variable reference of type match,
+   * so it goes through the loop and check if temp is equal to all parameter it returns the index as a number from that match..
+   * @param startTime it is input of start time of the match
+   * @param endTime it is input of end time of the match
+   * @param date it is the date of the match
+   * @param opponent it is the opponent in the match
+   * @param matchType it is match type
+   * @param isAwayGame it is is away game
+   * @return it returns the int
+   */
+  public int getIndex(Time startTime, Time endTime, Date date, String opponent, String matchType, boolean isAwayGame)
   {
     for (int i = 0; i < matches.size(); i++)
     {
@@ -83,7 +104,10 @@ public class MatchList implements Serializable
     return -1;
   }
 
-
+  /**
+   * the method will run through the loop and print out all matches
+   * @return it will return the string
+   */
   public String toString()
   {
     String returnStr = "";
