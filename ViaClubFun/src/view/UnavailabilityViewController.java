@@ -41,7 +41,7 @@ public class UnavailabilityViewController
     this.viewHandler = viewHandler;
     unavailabilityListView.getSelectionModel().selectedItemProperty()
         .addListener((new MyListListener()));
-
+  tempUnavailabilities= new ArrayList<Unavailability>();
     reset();
   }
 
@@ -65,7 +65,10 @@ public class UnavailabilityViewController
   {
     if (e.getSource() == saveButton)
     {
-
+      for (int i = 0; i < unavailabilityListView.getItems().size(); i++)
+      {
+        player.addUnavailability(unavailabilityListView.getItems().get(i));
+      }
     }
     else if (e.getSource() == cancelButton)
     {
@@ -74,8 +77,11 @@ public class UnavailabilityViewController
 
     else if (e.getSource() == addSuspensionButton)
     {
+      tempUnavailabilities.add(new Unavailability(Date.today(),
+          numberOfGamesBox.getSelectionModel().getSelectedItem()));
       unavailabilityListView.getItems().add(new Unavailability(Date.today(),
           numberOfGamesBox.getSelectionModel().getSelectedItem()));
+
     }
 
     else if (e.getSource() == addInjuryButton)
@@ -89,8 +95,9 @@ public class UnavailabilityViewController
           toDatePicker.getValue().getYear());
       if (tempStart != null && tempEnd != null && tempStart.isBefore(tempEnd))
       {
-        unavailabilityListView.getItems()
+        tempUnavailabilities
             .add(new Unavailability(tempStart, tempEnd));
+        unavailabilityListView.getItems().add(new Unavailability(tempStart, tempEnd));
       }
       else
       {
@@ -131,12 +138,16 @@ public class UnavailabilityViewController
     }
     else if (e.getSource() == forceAvailableButton)
     {
+
       if (tempUnavailabilities != null)
       {
+
         for (int i = 0; i < tempUnavailabilities.size(); i++)
         {
+
           if (tempUnavailabilities.get(i).isActive())
           {
+
             tempUnavailabilities.get(i).setAvailable(Date.today());
           }
         }
@@ -146,6 +157,7 @@ public class UnavailabilityViewController
         }
 
       }
+      updateUnavailabilityList();
     }
   }
 
@@ -162,7 +174,9 @@ public class UnavailabilityViewController
       }
     }
     this.player = player;
+
   }
+
 
   public void setNumberOfGamesBox()
   {
@@ -172,6 +186,17 @@ public class UnavailabilityViewController
     }
   }
 
+  public void updateUnavailabilityList(){
+    if(modelManager!= null && player!=null){
+      unavailabilityListView.getItems().clear();
+      for (int i = 0; i < tempUnavailabilities.size(); i++)
+      {
+
+        unavailabilityListView.getItems().add(tempUnavailabilities.get(i));
+      }
+    }
+
+  }
   public void setUnavailabilityList()
   {
     if (modelManager != null && player != null)

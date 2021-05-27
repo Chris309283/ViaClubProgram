@@ -58,6 +58,8 @@ public class AddMatchViewController
     this.root = root;
     this.viewHandler = viewHandler;
     datePicker.setValue(LocalDate.now());
+    tempField = new PlayerList();
+    tempBench = new PlayerList();
     reset();
   }
 
@@ -100,12 +102,13 @@ public class AddMatchViewController
       if (lineUpListBoolean)
       {
         tempField.remove(lineUpAndBenchList.getSelectionModel().getSelectedItem());
+        updateFieldList();
       }
       else
       {
         tempBench.remove(lineUpAndBenchList.getSelectionModel().getSelectedItem());
+        updateBenchList();
       }
-
     }
 
     else if (e.getSource() == saveButton)

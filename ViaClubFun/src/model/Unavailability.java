@@ -2,13 +2,15 @@ package model;
 
 import model.Date;
 
+import java.io.Serializable;
+
 /**
  * a class for creating unavailability objects
  *
  * @author Java Gods
  * @version 1.0
  */
-public class Unavailability
+public class Unavailability implements Serializable
 {
   private String type;
   // private boolean isAvailable;
