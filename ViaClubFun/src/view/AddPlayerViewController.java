@@ -81,7 +81,7 @@ public class AddPlayerViewController
     else if (e.getSource() == saveButton)
     {
       Player temp = new Player(nameField.getText());
-      if (numberBox.getSelectionModel().getSelectedItem()!=null)
+      if (numberBox.getSelectionModel().getSelectedItem() != null)
       {
         temp.setNumber(numberBox.getSelectionModel().getSelectedItem());
       }
@@ -130,14 +130,16 @@ public class AddPlayerViewController
         System.exit(0);
       }
     }
-    else if(e.getSource()==aboutMenuItem){
+    else if (e.getSource() == aboutMenuItem)
+    {
       Alert alert = new Alert(Alert.AlertType.INFORMATION,
           "Here you can add or edit a player.", ButtonType.OK);
       alert.setTitle("About");
       alert.setHeaderText(null);
       alert.showAndWait();
     }
-    else if(e.getSource()==helpMenuItem){
+    else if (e.getSource() == helpMenuItem)
+    {
       Alert alert = new Alert(Alert.AlertType.INFORMATION,
           "For client support, please refer to JavaGods.", ButtonType.OK);
       alert.setTitle("About");
@@ -146,16 +148,18 @@ public class AddPlayerViewController
     }
   }
 
-  public void setNumberBox(){
-    ArrayList<Integer> usedNumbers= new ArrayList<Integer>();
+  public void setNumberBox()
+  {
+    ArrayList<Integer> usedNumbers = new ArrayList<Integer>();
     for (int i = 0; i < modelManager.getAllPlayers().size(); i++)
     {
       usedNumbers.add(modelManager.getAllPlayers().get(i).getNumber());
     }
     for (int i = 0; i < 99; i++)
     {
-      if(!(usedNumbers.contains(i+1))){
-      numberBox.getItems().add(i+1);
+      if (!(usedNumbers.contains(i + 1)))
+      {
+        numberBox.getItems().add(i + 1);
       }
     }
   }
@@ -190,11 +194,11 @@ public class AddPlayerViewController
     editPlayer = player;
   }
 
-  private void updatePositionsBox()
+
+  public void updatePositionsBox()
   {
 
-
-    ArrayList<String> positions= new ArrayList<String>();
+    ArrayList<String> positions = new ArrayList<String>();
     positions.add("Goalkeeper");
     positions.add("Sweeper");
     positions.add("Centre-Back");
@@ -206,14 +210,21 @@ public class AddPlayerViewController
     positions.add("Winger");
     positions.add("Striker");
 
-    ArrayList<String> usedPositions= new ArrayList<String>();
+    ArrayList<String> usedPositions = new ArrayList<String>();
     for (int i = 0; i < positionsList.getItems().size(); i++)
     {
       usedPositions.add(positionsList.getItems().get(i));
     }
+    if(editPlayer!=null){
+    for (int i = 0; i < editPlayer.getPositions().size(); i++)
+    {
+      usedPositions.add(editPlayer.getPositions().get(i));
+    }}
+
     for (int j = 0; j < positions.size(); j++)
     {
-      if(!(usedPositions.contains(positions.get(j)))){
+      if (!(usedPositions.contains(positions.get(j))))
+      {
         positionsBox.getItems().add(positions.get(j));
       }
     }
