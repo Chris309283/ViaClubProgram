@@ -29,7 +29,6 @@ public class AddPlayerViewController
 
   @FXML private ComboBox<String> positionsBox;
 
-  //  private boolean editPlayer;
   private Player editPlayer;
 
   public void init(ViewHandler viewHandler, ViaClubModelManager modelManager,
@@ -77,20 +76,25 @@ public class AddPlayerViewController
       {
         temp.setNumber(Integer.parseInt(numberField.getText()));
       }
+
       for (int i = 0; i < positionsList.getItems().size(); i++)
       {
         temp.addPosition(positionsList.getItems().get(i));
       }
+
       PlayerList tempList = modelManager.getAllPlayers();
+
       if (editPlayer != null)
       {
         tempList.set(modelManager.getAllPlayers()
             .getIndex(editPlayer.getName(), editPlayer.getNumber()), temp);
       }
+
       else
       {
         tempList.add(temp);
-      } modelManager.savePlayers(tempList);
+      }
+      modelManager.savePlayers(tempList);
       viewHandler.openView("MainView");
 
     }
@@ -130,7 +134,6 @@ public class AddPlayerViewController
       }
     }
   }
-
 
   public void setFields(Player player)
   {

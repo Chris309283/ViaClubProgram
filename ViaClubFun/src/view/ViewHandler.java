@@ -167,4 +167,7 @@ public class ViewHandler
   {
     return addPlayerViewController;
   }
+  public UnavailabilityViewController getUnavailabilityViewController(){
+    return unavailabilityViewController;
+  }
 }

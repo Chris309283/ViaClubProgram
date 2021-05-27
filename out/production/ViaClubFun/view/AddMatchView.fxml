@@ -11,6 +11,7 @@
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
@@ -47,11 +48,17 @@
                               <Insets />
                            </HBox.margin>
                         </Text>
-                        <DatePicker>
+                        <DatePicker fx:id="datePicker" showWeekNumbers="true">
                            <HBox.margin>
                               <Insets />
                            </HBox.margin>
                         </DatePicker>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="5.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Match Type" />
+                        <ComboBox fx:id="matchTypeBox" prefHeight="25.0" prefWidth="135.0" />
                      </children>
                   </HBox>
                </children>
@@ -64,9 +71,9 @@
                            <HBox.margin>
                               <Insets right="5.0" />
                            </HBox.margin></Text>
-                        <ComboBox prefWidth="150.0" />
+                        <ComboBox fx:id="startTimeHourBox" prefWidth="150.0" />
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text=":" />
-                        <ComboBox prefWidth="150.0" />
+                        <ComboBox fx:id="startTimeMinuteBox" prefWidth="150.0" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0">
@@ -75,9 +82,9 @@
                            <HBox.margin>
                               <Insets right="5.0" />
                            </HBox.margin></Text>
-                        <ComboBox prefWidth="150.0" />
+                        <ComboBox fx:id="endTimeHourBox" prefWidth="150.0" />
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text=":" />
-                        <ComboBox prefWidth="150.0" />
+                        <ComboBox fx:id="endTimeMinuteBox" prefWidth="150.0" />
                      </children>
                   </HBox>
                </children>
@@ -91,13 +98,16 @@
                               <Insets />
                            </HBox.margin>
                         </Text>
-                        <TextField promptText="Opponent" />
+                        <TextField fx:id="opponentField" promptText="Opponent" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="50.0" prefWidth="300.0" spacing="20.0">
                      <children>
-                        <RadioButton mnemonicParsing="false" text="Home Game" />
-                        <RadioButton mnemonicParsing="false" text="Away Game" />
+                        <RadioButton fx:id="homeRadio" mnemonicParsing="false" onAction="#handleActions" text="Home Game">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="gamePlaceGroup" />
+                           </toggleGroup></RadioButton>
+                        <RadioButton fx:id="awayRadio" mnemonicParsing="false" onAction="#handleActions" text="Away Game" toggleGroup="$gamePlaceGroup" />
                      </children>
                   </HBox>
                </children>
@@ -110,15 +120,15 @@
                <children>
                   <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="350.0" spacing="7.0">
                      <children>
-                        <TextField promptText="Search" />
-                        <ComboBox prefHeight="25.0" prefWidth="106.0" promptText="Search By" />
-                        <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="81.0" text="Search" />
+                        <TextField fx:id="searchField" promptText="Search" />
+                        <ComboBox fx:id="searchBox" prefHeight="25.0" prefWidth="106.0" promptText="Search By" />
+                        <Button fx:id="searchButton" mnemonicParsing="false" onAction="#handleActions" prefHeight="25.0" prefWidth="81.0" text="Search" />
                      </children>
                      <VBox.margin>
                         <Insets />
                      </VBox.margin>
                   </HBox>
-                  <ListView maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="395.0" prefWidth="350.0" />
+                  <ListView fx:id="allPlayersList" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="395.0" prefWidth="350.0" />
                </children>
                <padding>
                   <Insets left="10.0" />
@@ -126,19 +136,22 @@
             </VBox>
             <VBox alignment="CENTER" prefHeight="435.0" prefWidth="100.0" spacing="20.0">
                <children>
-                  <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="60.0" text="Add" />
-                  <Button mnemonicParsing="false" prefWidth="60.0" text="Remove" />
+                  <Button fx:id="addButton" mnemonicParsing="false" onAction="#handleActions" prefHeight="25.0" prefWidth="60.0" text="Add" />
+                  <Button fx:id="removeButton" mnemonicParsing="false" onAction="#handleActions" prefWidth="60.0" text="Remove" />
                </children>
             </VBox>
             <VBox prefHeight="435.0" prefWidth="340.0">
                <children>
                   <HBox alignment="CENTER" prefHeight="40.0" prefWidth="350.0" spacing="35.0">
                      <children>
-                        <RadioButton mnemonicParsing="false" text="Field" />
-                        <RadioButton mnemonicParsing="false" text="Bench" />
+                        <RadioButton fx:id="fieldRadio" mnemonicParsing="false" onAction="#handleActions" text="Field">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="fieldAndBenchGroup" />
+                           </toggleGroup></RadioButton>
+                        <RadioButton fx:id="benchRadio" mnemonicParsing="false" onAction="#handleActions" text="Bench" toggleGroup="$fieldAndBenchGroup" />
                      </children>
                   </HBox>
-                  <ListView maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="350.0" />
+                  <ListView fx:id="lineUpAndBenchList" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="350.0" />
                </children>
                <HBox.margin>
                   <Insets />
@@ -151,7 +164,7 @@
       </HBox>
       <ButtonBar prefHeight="40.0" prefWidth="800.0">
         <buttons>
-          <Button mnemonicParsing="false" text="Save" />
+          <Button fx:id="saveButton" mnemonicParsing="false" onAction="#handleActions" text="Save" />
             <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#handleActions" text="Cancel" />
         </buttons>
          <padding>

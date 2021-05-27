@@ -40,7 +40,14 @@ public class Unavailability
     numberOfGames=-1;
 
   }
-
+  public Unavailability(String type, Date start, Date end)
+  {
+    this.type = type;
+    this.start = start.copy();
+    this.end = end.copy();
+    isAvailable = false;
+    numberOfGames = -1;
+  }
   /**
    * Gets the type of model.Unavailability
    * @return the type of model.Unavailability
@@ -55,7 +62,19 @@ public class Unavailability
   public void setAvailable(Date end){
 
     this.end=end;
+    if(end.isBefore(Date.today())){
+      isAvailable=false;
+    }
     isAvailable=true;
+  }
+
+  public boolean isActive(){
+    if(!(end.isBefore(Date.today()))){
+      return true;
+    }
+    else{
+      return false;
+    }
   }
 
   /**
@@ -97,6 +116,19 @@ public class Unavailability
    */
   public int lasted(){
    return start.daysUntil(end);
+  }
+
+  public String toString()
+  {
+    String finalString="";
+
+    if(type.equals("Suspended")){
+      finalString="Type: Suspended; Number of games: "+numberOfGames;
+    }
+    else if(type.equals("Injured")){
+      finalString="Type: Injured; Start Date: "+start+"; End Date: "+end;
+    }
+    return finalString;
   }
 }
 

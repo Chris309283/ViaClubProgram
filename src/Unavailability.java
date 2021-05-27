@@ -33,7 +33,7 @@ public class Unavailability
    * @param start sets the start date of the Unavailability
    *              isAvailable method is set initially to false
    */
-  public Unavailability(String type, Date start)
+  public Unavailability(Date start, String type)
   {
     this.type = type;
     this.start = start.copy();
