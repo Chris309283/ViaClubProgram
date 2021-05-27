@@ -30,6 +30,8 @@ public class MainViewController
   @FXML private Button playerAvailability;
 
   @FXML private MenuItem exitMenuItem;
+  @FXML private MenuItem aboutMenuItem;
+  @FXML private MenuItem helpMenuItem;
 
   @FXML private Tab playerListTab;
   @FXML private Tab matchListTab;
@@ -39,6 +41,7 @@ public class MainViewController
 
   @FXML private TextField searchPlayersField;
   @FXML private TextField searchMatchesField;
+
 
   @FXML private ComboBox<String> playerSearchComboBox;
   @FXML private ComboBox<String> matchSearchComboBox;
@@ -118,6 +121,20 @@ public class MainViewController
       {
         System.exit(0);
       }
+    }
+    else if(e.getSource()==aboutMenuItem){
+      Alert alert = new Alert(Alert.AlertType.INFORMATION,
+          "Here you can manipulate your players and matches.", ButtonType.OK);
+      alert.setTitle("About");
+      alert.setHeaderText(null);
+      alert.showAndWait();
+    }
+    else if(e.getSource()==helpMenuItem){
+      Alert alert = new Alert(Alert.AlertType.INFORMATION,
+          "For client support, please refer to JavaGods.", ButtonType.OK);
+      alert.setTitle("About");
+      alert.setHeaderText(null);
+      alert.showAndWait();
     }
 
     else if (e.getSource() == removePlayerButton)

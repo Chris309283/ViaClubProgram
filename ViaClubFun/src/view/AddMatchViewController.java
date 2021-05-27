@@ -33,6 +33,8 @@ public class AddMatchViewController
   @FXML private TextField searchField;
 
   @FXML private MenuItem exitMenuItem;
+  @FXML private MenuItem aboutMenuItem;
+  @FXML private MenuItem helpMenuItem;
 
   @FXML private ListView<Player> allPlayersList;
   @FXML private ListView<Player> lineUpAndBenchList;
@@ -196,6 +198,21 @@ public class AddMatchViewController
         System.exit(0);
       }
     }
+    else if(e.getSource()==aboutMenuItem){
+      Alert alert = new Alert(Alert.AlertType.INFORMATION,
+          "Here you can create or edit a match", ButtonType.OK);
+      alert.setTitle("About");
+      alert.setHeaderText(null);
+      alert.showAndWait();
+    }
+    else if(e.getSource()==helpMenuItem){
+      Alert alert = new Alert(Alert.AlertType.INFORMATION,
+          "For client support, please refer to JavaGods.", ButtonType.OK);
+      alert.setTitle("About");
+      alert.setHeaderText(null);
+      alert.showAndWait();
+    }
+
   }
 
   public void updateTimeBoxes()

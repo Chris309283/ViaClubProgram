@@ -24,6 +24,9 @@ public class UnavailabilityViewController
   @FXML private Button forceAvailableButton;
 
   @FXML private MenuItem exitMenuItem;
+  @FXML private MenuItem aboutMenuItem;
+  @FXML private MenuItem helpMenuItem;
+
   @FXML private ListView<Unavailability> unavailabilityListView;
   @FXML private DatePicker fromDatePicker;
   @FXML private DatePicker toDatePicker;
@@ -150,6 +153,23 @@ public class UnavailabilityViewController
         System.exit(0);
       }
     }
+    else if (e.getSource() == aboutMenuItem)
+    {
+      Alert alert = new Alert(Alert.AlertType.INFORMATION,
+          "Here you can add, remove and see the history of your player's unavailabilities.",
+          ButtonType.OK);
+      alert.setTitle("About");
+      alert.setHeaderText(null);
+      alert.showAndWait();
+    }
+    else if (e.getSource() == helpMenuItem)
+    {
+      Alert alert = new Alert(Alert.AlertType.INFORMATION,
+          "For client support, please refer to JavaGods.", ButtonType.OK);
+      alert.setTitle("About");
+      alert.setHeaderText(null);
+      alert.showAndWait();
+    }
     else if (e.getSource() == removeButton)
     {
       unavailabilityListView.getItems()
@@ -170,7 +190,6 @@ public class UnavailabilityViewController
             tempUnavailabilities.get(i).setAvailable(Date.today());
           }
         }
-
 
       }
       updateUnavailabilityListView();
@@ -258,6 +277,5 @@ public class UnavailabilityViewController
 
     }
   }
-
 
 }
