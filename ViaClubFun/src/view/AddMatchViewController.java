@@ -79,6 +79,7 @@ public class AddMatchViewController
 
   public void handleActions(ActionEvent e)
   {
+    System.out.println("test");
     if (e.getSource() == searchButton)
     {
 
@@ -101,12 +102,14 @@ public class AddMatchViewController
     {
       if (lineUpListBoolean)
       {
-        tempField.remove(lineUpAndBenchList.getSelectionModel().getSelectedItem());
+        tempField
+            .remove(lineUpAndBenchList.getSelectionModel().getSelectedItem());
         updateFieldList();
       }
       else
       {
-        tempBench.remove(lineUpAndBenchList.getSelectionModel().getSelectedItem());
+        tempBench
+            .remove(lineUpAndBenchList.getSelectionModel().getSelectedItem());
         updateBenchList();
       }
     }
@@ -154,26 +157,28 @@ public class AddMatchViewController
       viewHandler.openView("MainView");
     }
 
-    else if (awayRadio.isSelected())
+    else if (e.getSource() == awayRadio)
     {
       gamePlaceBoolean = true;
     }
 
-    else if (homeRadio.isSelected())
+    else if (e.getSource() == homeRadio)
     {
       gamePlaceBoolean = false;
     }
 
-    else if (fieldRadio.isSelected())
+    else if (e.getSource() == fieldRadio)
     {
       lineUpListBoolean = true;
       updateFieldList();
+      System.out.println("field");
     }
 
-    else if (benchRadio.isSelected())
+    else if (e.getSource() == benchRadio)
     {
       lineUpListBoolean = false;
       updateBenchList();
+      System.out.println("bench");
     }
 
     else if (e.getSource() == exitMenuItem)
@@ -255,6 +260,7 @@ public class AddMatchViewController
       lineUpAndBenchList.getItems().add(tempField.get(i));
     }
   }
+
   private void updateBenchList()
   {
     lineUpAndBenchList.getItems().clear();
@@ -267,7 +273,9 @@ public class AddMatchViewController
 
   public void setFields(Match match)
   {
-    datePicker.setValue(LocalDate.of((match.getDate().getYear()),(match.getDate().getMonth()),(match.getDate().getDay())));
+    datePicker.setValue(LocalDate
+        .of((match.getDate().getYear()), (match.getDate().getMonth()),
+            (match.getDate().getDay())));
 
     matchTypeBox.getSelectionModel().select(match.getMatchType());
 
@@ -275,7 +283,8 @@ public class AddMatchViewController
 
     endTimeHourBox.getSelectionModel().select(match.getEndTime().getHour());
 
-    startTimeMinuteBox.getSelectionModel().select(match.getStartTime().getMinute());
+    startTimeMinuteBox.getSelectionModel()
+        .select(match.getStartTime().getMinute());
 
     endTimeMinuteBox.getSelectionModel().select(match.getEndTime().getMinute());
 
@@ -292,6 +301,6 @@ public class AddMatchViewController
       awayRadio.setSelected(true);
     }
 
-    editMatch= match;
+    editMatch = match;
   }
 }
