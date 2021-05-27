@@ -8,10 +8,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import model.MatchList;
-import model.Player;
-import model.PlayerList;
-import model.ViaClubModelManager;
+import model.*;
 
 import javafx.fxml.FXML;
 import javafx.scene.layout.Region;
@@ -38,7 +35,7 @@ public class MainViewController
   @FXML private Tab matchListTab;
 
   @FXML private ListView<Player> allPlayersList;
-  @FXML private TextArea allMatchesArea;
+  @FXML private ListView<Match> allMatchesList;
 
   @FXML private TextField searchPlayersField;
   @FXML private TextField searchMatchesField;
@@ -55,13 +52,14 @@ public class MainViewController
     this.viewHandler = viewHandler;
     allPlayersList.getSelectionModel().selectedItemProperty()
         .addListener((new MyListListener()));
+    allMatchesList.getSelectionModel().selectedItemProperty().addListener(new MyListListener2());
     reset();
   }
 
   public void reset()
   {
     updatePlayerList();
-    updateMatchArea();
+    updateMatchList();
   }
 
   public Region getRoot()
@@ -95,6 +93,12 @@ public class MainViewController
     else if (e.getSource() == searchPlayersField)
     {
 
+    }
+
+    else if (e.getSource()==editMatchButton)
+    {
+      viewHandler.openView("AddMatchView");
+      viewHandler.getAddMatchViewController().setFields(allMatchesList.getSelectionModel().getSelectedItem());
     }
 
     else if (e.getSource() == exitMenuItem)
@@ -162,10 +166,17 @@ public class MainViewController
   }
 
 
-  private void updateMatchArea()
+  private void updateMatchList()
   {
-    MatchList matches = modelManager.getAllMatches();
-    allMatchesArea.setText(matches.toString());
+    if (modelManager != null)
+    {
+      allMatchesList.getItems().clear();
+      MatchList matches = modelManager.getAllMatches();
+      for (int i = 0; i < matches.size(); i++)
+      {
+        allMatchesList.getItems().add(matches.get(i));
+      }
+    }
   }
 
   public void tabChanged(Event e)
@@ -177,7 +188,7 @@ public class MainViewController
     }
     else if (matchListTab.isSelected())
     {
-      updateMatchArea();
+      updateMatchList();
     }
   }
 
@@ -189,6 +200,14 @@ public class MainViewController
       editPlayerButton.setDisable(false);
       removePlayerButton.setDisable(false);
       playerAvailability.setDisable(false);
+    }
+  }
+  private class MyListListener2 implements ChangeListener<Match>
+  {
+    public void changed(ObservableValue<? extends Match> match,
+        Match oldMatch, Match newMatch)
+    {
+      editMatchButton.setDisable(false);
     }
   }
 

@@ -10,7 +10,6 @@
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
-<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -87,12 +86,12 @@
                               <Insets left="10.0" />
                            </padding>
                         </HBox>
-                        <TextArea fx:id="allMatchesArea" editable="false" prefHeight="470.0" prefWidth="800.0" />
+                        <ListView fx:id="allMatchesList" prefHeight="471.0" prefWidth="800.0" />
                         <HBox prefHeight="35.0" prefWidth="600.0">
                            <children>
                               <ButtonBar prefHeight="35.0" prefWidth="828.0">
                                 <buttons>
-                                  <Button fx:id="editMatchButton" disable="true" mnemonicParsing="false" text="Edit Match" />
+                                  <Button fx:id="editMatchButton" disable="true" mnemonicParsing="false" onAction="#handleActions" text="Edit Match" />
                                     <Button fx:id="removeMatchButton" disable="true" mnemonicParsing="false" text="Remove Match" />
                                     <Button fx:id="addMatchButton" mnemonicParsing="false" onAction="#handleActions" text="Add Match" />
                                 </buttons>

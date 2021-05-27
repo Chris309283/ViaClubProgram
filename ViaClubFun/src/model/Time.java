@@ -41,6 +41,21 @@ public class Time implements Serializable
     second = totalTimeInSeconds;
   }
 
+  public int getHour()
+  {
+    return hour;
+  }
+
+  public int getMinute()
+  {
+    return minute;
+  }
+
+  public int getSecond()
+  {
+    return second;
+  }
+
   /**
    * A method for converting this time into seconds.
    *
