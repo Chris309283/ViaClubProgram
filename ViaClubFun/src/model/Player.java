@@ -103,23 +103,24 @@ public class Player implements Serializable
    */
   public boolean isSuspended()
   {
-    //add today date
-    if (unavailabilities.get((unavailabilities.size() - 1)).getType()
-        .equals("Suspended"))
-    {
-
-      return true;
-    }
-    else
-    {
-      return false;
-    }
-  }
-
-  public boolean isInjured(){
     for (int i = 0; i < unavailabilities.size(); i++)
     {
-      if(unavailabilities.get(i).isActive()){
+      if (unavailabilities.get(i).isActive() && unavailabilities.get(i)
+          .getType().equals("Suspended"))
+      {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  public boolean isInjured()
+  {
+    for (int i = 0; i < unavailabilities.size(); i++)
+    {
+      if (unavailabilities.get(i).isActive() && unavailabilities.get(i)
+          .getType().equals("Injured"))
+      {
         return true;
       }
     }
@@ -220,32 +221,11 @@ public class Player implements Serializable
     {
       returnStr += " Status: Available";
     }
-    else if (unavailabilities.get(unavailabilities.size() - 1).getType()
-        .equals("Suspended") && unavailabilities
-        .get(unavailabilities.size() - 1).isActive())
-    {
-      returnStr += " Status: Suspended";
+   else if(isInjured()){
+     returnStr+=" Status: Injured";
     }
-    else if (unavailabilities.get(unavailabilities.size() - 1).getType()
-        .equals("Injured") && unavailabilities.get(unavailabilities.size() - 1)
-        .isActive())
-    {
-      returnStr += " Status: Injured";
-    }
-    else
-    {
-      boolean available = true;
-      for (int i = 0; i < unavailabilities.size(); i++)
-      {
-        if (unavailabilities.get(i).isActive())
-        {
-          available = false;
-        }
-      }
-      if (available == true)
-      {
-        returnStr += " Status: Available";
-      }
+   else if(isSuspended()){
+     returnStr+=" Status: Suspended";
     }
     return returnStr;
   }
@@ -265,24 +245,7 @@ public class Player implements Serializable
     benchedInARow++;
   }
 
-  /*public boolean isAvailable()
-  {
-    for (int i = 0; i < unavailabilities.size(); i++)
-    {
-      if (unavailabilities.get(i).isAvailable)
-    }
-  }
 
-  public boolean isAvailable()
-  {
-    if (!isSuspended() && !isInjured())
-    {
-      return true;
-   }
-    return  false;
-  }
-
-   */
 
 }
 

@@ -299,9 +299,11 @@ public class AddMatchViewController
     allPlayersList.getItems().clear();
 
     PlayerList allPlayers = new PlayerList();
+
     for (int i = 0; i < modelManager.getAllPlayers().size(); i++)
     {
-      if(!(modelManager.getAllPlayers().get(i).isInjured())){
+      if (!(modelManager.getAllPlayers().get(i).isInjured()))
+      {
         allPlayers.add(modelManager.getAllPlayers().get(i));
       }
     }
