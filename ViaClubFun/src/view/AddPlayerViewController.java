@@ -63,6 +63,7 @@ public class AddPlayerViewController
     nameField.clear();
     numberBox.setValue(null);
     positionsList.getItems().clear();
+    updatePositionsBox();
 
   }
 
@@ -221,8 +222,9 @@ public class AddPlayerViewController
     positions.add("Forward");
     positions.add("Winger");
     positions.add("Striker");
-
+positionsBox.getItems().clear();
     ArrayList<String> usedPositions = new ArrayList<String>();
+
     for (int i = 0; i < positionsList.getItems().size(); i++)
     {
       usedPositions.add(positionsList.getItems().get(i));
@@ -234,9 +236,13 @@ public class AddPlayerViewController
       if (!(usedPositions.contains(positions.get(j))))
       {
         positionsBox.getItems().add(positions.get(j));
+
       }
     }
-
+    for (int i = 0; i < positionsBox.getItems().size(); i++)
+    {
+      System.out.println(positionsBox.getItems().get(i));
+    }
   }
 
   private class MyListListener implements ChangeListener<String>
