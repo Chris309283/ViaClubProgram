@@ -59,8 +59,6 @@ public class UnavailabilityViewController
     tempUnavailabilities.clear();
     unavailabilityListView.getItems().clear();
     setUnavailabilityList();
-
-
   }
 
   public void disableButtons()
@@ -154,6 +152,7 @@ public class UnavailabilityViewController
         System.exit(0);
       }
     }
+
     else if (e.getSource() == aboutMenuItem)
     {
       Alert alert = new Alert(Alert.AlertType.INFORMATION,
@@ -163,6 +162,7 @@ public class UnavailabilityViewController
       alert.setHeaderText(null);
       alert.showAndWait();
     }
+
     else if (e.getSource() == helpMenuItem)
     {
       Alert alert = new Alert(Alert.AlertType.INFORMATION,
@@ -171,18 +171,18 @@ public class UnavailabilityViewController
       alert.setHeaderText(null);
       alert.showAndWait();
     }
+
     else if (e.getSource() == removeButton)
     {
 
       tempUnavailabilities.remove(unavailabilityListView.getSelectionModel().getSelectedItem());
       updateUnavailabilityListView();
     }
+
     else if (e.getSource() == forceAvailableButton)
     {
-
       if (tempUnavailabilities != null)
       {
-
         for (int i = 0; i < tempUnavailabilities.size(); i++)
         {
 
@@ -192,7 +192,6 @@ public class UnavailabilityViewController
             tempUnavailabilities.get(i).setAvailable(Date.today());
           }
         }
-
       }
       updateUnavailabilityListView();
     }
@@ -227,7 +226,6 @@ public class UnavailabilityViewController
       }
     }
     this.player = player;
-
   }
 
   public void setNumberOfGamesBox()
@@ -251,7 +249,6 @@ public class UnavailabilityViewController
         unavailabilityListView.getItems().add(tempUnavailabilities.get(i));
       }
     }
-
   }
 
   public void setUnavailabilityList()
@@ -266,7 +263,6 @@ public class UnavailabilityViewController
         unavailabilityListView.getItems().add(tempUnavailabilities.get(i));
       }
     }
-
   }
 
   private class MyListListener implements ChangeListener<Unavailability>
@@ -276,8 +272,6 @@ public class UnavailabilityViewController
         Unavailability oldUnavailability, Unavailability newUnavailability)
     {
       removeButton.setDisable(false);
-
     }
   }
-
 }
