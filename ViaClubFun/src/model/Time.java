@@ -1,5 +1,6 @@
 package model;
 
+import java.io.Serializable;
 import java.time.LocalTime;
 
 /**
@@ -8,7 +9,7 @@ import java.time.LocalTime;
  * @author Java Gods
  * @version 1.0
  */
-public class Time
+public class Time implements Serializable
 {
   private int hour, minute, second;
 
@@ -38,6 +39,21 @@ public class Time
     minute = totalTimeInSeconds / 60;
     totalTimeInSeconds = totalTimeInSeconds - minute * 60;
     second = totalTimeInSeconds;
+  }
+
+  public int getHour()
+  {
+    return hour;
+  }
+
+  public int getMinute()
+  {
+    return minute;
+  }
+
+  public int getSecond()
+  {
+    return second;
   }
 
   /**

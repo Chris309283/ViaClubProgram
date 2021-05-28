@@ -31,10 +31,10 @@ public class Player implements Serializable
     unavailabilities = new ArrayList<Unavailability>();
   }
 
-  public Player (String name)
+  public Player(String name)
   {
-    this.name=name;
-    this.number=0;
+    this.name = name;
+    this.number = 0;
     positions = new ArrayList<String>();
     unavailabilities = new ArrayList<Unavailability>();
   }
@@ -103,21 +103,33 @@ public class Player implements Serializable
    */
   public boolean isSuspended()
   {
-    //add today date
-    if (unavailabilities.get((unavailabilities.size() - 1)).getType()
-        .equals("Suspended"))
+    for (int i = 0; i < unavailabilities.size(); i++)
     {
+      if (unavailabilities.get(i).isActive() && unavailabilities.get(i)
+          .getType().equals("Suspended"))
+      {
+        return true;
+      }
+    }
+    return false;
+  }
 
-      return true;
-    }
-    else
+  public boolean isInjured()
+  {
+    for (int i = 0; i < unavailabilities.size(); i++)
     {
-      return false;
+      if (unavailabilities.get(i).isActive() && unavailabilities.get(i)
+          .getType().equals("Injured"))
+      {
+        return true;
+      }
     }
+    return false;
   }
 
   /**
    * adds a unavailability to the unavailabilities array list
+   *
    * @param unavailability is added the the unavaliabilities array list
    */
 
@@ -128,6 +140,7 @@ public class Player implements Serializable
 
   /**
    * Remove the unavailability from the unavailabilities array list
+   *
    * @param unavailability is removed form the unavailabilities array list
    */
 
@@ -139,6 +152,7 @@ public class Player implements Serializable
 
   /**
    * Gets the history of the player's unavailabilities
+   *
    * @return all unavailability objects from unavailabilites array list
    */
   public ArrayList<Unavailability> getAllUnavailabilities()
@@ -147,7 +161,6 @@ public class Player implements Serializable
   }
 
   /**
-   *
    * @return
    */
 
@@ -195,7 +208,7 @@ public class Player implements Serializable
     String returnStr = "Name: " + name + " Number: " + number + " Positions: ";
     for (int i = 0; i < positions.size(); i++)
     {
-      if (i+1!=positions.size())
+      if (i + 1 != positions.size())
       {
         returnStr += positions.get(i) + ", ";
       }
@@ -204,12 +217,15 @@ public class Player implements Serializable
         returnStr += positions.get(i);
       }
     }
-    if(unavailabilities.size()==0){
-      returnStr+=" Status: Available";
+    if (unavailabilities.size() == 0)
+    {
+      returnStr += " Status: Available";
     }
-    else if(unavailabilities.get(unavailabilities.size()-1).getType().equals("Suspended")&&
-        unavailabilities.get(unavailabilities.size()-1).isActive()){
-      returnStr+=" Status: Suspended";
+   else if(isInjured()){
+     returnStr+=" Status: Injured";
+    }
+   else if(isSuspended()){
+     returnStr+=" Status: Suspended";
     }
     return returnStr;
   }
@@ -229,24 +245,7 @@ public class Player implements Serializable
     benchedInARow++;
   }
 
-  /*public boolean isAvailable()
-  {
-    for (int i = 0; i < unavailabilities.size(); i++)
-    {
-      if (unavailabilities.get(i).isAvailable)
-    }
-  }
 
-  public boolean isAvailable()
-  {
-    if (!isSuspended() && !isInjured())
-    {
-      return true;
-   }
-    return  false;
-  }
-
-   */
 
 }
 
