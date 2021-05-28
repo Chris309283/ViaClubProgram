@@ -185,7 +185,7 @@ public class MainViewController
     else if(e.getSource()==helpMenuItem){
       Alert alert = new Alert(Alert.AlertType.INFORMATION,
           "For client support, please refer to JavaGods.", ButtonType.OK);
-      alert.setTitle("About");
+      alert.setTitle("Help");
       alert.setHeaderText(null);
       alert.showAndWait();
     }
