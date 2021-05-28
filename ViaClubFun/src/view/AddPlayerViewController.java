@@ -61,6 +61,8 @@ public class AddPlayerViewController
     numberBox.setValue(null);
     positionsList.getItems().clear();
     updatePositionsBox();
+    saveButton.setDisable(true);
+    checkForInput();
   }
 
   public Region getRoot()
@@ -123,6 +125,20 @@ public class AddPlayerViewController
     else if (e.getSource() == positionsBox)
     {
 
+    }
+    else if (e.getSource() == nameField)
+    {
+      if (nameField.getText().length() > 0 && numberBox.getValue() != null)
+      {
+        saveButton.setDisable(false);
+      }
+    }
+    else if (e.getSource() == numberBox)
+    {
+      if (nameField.getText().length() > 0 && numberBox.getValue() != null)
+      {
+        saveButton.setDisable(false);
+      }
     }
 
     else if (e.getSource() == exitMenuItem)
@@ -205,6 +221,14 @@ public class AddPlayerViewController
 
     editPlayer = player;
     updatePositionsBox();
+  }
+
+  public void checkForInput()
+  {
+    if (nameField.getText().length() > 0 && numberBox.getValue() != null)
+    {
+      saveButton.setDisable(false);
+    }
   }
 
   public void updatePositionsBox()

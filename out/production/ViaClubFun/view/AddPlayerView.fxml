@@ -42,7 +42,7 @@
                   <Font size="15.0" />
                </font>
             </Text>
-            <TextField fx:id="nameField" prefHeight="26.0" prefWidth="200.0" />
+            <TextField fx:id="nameField" onAction="#handleActions" onKeyTyped="#checkForInput" onMouseExited="#checkForInput" onMouseMoved="#checkForInput" prefHeight="26.0" prefWidth="200.0" />
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Jersey Number">
                <HBox.margin>
                   <Insets left="50.0" />
