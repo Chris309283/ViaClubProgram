@@ -99,7 +99,7 @@ public class UnavailabilityViewController
 
     else if (e.getSource() == addSuspensionButton)
     {
-      tempUnavailabilities.add(new Unavailability(new Date(1,5,2021),
+      tempUnavailabilities.add(new Unavailability(Date.today(),
           numberOfGamesBox.getSelectionModel().getSelectedItem()));
       updateUnavailabilityListView();
 

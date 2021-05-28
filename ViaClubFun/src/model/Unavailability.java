@@ -13,7 +13,7 @@ import java.io.Serializable;
 public class Unavailability implements Serializable
 {
   private String type;
-  // private boolean isAvailable;
+
   private int numberOfGames;
   private Date start, end;
   private ViaClubModelManager modelManager;
@@ -30,7 +30,7 @@ public class Unavailability implements Serializable
     this.type = "Suspended";
     this.start = start.copy();
     this.numberOfGames = numberOfGames;
-    //isAvailable=false;
+
   }
 
   /**
@@ -43,7 +43,7 @@ public class Unavailability implements Serializable
   {
     this.type = "Injury";
     this.start = start.copy();
-    // isAvailable=false;
+
     numberOfGames = -1;
 
   }
@@ -53,7 +53,7 @@ public class Unavailability implements Serializable
     this.type = "Injured";
     this.start = start.copy();
     this.end = end.copy();
-    //isAvailable = false;
+
     numberOfGames = -1;
   }
 
@@ -83,7 +83,7 @@ public class Unavailability implements Serializable
 
     this.end = end;
     numberOfGames = 0;
-    //isAvailable=true;
+
   }
 
   public boolean isActive()
@@ -152,10 +152,6 @@ public class Unavailability implements Serializable
    *
    * @return the number of days from start date to end date
    */
-  public int lasted()
-  {
-    return start.daysUntil(end);
-  }
 
   public boolean equals(Object obj)
   {
@@ -176,22 +172,6 @@ public class Unavailability implements Serializable
           && other.end == null && type.equals(other.type);
     }
   }
-
-  public int matchesPast()
-  {
-    int total = 0;
-    Date temp = start.copy();
-    while (!temp.equals(Date.today()))
-    {
-      if (modelManager.getMatchesOnDate(temp) != null)
-      {
-        total += modelManager.getMatchesOnDate(temp).size();
-      }
-      temp.nextDay();
-    }
-    return total;
-  }
-
 
   public String toString()
   {
