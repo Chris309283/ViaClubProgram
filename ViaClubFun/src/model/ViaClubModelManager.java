@@ -1,6 +1,5 @@
 package model;
 
-
 import utils.MyFileHandler;
 
 import java.io.FileNotFoundException;
@@ -12,10 +11,10 @@ public class ViaClubModelManager
   private String playerFileName;
   private String matchFileName;
 
-  public ViaClubModelManager(String playerFileName,String matchFileName)
+  public ViaClubModelManager(String playerFileName, String matchFileName)
   {
-    this.playerFileName=playerFileName;
-    this.matchFileName=matchFileName;
+    this.playerFileName = playerFileName;
+    this.matchFileName = matchFileName;
   }
 
   public PlayerList getAllPlayers()
@@ -24,7 +23,8 @@ public class ViaClubModelManager
 
     try
     {
-      allPlayers = (PlayerList) MyFileHandler.readFromBinaryFile(playerFileName);
+      allPlayers = (PlayerList) MyFileHandler
+          .readFromBinaryFile(playerFileName);
     }
     catch (FileNotFoundException e)
     {
@@ -84,7 +84,7 @@ public class ViaClubModelManager
 
     for (int i = 0; i < allPlayers.size(); i++)
     {
-      if (!allPlayers.get(i).isSuspended()&&!allPlayers.get(i).isInjured())
+      if (!allPlayers.get(i).isSuspended() && !allPlayers.get(i).isInjured())
       {
         allAvailablePlayers.add(allPlayers.get(i));
       }
@@ -99,7 +99,7 @@ public class ViaClubModelManager
 
     for (int i = 0; i < allPlayers.size(); i++)
     {
-      if (allPlayers.get(i).isSuspended()||allPlayers.get(i).isInjured())
+      if (allPlayers.get(i).isSuspended() || allPlayers.get(i).isInjured())
       {
         allUnavailablePlayers.add(allPlayers.get(i));
       }
@@ -120,21 +120,21 @@ public class ViaClubModelManager
     }
     return allPlayersNamed;
   }
-  
+
   public PlayerList getPlayersByNumber(int number, PlayerList list)
   {
     PlayerList allPlayersNumbered = new PlayerList();
 
     for (int i = 0; i < list.size(); i++)
     {
-      if (list.get(i).getNumber()==number)
+      if (list.get(i).getNumber() == number)
       {
         allPlayersNumbered.add(list.get(i));
       }
     }
     return allPlayersNumbered;
   }
-  
+
   public PlayerList getPlayersByPositions(String position, PlayerList list)
   {
     PlayerList allPlayersByPositions = new PlayerList();
@@ -143,7 +143,8 @@ public class ViaClubModelManager
     {
       for (int j = 0; j < list.get(i).getPositions().size(); j++)
       {
-        if (list.get(i).getPositions().get(j).toLowerCase().contains(position.toLowerCase()))
+        if (list.get(i).getPositions().get(j).toLowerCase()
+            .contains(position.toLowerCase()))
         {
           allPlayersByPositions.add(list.get(i));
         }
@@ -152,13 +153,11 @@ public class ViaClubModelManager
     return allPlayersByPositions;
   }
 
-
-
   public void saveMatches(MatchList matches)
   {
     try
     {
-      MyFileHandler.writeToBinaryFile(matchFileName,matches);
+      MyFileHandler.writeToBinaryFile(matchFileName, matches);
     }
     catch (FileNotFoundException e)
     {
@@ -184,5 +183,54 @@ public class ViaClubModelManager
     {
       System.out.println("IO Error writing to player file");
     }
+  }
+
+  public void updateSuspensions()
+  {
+    PlayerList allPlayers = getAllPlayers();
+    PlayerList tempList = new PlayerList();
+
+    for (int i = 0; i < allPlayers.size(); i++)
+    {
+      if (allPlayers.get(i).isSuspended())
+      {
+        tempList.add(allPlayers.get(i));
+      }
+    }
+
+    for (int i = 0; i < tempList.size(); i++)
+    {
+
+      int total = 0;
+
+      for (int j = 0; j < tempList.get(i).getAllUnavailabilities().size(); j++)
+      {
+
+        Date tempDate = tempList.get(i).getAllUnavailabilities().get(j)
+            .getStart().copy();
+
+        while (!tempDate.equals(Date.today()))
+        {
+          if (getMatchesOnDate(tempDate) != null)
+          {
+
+            total += getMatchesOnDate(tempDate).size();
+          }
+          tempDate.nextDay();
+
+        }
+        Player tempPlayer = allPlayers.get(tempList.get(i).getName());
+
+
+        if (total >= tempList.get(i).getAllUnavailabilities().get(j)
+            .getNumberOfGames())
+        {
+          tempPlayer.getAllUnavailabilities().get(j)
+              .setNumberOfGames(0);
+        }
+
+      }
+    }
+    savePlayers(allPlayers);
   }
 }

@@ -64,8 +64,16 @@ public class test
 
     System.out.println(pl2.getAllUnavailabilities()==null);
 
-  u1.setAvailable(Date.today());
+
 
     System.out.println(u1);
+
+    Time t1= new Time(12,30,00);
+    Match m3= new Match(t1,t1,new Date(1,1,2020),"aarhus", "Cup",false );
+    Match m4= new Match(t1,t1,new Date(1,1,2020),"aarhus", "Cup",false );
+    Player p3= new Player("bob");
+    p3.addUnavailability(u1);
+
+    System.out.println(p3.getAllUnavailabilities().get(0).matchesPast());
   }
 }

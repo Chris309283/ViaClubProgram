@@ -58,6 +58,7 @@ public class MainViewController
         .addListener((new MyListListener()));
     allMatchesList.getSelectionModel().selectedItemProperty()
         .addListener(new MyListListener2());
+    modelManager.updateSuspensions();
     reset();
   }
 

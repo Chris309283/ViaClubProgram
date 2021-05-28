@@ -115,7 +115,7 @@ public class Date implements Serializable
   /**
    * A method that sets the day to the day after.
    */
-  private void nextDay()
+  public void nextDay()
   {
     if (this.day < daysInMonth())
     {

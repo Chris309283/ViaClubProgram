@@ -217,18 +217,19 @@ public class Player implements Serializable
         returnStr += positions.get(i);
       }
     }
-    if (unavailabilities.size() == 0)
-    {
-      returnStr += " Status: Available";
-    }
-   else if(isInjured()){
+
+    if(isInjured()){
      returnStr+=" Status: Injured";
     }
    else if(isSuspended()){
      returnStr+=" Status: Suspended";
     }
+    else {
+      returnStr += " Status: Available";
+    }
     return returnStr;
   }
+
 
   public int getBenchedInARow()
   {
@@ -244,6 +245,7 @@ public class Player implements Serializable
   {
     benchedInARow++;
   }
+
 
 
 
