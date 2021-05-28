@@ -172,8 +172,9 @@ public class UnavailabilityViewController
     }
     else if (e.getSource() == removeButton)
     {
-      unavailabilityListView.getItems()
-          .remove(unavailabilityListView.getSelectionModel().getSelectedItem());
+
+      tempUnavailabilities.remove(unavailabilityListView.getSelectionModel().getSelectedItem());
+      updateUnavailabilityListView();
     }
     else if (e.getSource() == forceAvailableButton)
     {

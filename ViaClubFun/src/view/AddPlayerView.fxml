@@ -51,7 +51,7 @@
                   <Font size="15.0" />
                </font>
             </Text>
-            <ComboBox fx:id="numberBox" onAction="#handleActions" prefHeight="25.0" prefWidth="26.0" />
+            <ComboBox fx:id="numberBox" onAction="#handleActions" prefHeight="25.0" prefWidth="59.0" />
          </children>
       </HBox>
       <HBox alignment="CENTER" prefHeight="334.0" prefWidth="800.0" spacing="100.0">
