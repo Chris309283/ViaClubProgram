@@ -227,7 +227,6 @@ public class AddPlayerViewController
     for (int i = 0; i < positionsList.getItems().size(); i++)
     {
       usedPositions.add(positionsList.getItems().get(i));
-      System.out.println(positionsList.getItems().get(i));
     }
 
     for (int j = 0; j < positions.size(); j++)

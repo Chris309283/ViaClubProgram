@@ -137,81 +137,69 @@ public class AddMatchViewController
 
     else if (e.getSource() == saveButton)
     {
-      if (matchTypeBox.getSelectionModel().getSelectedIndex() != 0
-          && matchTypeBox.getSelectionModel().getSelectedIndex() != 1
-          && matchTypeBox.getSelectionModel().getSelectedIndex() != 2)
+      if (opponentField.getText().equals(""))
       {
-        Alert alert = new Alert(Alert.AlertType.ERROR,
-            "Please Input a Match Type", ButtonType.CLOSE);
-        alert.setTitle("Error");
-        alert.setHeaderText(null);
-
-        alert.showAndWait();
+        opponentField.setText("Unknown");
       }
 
+      Time stTemp = new Time(
+          startTimeHourBox.getSelectionModel().getSelectedItem(),
+          startTimeMinuteBox.getSelectionModel().getSelectedItem(), 0);
+
+      Time etTemp = new Time(
+          endTimeHourBox.getSelectionModel().getSelectedItem(),
+          endTimeMinuteBox.getSelectionModel().getSelectedItem(), 0);
+
+      Date dTemp = new Date(datePicker.getValue().getDayOfMonth(),
+          datePicker.getValue().getMonthValue(),
+          datePicker.getValue().getYear());
+
+      Match temp = new Match(stTemp, etTemp, dTemp, opponentField.getText(),
+          matchTypeBox.getSelectionModel().getSelectedItem(), gamePlaceBoolean);
+
+      temp.addBench(tempBench);
+      temp.addLineUp(tempField);
+
+      temp.setScoreHomeTeam(homeScoreSpinner.getValue());
+      temp.setScoreOpponent(opponentScoreSpinner.getValue());
+
+      MatchList tempList = modelManager.getAllMatches();
+
+      if (editMatch != null)
+      {
+        tempList.set(modelManager.getAllMatches()
+            .getIndex(editMatch.getStartTime(), editMatch.getEndTime(),
+                editMatch.getDate(), editMatch.getOpponent(),
+                editMatch.getMatchType(), editMatch.getIsAwayGame()), temp);
+      }
       else
       {
-        if (opponentField.getText().equals(""))
-        {
-          opponentField.setText("Unknown");
-        }
-
-        Time stTemp = new Time(
-            startTimeHourBox.getSelectionModel().getSelectedItem(),
-            startTimeMinuteBox.getSelectionModel().getSelectedItem(), 0);
-
-        Time etTemp = new Time(
-            endTimeHourBox.getSelectionModel().getSelectedItem(),
-            endTimeMinuteBox.getSelectionModel().getSelectedItem(), 0);
-
-        Date dTemp = new Date(datePicker.getValue().getDayOfMonth(),
-            datePicker.getValue().getMonthValue(),
-            datePicker.getValue().getYear());
-
-        Match temp = new Match(stTemp, etTemp, dTemp, opponentField.getText(),
-            matchTypeBox.getSelectionModel().getSelectedItem(),
-            gamePlaceBoolean);
-
-        temp.addBench(tempBench);
-        temp.addLineUp(tempField);
-
-        temp.setScoreHomeTeam(homeScoreSpinner.getValue());
-        temp.setScoreOpponent(opponentScoreSpinner.getValue());
-
-        MatchList tempList = modelManager.getAllMatches();
-
-        if (editMatch != null)
-        {
-          tempList.set(modelManager.getAllMatches()
-              .getIndex(editMatch.getStartTime(), editMatch.getEndTime(),
-                  editMatch.getDate(), editMatch.getOpponent(),
-                  editMatch.getMatchType(), editMatch.getIsAwayGame()), temp);
-        }
-        else
-        {
-          tempList.add(temp);
-        }
-        modelManager.saveMatches(tempList);
-        viewHandler.openView("MainView");
+        tempList.add(temp);
       }
+      modelManager.saveMatches(tempList);
+      viewHandler.openView("MainView");
     }
 
     else if (e.getSource() == cancelButton)
+
     {
       viewHandler.openView("MainView");
     }
 
     else if (e.getSource() == awayRadio)
+
     {
       gamePlaceBoolean = true;
     }
 
     else if (e.getSource() == homeRadio)
+
     {
       gamePlaceBoolean = false;
     }
 
     else if (e.getSource() == fieldRadio)
+
     {
       lineUpListBoolean = true;
       allPlayersList.getSelectionModel().select(-1);
@@ -220,6 +208,7 @@ public class AddMatchViewController
     }
 
     else if (e.getSource() == benchRadio)
+
     {
       lineUpListBoolean = false;
       allPlayersList.getSelectionModel().select(-1);
@@ -228,6 +217,7 @@ public class AddMatchViewController
     }
 
     else if (e.getSource() == matchTypeBox)
+
     {
       if (tempField.size() > 0 || tempBench.size() > 0)
       {
@@ -251,6 +241,7 @@ public class AddMatchViewController
     }
 
     else if (e.getSource() == exitMenuItem)
+
     {
       Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
           "Do you really want to exit the program?", ButtonType.YES,
@@ -267,6 +258,7 @@ public class AddMatchViewController
     }
 
     else if (e.getSource() == aboutMenuItem)
+
     {
       Alert alert = new Alert(Alert.AlertType.INFORMATION,
           "Here you can create or edit a match", ButtonType.OK);
@@ -276,6 +268,7 @@ public class AddMatchViewController
     }
 
     else if (e.getSource() == helpMenuItem)
+
     {
       Alert alert = new Alert(Alert.AlertType.INFORMATION,
           "For client support, please refer to JavaGods.", ButtonType.OK);
@@ -461,7 +454,7 @@ public class AddMatchViewController
     public void changed(ObservableValue<? extends Player> player,
         Player oldPlayer, Player newPlayer)
     {
-      if (tempField.size() < 3 && lineUpListBoolean)
+      if (tempField.size() < 11 && lineUpListBoolean)
       {
         addButton.setDisable(false);
       }
@@ -475,7 +468,8 @@ public class AddMatchViewController
       {
         addButton.setDisable(false);
       }
-      else if (!lineUpListBoolean&& matchTypeBox.getSelectionModel().getSelectedItem().equals("Friendly"))
+      else if (!lineUpListBoolean && matchTypeBox.getSelectionModel()
+          .getSelectedItem().equals("Friendly"))
       {
         addButton.setDisable(false);
       }
