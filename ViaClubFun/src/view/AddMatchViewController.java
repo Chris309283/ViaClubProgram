@@ -80,10 +80,10 @@ public class AddMatchViewController
     tempBench.clear();
     tempField.clear();
     setSpinners();
+    setMatchTypeBox();
     updatePlayerList();
     updateTimeBoxes();
     setToggle();
-    setMatchTypeBox();
     updateFieldList();
     lineUpListBoolean = true;
   }
@@ -222,6 +222,15 @@ public class AddMatchViewController
       updateBenchList();
     }
 
+    else if (e.getSource() == matchTypeBox)
+    {
+      tempBench.clear();
+      tempField.clear();
+      updatePlayerList();
+      updateBenchList();
+      updateFieldList();
+    }
+
     else if (e.getSource() == exitMenuItem)
     {
       Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
@@ -292,9 +301,10 @@ public class AddMatchViewController
     matchTypeBox.getItems().add("League");
     matchTypeBox.getItems().add("Cup");
     matchTypeBox.getItems().add("Friendly");
+    matchTypeBox.getSelectionModel().select(0);
   }
 
-  private void updatePlayerList()
+  private void updatePlayerList2()
   {
     allPlayersList.getItems().clear();
 
@@ -325,6 +335,59 @@ public class AddMatchViewController
     {
       allPlayersList.getItems().remove(usedPlayers.get(i));
     }
+  }
+
+  public void updatePlayerList()
+  {
+    allPlayersList.getItems().clear();
+
+    PlayerList allPlayers = modelManager.getAllPlayers();
+    PlayerList available = new PlayerList();
+    PlayerList usedPlayers = new PlayerList();
+
+    if (matchTypeBox.getSelectionModel().getSelectedItem().equals("Cup")
+        || matchTypeBox.getSelectionModel().getSelectedItem().equals("League"))
+    {
+      for (int i = 0; i < allPlayers.size(); i++)
+      {
+        if (!(allPlayers.get(i).isSuspended()) && !(allPlayers.get(i)
+            .isInjured()))
+        {
+          available.add((allPlayers.get(i)));
+        }
+      }
+
+    }
+    else
+    {
+      for (int i = 0; i < allPlayers.size(); i++)
+      {
+        if (!(allPlayers.get(i).isInjured()))
+        {
+          available.add(allPlayers.get(i));
+        }
+      }
+    }
+
+    for (int i = 0; i < available.size(); i++)
+    {
+      allPlayersList.getItems().add(available.get(i));
+    }
+
+    for (int i = 0; i < tempField.size(); i++)
+    {
+      usedPlayers.add(tempField.get(i));
+    }
+    for (int i = 0; i < tempBench.size(); i++)
+    {
+      usedPlayers.add(tempBench.get(i));
+    }
+
+    for (int i = 0; i < usedPlayers.size(); i++)
+    {
+      allPlayersList.getItems().remove(usedPlayers.get(i));
+    }
+
   }
 
   private void updateFieldList()
