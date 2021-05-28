@@ -44,6 +44,7 @@ public class MainViewController
 
 
   @FXML private ComboBox<String> playerSearchComboBox;
+  @FXML private ComboBox<String> availableComboBox;
   @FXML private ComboBox<String> matchSearchComboBox;
   @FXML private ComboBox<String> matchDateComboBox;
 
@@ -62,6 +63,8 @@ public class MainViewController
 
   public void reset()
   {
+    availableComboBox.getItems().clear();
+    setAvailableComboBox();
     updatePlayerList();
     updateMatchList();
   }
@@ -121,6 +124,15 @@ public class MainViewController
     else if (e.getSource() == searchPlayersField)
     {
 
+    }
+
+    else if (e.getSource() == playerSearchButton)
+    {
+
+    }
+    else if (e.getSource() == availableComboBox)
+    {
+      updatePlayerList();
     }
 
     else if (e.getSource() == addMatchButton)
@@ -204,9 +216,42 @@ public class MainViewController
     removeMatchButton.setDisable(true);
   }
 
+  private void setAvailableComboBox()
+  {
+    availableComboBox.getItems().add("All Players");
+    availableComboBox.getItems().add("Available Players");
+    availableComboBox.getItems().add("Unavailable players");
+    availableComboBox.getSelectionModel().select(0);
+  }
+
+  private void setPlayerSearchComboBox()
+  {
+    setPlayerSearchComboBox();
+  }
+
   private void updatePlayerList()
   {
-    if (modelManager != null)
+    if (availableComboBox.getSelectionModel().getSelectedIndex()==0)
+    {
+      allPlayersList.getItems().clear();
+      PlayerList players = modelManager.getAllPlayers();
+      for (int i = 0; i < players.size(); i++)
+      {
+        allPlayersList.getItems().add(players.get(i));
+      }
+    }
+
+   else if (availableComboBox.getSelectionModel().getSelectedIndex()==1)
+    {
+      allPlayersList.getItems().clear();
+      PlayerList players = modelManager.getPlayersAvailable();
+      for (int i = 0; i < players.size(); i++)
+      {
+        allPlayersList.getItems().add(players.get(i));
+      }
+    }
+
+    else if (availableComboBox.getSelectionModel().getSelectedIndex()==3)
     {
       allPlayersList.getItems().clear();
       PlayerList players = modelManager.getAllPlayers();

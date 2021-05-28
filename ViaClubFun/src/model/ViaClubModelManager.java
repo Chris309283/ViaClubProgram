@@ -76,21 +76,22 @@ public class ViaClubModelManager
     return temp;
   }
 
- /* public PlayerList getPlayersAvailable()
+  public PlayerList getPlayersAvailable()
   {
-    PlayerList temp = new PlayerList();
-    for (int i = 0; i < getAllPlayers().size(); i++)
-    {
-      if (getAllPlayers().get(i).isAvailable)
-      {
-      temp.add(getAllPlayers().get(i));
-      }
+    PlayerList allAvailablePlayers = new PlayerList();
+    PlayerList allPlayers = getAllPlayers();
 
+    for (int i = 0; i < allPlayers.size(); i++)
+    {
+      if (!allPlayers.get(i).isSuspended()&&!allPlayers.get(i).isInjured())
+      {
+        allAvailablePlayers.add(allPlayers.get(i));
+      }
     }
-  return temp;
+    return allAvailablePlayers;
   }
 
-  */
+
 
   public void saveMatches(MatchList matches)
   {

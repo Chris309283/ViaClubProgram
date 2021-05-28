@@ -113,6 +113,11 @@ public class PlayerList implements Serializable
     return -1;
   }
 
+  public void clear()
+  {
+    players.clear();
+  }
+
   /**
    * the method will run through the loop and print out all matches
    * @return it will return the string of all players
