@@ -162,8 +162,8 @@
             </VBox>
             <VBox alignment="CENTER" prefHeight="435.0" prefWidth="100.0" spacing="20.0">
                <children>
-                  <Button fx:id="addButton" mnemonicParsing="false" onAction="#handleActions" prefHeight="25.0" prefWidth="60.0" text="Add" />
-                  <Button fx:id="removeButton" mnemonicParsing="false" onAction="#handleActions" prefWidth="60.0" text="Remove" />
+                  <Button fx:id="addButton" disable="true" mnemonicParsing="false" onAction="#handleActions" prefHeight="25.0" prefWidth="60.0" text="Add" />
+                  <Button fx:id="removeButton" disable="true" mnemonicParsing="false" onAction="#handleActions" prefWidth="60.0" text="Remove" />
                </children>
             </VBox>
             <VBox prefHeight="435.0" prefWidth="340.0">

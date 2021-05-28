@@ -1,5 +1,7 @@
 package view;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -65,6 +67,11 @@ public class AddMatchViewController
     datePicker.setValue(LocalDate.now());
     tempField = new PlayerList();
     tempBench = new PlayerList();
+    allPlayersList.getSelectionModel().selectedItemProperty()
+        .addListener((new MyListListener()));
+    lineUpAndBenchList.getSelectionModel().selectedItemProperty()
+        .addListener((new MyListListener2()));
+
     reset();
   }
 
@@ -99,14 +106,14 @@ public class AddMatchViewController
       {
         tempField.add(allPlayersList.getSelectionModel().getSelectedItem());
         updateFieldList();
-        updatePlayerList();
       }
       else
       {
         tempBench.add(allPlayersList.getSelectionModel().getSelectedItem());
         updateBenchList();
-        updatePlayerList();
       }
+      updatePlayerList();
+      disableButtons();
     }
 
     else if (e.getSource() == removeButton)
@@ -123,6 +130,8 @@ public class AddMatchViewController
             .remove(lineUpAndBenchList.getSelectionModel().getSelectedItem());
         updateBenchList();
       }
+      updatePlayerList();
+      disableButtons();
     }
 
     else if (e.getSource() == saveButton)
@@ -138,8 +147,14 @@ public class AddMatchViewController
 
         alert.showAndWait();
       }
+
       else
       {
+        if (opponentField.getText().equals(""))
+        {
+          opponentField.setText("Unknown");
+        }
+
         Time stTemp = new Time(
             startTimeHourBox.getSelectionModel().getSelectedItem(),
             startTimeMinuteBox.getSelectionModel().getSelectedItem(), 0);
@@ -268,7 +283,6 @@ public class AddMatchViewController
   public void setToggle()
   {
     fieldRadio.setSelected(true);
-
     homeRadio.setSelected(true);
   }
 
@@ -280,20 +294,6 @@ public class AddMatchViewController
     matchTypeBox.getItems().add("Friendly");
   }
 
-  private void updatePlayerList2()
-  {
-    if (modelManager != null)
-    {
-      allPlayersList.getItems().clear();
-
-      PlayerList players = modelManager.getAllPlayers();
-      for (int i = 0; i < players.size(); i++)
-      {
-        allPlayersList.getItems().add(players.get(i));
-      }
-    }
-  }
-
   private void updatePlayerList()
   {
     allPlayersList.getItems().clear();
@@ -303,25 +303,20 @@ public class AddMatchViewController
     {
       allPlayersList.getItems().add(allPlayers.get(i));
     }
-
-    if (editMatch!=null)
+    PlayerList usedPlayers = new PlayerList();
+    for (int i = 0; i < tempField.size(); i++)
     {
-      PlayerList usedPlayers = new PlayerList();
-      for (int i = 0; i < tempField.size(); i++)
-      {
-        usedPlayers.add(tempField.get(i));
-      }
-      for (int i = 0; i < tempBench.size(); i++)
-      {
-        usedPlayers.add(tempBench.get(i));
-      }
-
-      for (int i = 0; i < usedPlayers.size(); i++)
-      {
-        allPlayersList.getItems().remove(usedPlayers.get(i));
-      }
+      usedPlayers.add(tempField.get(i));
+    }
+    for (int i = 0; i < tempBench.size(); i++)
+    {
+      usedPlayers.add(tempBench.get(i));
     }
 
+    for (int i = 0; i < usedPlayers.size(); i++)
+    {
+      allPlayersList.getItems().remove(usedPlayers.get(i));
+    }
   }
 
   private void updateFieldList()
@@ -394,5 +389,29 @@ public class AddMatchViewController
 
     editMatch = match;
     updatePlayerList();
+  }
+
+  private void disableButtons()
+  {
+    addButton.setDisable(true);
+    removeButton.setDisable(true);
+  }
+
+  private class MyListListener implements ChangeListener<Player>
+  {
+    public void changed(ObservableValue<? extends Player> player,
+        Player oldPlayer, Player newPlayer)
+    {
+      addButton.setDisable(false);
+    }
+  }
+
+  private class MyListListener2 implements ChangeListener<Player>
+  {
+    public void changed(ObservableValue<? extends Player> player,
+        Player oldPlayer, Player newPlayer)
+    {
+      removeButton.setDisable(false);
+    }
   }
 }
