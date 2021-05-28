@@ -63,8 +63,12 @@ public class MainViewController
 
   public void reset()
   {
+    disableMatchButtons();
+    disableButtons();
     availableComboBox.getItems().clear();
     setAvailableComboBox();
+    playerSearchComboBox.getItems().clear();
+    setPlayerSearchComboBox();
     updatePlayerList();
     updateMatchList();
   }
@@ -128,7 +132,7 @@ public class MainViewController
 
     else if (e.getSource() == playerSearchButton)
     {
-
+    searchPlayersList();
     }
     else if (e.getSource() == availableComboBox)
     {
@@ -226,39 +230,101 @@ public class MainViewController
 
   private void setPlayerSearchComboBox()
   {
-    setPlayerSearchComboBox();
+    playerSearchComboBox.getItems().add("Name");
+    playerSearchComboBox.getItems().add("Number");
+    playerSearchComboBox.getItems().add("Position");
+    playerSearchComboBox.getItems().add("");
+  }
+
+  private void searchPlayersList()
+  {
+    PlayerList tempList;
+
+    if (availableComboBox.getSelectionModel().getSelectedIndex()==0)
+    {
+      tempList=modelManager.getAllPlayers();
+    }
+    else if (availableComboBox.getSelectionModel().getSelectedIndex()==1)
+    {
+      tempList=modelManager.getPlayersAvailable();
+    }
+    else
+    {
+      tempList=modelManager.getPlayersUnavailable();
+    }
+
+    if (searchPlayersField.getText().equals(""))
+    {
+      updatePlayerList();
+    }
+
+    if (playerSearchComboBox.getSelectionModel().getSelectedItem().equals("Name"))
+    {
+      PlayerList tempListOutput = modelManager.getPlayersByName(searchPlayersField.getText(),tempList);
+      allPlayersList.getItems().clear();
+      for (int i = 0; i < tempListOutput.size() ; i++)
+      {
+        allPlayersList.getItems().add(tempListOutput.get(i));
+      }
+    }
+
+    else if (playerSearchComboBox.getSelectionModel().getSelectedItem().equals("Number") && !searchPlayersField.getText().equals(""))
+    {
+      PlayerList tempListOutput = modelManager.getPlayersByNumber(Integer.parseInt(searchPlayersField.getText()), tempList);
+      allPlayersList.getItems().clear();
+      for (int i = 0; i < tempListOutput.size(); i++)
+      {
+        allPlayersList.getItems().add(tempListOutput.get(i));
+      }
+    }
+    else if (playerSearchComboBox.getSelectionModel().getSelectedItem().equals("Position"))
+    {
+      PlayerList tempListOutput = modelManager.getPlayersByPositions(searchPlayersField.getText(), tempList);
+      allPlayersList.getItems().clear();
+      for (int i = 0; i < tempListOutput.size(); i++)
+      {
+        allPlayersList.getItems().add(tempListOutput.get(i));
+      }
+    }
   }
 
   private void updatePlayerList()
   {
-    if (availableComboBox.getSelectionModel().getSelectedIndex()==0)
+    if (searchPlayersField.getText().equals(""))
     {
-      allPlayersList.getItems().clear();
-      PlayerList players = modelManager.getAllPlayers();
-      for (int i = 0; i < players.size(); i++)
+      if (availableComboBox.getSelectionModel().getSelectedIndex()==0)
       {
-        allPlayersList.getItems().add(players.get(i));
+        allPlayersList.getItems().clear();
+        PlayerList players = modelManager.getAllPlayers();
+        for (int i = 0; i < players.size(); i++)
+        {
+          allPlayersList.getItems().add(players.get(i));
+        }
+      }
+
+      else if (availableComboBox.getSelectionModel().getSelectedIndex()==1)
+      {
+        allPlayersList.getItems().clear();
+        PlayerList players = modelManager.getPlayersAvailable();
+        for (int i = 0; i < players.size(); i++)
+        {
+          allPlayersList.getItems().add(players.get(i));
+        }
+      }
+
+      else if (availableComboBox.getSelectionModel().getSelectedIndex()==2)
+      {
+        allPlayersList.getItems().clear();
+        PlayerList players = modelManager.getPlayersUnavailable();
+        for (int i = 0; i < players.size(); i++)
+        {
+          allPlayersList.getItems().add(players.get(i));
+        }
       }
     }
-
-   else if (availableComboBox.getSelectionModel().getSelectedIndex()==1)
+    else
     {
-      allPlayersList.getItems().clear();
-      PlayerList players = modelManager.getPlayersAvailable();
-      for (int i = 0; i < players.size(); i++)
-      {
-        allPlayersList.getItems().add(players.get(i));
-      }
-    }
-
-    else if (availableComboBox.getSelectionModel().getSelectedIndex()==3)
-    {
-      allPlayersList.getItems().clear();
-      PlayerList players = modelManager.getAllPlayers();
-      for (int i = 0; i < players.size(); i++)
-      {
-        allPlayersList.getItems().add(players.get(i));
-      }
+     searchPlayersList();
     }
   }
 
@@ -282,6 +348,7 @@ public class MainViewController
       updatePlayerList();
       disableButtons();
     }
+
     else if (matchListTab.isSelected())
     {
       updateMatchList();
@@ -309,5 +376,4 @@ public class MainViewController
       removeMatchButton.setDisable(false);
     }
   }
-
 }

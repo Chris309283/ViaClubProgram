@@ -175,4 +175,9 @@ public class ViewHandler
   {
     return addMatchViewController;
   }
+
+  public MainViewController getMainViewController()
+  {
+    return mainViewController;
+  }
 }

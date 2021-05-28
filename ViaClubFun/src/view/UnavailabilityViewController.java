@@ -95,6 +95,7 @@ public class UnavailabilityViewController
     else if (e.getSource() == cancelButton)
     {
       viewHandler.openView("MainView");
+      viewHandler.getMainViewController().reset();
     }
 
     else if (e.getSource() == addSuspensionButton)

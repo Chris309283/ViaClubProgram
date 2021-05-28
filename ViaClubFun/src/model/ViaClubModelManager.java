@@ -5,6 +5,7 @@ import utils.MyFileHandler;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Locale;
 
 public class ViaClubModelManager
 {
@@ -89,6 +90,66 @@ public class ViaClubModelManager
       }
     }
     return allAvailablePlayers;
+  }
+
+  public PlayerList getPlayersUnavailable()
+  {
+    PlayerList allUnavailablePlayers = new PlayerList();
+    PlayerList allPlayers = getAllPlayers();
+
+    for (int i = 0; i < allPlayers.size(); i++)
+    {
+      if (allPlayers.get(i).isSuspended()||allPlayers.get(i).isInjured())
+      {
+        allUnavailablePlayers.add(allPlayers.get(i));
+      }
+    }
+    return allUnavailablePlayers;
+  }
+
+  public PlayerList getPlayersByName(String name, PlayerList list)
+  {
+    PlayerList allPlayersNamed = new PlayerList();
+
+    for (int i = 0; i < list.size(); i++)
+    {
+      if (list.get(i).getName().toLowerCase().contains(name.toLowerCase()))
+      {
+        allPlayersNamed.add(list.get(i));
+      }
+    }
+    return allPlayersNamed;
+  }
+  
+  public PlayerList getPlayersByNumber(int number, PlayerList list)
+  {
+    PlayerList allPlayersNumbered = new PlayerList();
+
+    for (int i = 0; i < list.size(); i++)
+    {
+      if (list.get(i).getNumber()==number)
+      {
+        allPlayersNumbered.add(list.get(i));
+      }
+    }
+    return allPlayersNumbered;
+  }
+  
+  public PlayerList getPlayersByPositions(String position, PlayerList list)
+  {
+    PlayerList allPlayersByPositions = new PlayerList();
+
+    for (int i = 0; i < list.size(); i++)
+    {
+      for (int j = 0; j < list.get(i).getPositions().size(); j++)
+      {
+        if (list.get(i).getPositions().get(j).toLowerCase().contains(position.toLowerCase()))
+        {
+          allPlayersByPositions.add(list.get(i));
+        }
+      }
+    }
+    return allPlayersByPositions;
   }
 
 
