@@ -54,7 +54,7 @@ public class MatchList implements Serializable
   /**
    * the method gets the match from a specific index, if it exist.
    * @param index which is a specific location of list
-   * @return if match does not exist it returns null.
+   * @return if match does not exist it returns null, otherwise it return the match.
    */
   public Match get(int index)
   {
@@ -69,7 +69,7 @@ public class MatchList implements Serializable
   }
 
   /**
-   * the method sets a match to a specific index
+   * the method sets/changesa match to a specific index
    * @param index is a location in the list
    * @param match is match to that index
    */
@@ -106,7 +106,7 @@ public class MatchList implements Serializable
 
   /**
    * the method will run through the loop and print out all matches
-   * @return it will return the string
+   * @return it will return the string of all all matches
    */
   public String toString()
   {
