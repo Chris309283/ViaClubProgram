@@ -77,6 +77,17 @@ public class PlayerList implements Serializable
   players.clear();
   }
 
+  public boolean equals(Object obj)
+  {
+    if (!(obj instanceof  PlayerList))
+    {
+      return false;
+    }
+
+    PlayerList other = (PlayerList) obj;
+    return players.equals(other.players);
+  }
+
   public String toString()
   {
     String returnStr = "";
