@@ -78,7 +78,7 @@ public class AddMatchViewController
     setToggle();
     setMatchTypeBox();
     updateFieldList();
-    lineUpListBoolean=true;
+    lineUpListBoolean = true;
   }
 
   public Region getRoot()
@@ -99,11 +99,13 @@ public class AddMatchViewController
       {
         tempField.add(allPlayersList.getSelectionModel().getSelectedItem());
         updateFieldList();
+        updatePlayerList();
       }
       else
       {
         tempBench.add(allPlayersList.getSelectionModel().getSelectedItem());
         updateBenchList();
+        updatePlayerList();
       }
     }
 
@@ -125,7 +127,9 @@ public class AddMatchViewController
 
     else if (e.getSource() == saveButton)
     {
-      if (matchTypeBox.getSelectionModel().getSelectedIndex()!=0&&matchTypeBox.getSelectionModel().getSelectedIndex()!=1&&matchTypeBox.getSelectionModel().getSelectedIndex()!=2)
+      if (matchTypeBox.getSelectionModel().getSelectedIndex() != 0
+          && matchTypeBox.getSelectionModel().getSelectedIndex() != 1
+          && matchTypeBox.getSelectionModel().getSelectedIndex() != 2)
       {
         Alert alert = new Alert(Alert.AlertType.ERROR,
             "Please Input a Match Type", ButtonType.CLOSE);
@@ -134,7 +138,8 @@ public class AddMatchViewController
 
         alert.showAndWait();
       }
-      else {
+      else
+      {
         Time stTemp = new Time(
             startTimeHourBox.getSelectionModel().getSelectedItem(),
             startTimeMinuteBox.getSelectionModel().getSelectedItem(), 0);
@@ -148,7 +153,8 @@ public class AddMatchViewController
             datePicker.getValue().getYear());
 
         Match temp = new Match(stTemp, etTemp, dTemp, opponentField.getText(),
-            matchTypeBox.getSelectionModel().getSelectedItem(), gamePlaceBoolean);
+            matchTypeBox.getSelectionModel().getSelectedItem(),
+            gamePlaceBoolean);
 
         temp.addBench(tempBench);
         temp.addLineUp(tempField);
@@ -216,14 +222,16 @@ public class AddMatchViewController
         System.exit(0);
       }
     }
-    else if(e.getSource()==aboutMenuItem){
+    else if (e.getSource() == aboutMenuItem)
+    {
       Alert alert = new Alert(Alert.AlertType.INFORMATION,
           "Here you can create or edit a match", ButtonType.OK);
       alert.setTitle("About");
       alert.setHeaderText(null);
       alert.showAndWait();
     }
-    else if(e.getSource()==helpMenuItem){
+    else if (e.getSource() == helpMenuItem)
+    {
       Alert alert = new Alert(Alert.AlertType.INFORMATION,
           "For client support, please refer to JavaGods.", ButtonType.OK);
       alert.setTitle("About");
@@ -272,7 +280,7 @@ public class AddMatchViewController
     matchTypeBox.getItems().add("Friendly");
   }
 
-  private void updatePlayerList()
+  private void updatePlayerList2()
   {
     if (modelManager != null)
     {
@@ -284,6 +292,36 @@ public class AddMatchViewController
         allPlayersList.getItems().add(players.get(i));
       }
     }
+  }
+
+  private void updatePlayerList()
+  {
+    allPlayersList.getItems().clear();
+
+    PlayerList allPlayers = modelManager.getAllPlayers();
+    for (int i = 0; i < allPlayers.size(); i++)
+    {
+      allPlayersList.getItems().add(allPlayers.get(i));
+    }
+
+    if (editMatch!=null)
+    {
+      PlayerList usedPlayers = new PlayerList();
+      for (int i = 0; i < tempField.size(); i++)
+      {
+        usedPlayers.add(tempField.get(i));
+      }
+      for (int i = 0; i < tempBench.size(); i++)
+      {
+        usedPlayers.add(tempBench.get(i));
+      }
+
+      for (int i = 0; i < usedPlayers.size(); i++)
+      {
+        allPlayersList.getItems().remove(usedPlayers.get(i));
+      }
+    }
+
   }
 
   private void updateFieldList()
@@ -308,8 +346,10 @@ public class AddMatchViewController
 
   private void setSpinners()
   {
-    SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(0,40,0);
-    SpinnerValueFactory<Integer> valueFactory2 = new SpinnerValueFactory.IntegerSpinnerValueFactory(0,40,0);
+    SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(
+        0, 40, 0);
+    SpinnerValueFactory<Integer> valueFactory2 = new SpinnerValueFactory.IntegerSpinnerValueFactory(
+        0, 40, 0);
     homeScoreSpinner.setValueFactory(valueFactory);
     opponentScoreSpinner.setValueFactory(valueFactory2);
   }
@@ -337,6 +377,14 @@ public class AddMatchViewController
 
     tempBench = match.getBench();
 
+    homeScoreSpinner.setValueFactory(
+        new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 40,
+            match.getScoreHomeTeam()));
+
+    opponentScoreSpinner.setValueFactory(
+        new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 40,
+            match.getScoreOpponent()));
+
     updateFieldList();
 
     if (match.getIsAwayGame())
@@ -345,5 +393,6 @@ public class AddMatchViewController
     }
 
     editMatch = match;
+    updatePlayerList();
   }
 }

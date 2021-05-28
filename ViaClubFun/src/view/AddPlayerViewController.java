@@ -194,7 +194,6 @@ public class AddPlayerViewController
     editPlayer = player;
   }
 
-
   public void updatePositionsBox()
   {
 
@@ -215,11 +214,13 @@ public class AddPlayerViewController
     {
       usedPositions.add(positionsList.getItems().get(i));
     }
-    if(editPlayer!=null){
-    for (int i = 0; i < editPlayer.getPositions().size(); i++)
+    if (editPlayer != null)
     {
-      usedPositions.add(editPlayer.getPositions().get(i));
-    }}
+      for (int i = 0; i < editPlayer.getPositions().size(); i++)
+      {
+        usedPositions.add(editPlayer.getPositions().get(i));
+      }
+    }
 
     for (int j = 0; j < positions.size(); j++)
     {
