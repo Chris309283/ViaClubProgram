@@ -78,25 +78,54 @@ public class MainViewController
       viewHandler.openView("AddPlayerView");
       viewHandler.getAddPlayerViewController().reset();
     }
-    else if (e.getSource() == addMatchButton)
-    {
-      viewHandler.openView("AddMatchView");
-    }
+
     else if (e.getSource() == editPlayerButton)
     {
       viewHandler.openView("AddPlayerView");
       viewHandler.getAddPlayerViewController()
           .setFields(allPlayersList.getSelectionModel().getSelectedItem());
     }
+
+    else if (e.getSource() == removePlayerButton)
+    {
+      Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
+          "Are you sure you want to permanently delete this player?",
+          ButtonType.YES, ButtonType.NO);
+      alert.setTitle("Exit");
+      alert.setHeaderText(null);
+
+      alert.showAndWait();
+
+      if (alert.getResult() == ButtonType.YES)
+      {
+        PlayerList temp = new PlayerList();
+        for (int i = 0; i < modelManager.getAllPlayers().size(); i++)
+        {
+          temp.add(modelManager.getAllPlayers().get(i));
+        }
+        temp.remove(allPlayersList.getSelectionModel().getSelectedItem());
+        modelManager.savePlayers(temp);
+
+        updatePlayerList();
+        disableButtons();
+      }
+    }
+
     else if (e.getSource() == playerAvailability)
     {
       viewHandler.openView("UnavailabilityView");
       viewHandler.getUnavailabilityViewController()
           .setFields(allPlayersList.getSelectionModel().getSelectedItem());
     }
+
     else if (e.getSource() == searchPlayersField)
     {
 
+    }
+
+    else if (e.getSource() == addMatchButton)
+    {
+      viewHandler.openView("AddMatchView");
     }
 
     else if (e.getSource() == editMatchButton)
@@ -104,6 +133,31 @@ public class MainViewController
       viewHandler.openView("AddMatchView");
       viewHandler.getAddMatchViewController()
           .setFields(allMatchesList.getSelectionModel().getSelectedItem());
+    }
+
+    else if (e.getSource() == removeMatchButton)
+    {
+      Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
+          "Are you sure you want to permanently delete this match?",
+          ButtonType.YES, ButtonType.NO);
+      alert.setTitle("Remove");
+      alert.setHeaderText(null);
+
+      alert.showAndWait();
+
+      if (alert.getResult() == ButtonType.YES)
+      {
+        MatchList temp = new MatchList();
+        for (int i = 0; i < modelManager.getAllMatches().size(); i++)
+        {
+          temp.add(modelManager.getAllMatches().get(i));
+        }
+        temp.remove(allMatchesList.getSelectionModel().getSelectedItem());
+
+        modelManager.saveMatches(temp);
+
+        updateMatchList();
+      }
     }
 
     else if (e.getSource() == exitMenuItem)
@@ -137,31 +191,7 @@ public class MainViewController
       alert.showAndWait();
     }
 
-    else if (e.getSource() == removePlayerButton)
-    {
-      Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
-          "Are you sure you want to permanently delete this player?",
-          ButtonType.YES, ButtonType.NO);
-      alert.setTitle("Exit");
-      alert.setHeaderText(null);
 
-      alert.showAndWait();
-
-      if (alert.getResult() == ButtonType.YES)
-      {
-        PlayerList temp = new PlayerList();
-        for (int i = 0; i < modelManager.getAllPlayers().size(); i++)
-        {
-          temp.add(modelManager.getAllPlayers().get(i));
-        }
-        temp.remove(allPlayersList.getSelectionModel().getSelectedItem());
-        modelManager.savePlayers(temp);
-
-        updatePlayerList();
-        disableButtons();
-      }
-
-    }
   }
 
   private void disableButtons()
@@ -227,6 +257,7 @@ public class MainViewController
         Match newMatch)
     {
       editMatchButton.setDisable(false);
+      removeMatchButton.setDisable(false);
     }
   }
 

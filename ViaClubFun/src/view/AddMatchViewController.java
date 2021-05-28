@@ -125,7 +125,7 @@ public class AddMatchViewController
 
     else if (e.getSource() == saveButton)
     {
-      if (matchTypeBox.getSelectionModel().getSelectedIndex()!=1&&matchTypeBox.getSelectionModel().getSelectedIndex()!=2&&matchTypeBox.getSelectionModel().getSelectedIndex()!=3)
+      if (matchTypeBox.getSelectionModel().getSelectedIndex()!=0&&matchTypeBox.getSelectionModel().getSelectedIndex()!=1&&matchTypeBox.getSelectionModel().getSelectedIndex()!=2)
       {
         Alert alert = new Alert(Alert.AlertType.ERROR,
             "Please Input a Match Type", ButtonType.CLOSE);

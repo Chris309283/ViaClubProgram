@@ -92,7 +92,7 @@
                               <ButtonBar prefHeight="35.0" prefWidth="828.0">
                                 <buttons>
                                   <Button fx:id="editMatchButton" disable="true" mnemonicParsing="false" onAction="#handleActions" text="Edit Match" />
-                                    <Button fx:id="removeMatchButton" disable="true" mnemonicParsing="false" text="Remove Match" />
+                                    <Button fx:id="removeMatchButton" disable="true" mnemonicParsing="false" onAction="#handleActions" text="Remove Match" />
                                     <Button fx:id="addMatchButton" mnemonicParsing="false" onAction="#handleActions" text="Add Match" />
                                 </buttons>
                                  <padding>
