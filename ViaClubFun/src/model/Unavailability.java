@@ -148,6 +148,26 @@ public class Unavailability implements Serializable
     return start.daysUntil(end);
   }
 
+  public boolean equals(Object obj)
+  {
+    if (!(obj instanceof Unavailability))
+    {
+      return false;
+    }
+
+    Unavailability other = (Unavailability) obj;
+    if (end != null)
+    {
+      return numberOfGames == other.numberOfGames && start.equals(other.start)
+          && end.equals(other.end) && type.equals(other.type);
+    }
+    else
+    {
+      return numberOfGames == other.numberOfGames && start.equals(other.start)
+          && other.end == null && type.equals(other.type);
+    }
+  }
+
   public String toString()
   {
     String finalString = "";

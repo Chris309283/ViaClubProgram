@@ -147,11 +147,7 @@ public class MainViewController
 
       if (alert.getResult() == ButtonType.YES)
       {
-        MatchList temp = new MatchList();
-        for (int i = 0; i < modelManager.getAllMatches().size(); i++)
-        {
-          temp.add(modelManager.getAllMatches().get(i));
-        }
+        MatchList temp = modelManager.getAllMatches();
         temp.remove(allMatchesList.getSelectionModel().getSelectedItem());
 
         modelManager.saveMatches(temp);
