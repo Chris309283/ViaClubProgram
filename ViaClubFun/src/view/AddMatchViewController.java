@@ -77,6 +77,7 @@ public class AddMatchViewController
 
   public void reset()
   {
+    opponentField.clear();
     tempBench.clear();
     tempField.clear();
     setSpinners();
@@ -213,22 +214,40 @@ public class AddMatchViewController
     else if (e.getSource() == fieldRadio)
     {
       lineUpListBoolean = true;
+      allPlayersList.getSelectionModel().select(-1);
       updateFieldList();
+      disableButtons();
     }
 
     else if (e.getSource() == benchRadio)
     {
       lineUpListBoolean = false;
+      allPlayersList.getSelectionModel().select(-1);
       updateBenchList();
+      disableButtons();
     }
 
     else if (e.getSource() == matchTypeBox)
     {
-      tempBench.clear();
-      tempField.clear();
-      updatePlayerList();
-      updateBenchList();
-      updateFieldList();
+      if (tempField.size() > 0 || tempBench.size() > 0)
+      {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
+            "Changing the match type will remove your current Field line up and bench, do you wish to continue?",
+            ButtonType.YES, ButtonType.NO);
+        alert.setTitle("Confirmation");
+        alert.setHeaderText(null);
+
+        alert.showAndWait();
+
+        if (alert.getResult() == ButtonType.YES)
+        {
+          tempBench.clear();
+          tempField.clear();
+          updatePlayerList();
+          updateBenchList();
+          updateFieldList();
+        }
+      }
     }
 
     else if (e.getSource() == exitMenuItem)
@@ -246,6 +265,7 @@ public class AddMatchViewController
         System.exit(0);
       }
     }
+
     else if (e.getSource() == aboutMenuItem)
     {
       Alert alert = new Alert(Alert.AlertType.INFORMATION,
@@ -254,11 +274,12 @@ public class AddMatchViewController
       alert.setHeaderText(null);
       alert.showAndWait();
     }
+
     else if (e.getSource() == helpMenuItem)
     {
       Alert alert = new Alert(Alert.AlertType.INFORMATION,
           "For client support, please refer to JavaGods.", ButtonType.OK);
-      alert.setTitle("About");
+      alert.setTitle("Help");
       alert.setHeaderText(null);
       alert.showAndWait();
     }
@@ -304,39 +325,6 @@ public class AddMatchViewController
     matchTypeBox.getSelectionModel().select(0);
   }
 
-  private void updatePlayerList2()
-  {
-    allPlayersList.getItems().clear();
-
-    PlayerList allPlayers = new PlayerList();
-
-    for (int i = 0; i < modelManager.getAllPlayers().size(); i++)
-    {
-      if (!(modelManager.getAllPlayers().get(i).isInjured()))
-      {
-        allPlayers.add(modelManager.getAllPlayers().get(i));
-      }
-    }
-    for (int i = 0; i < allPlayers.size(); i++)
-    {
-      allPlayersList.getItems().add(allPlayers.get(i));
-    }
-    PlayerList usedPlayers = new PlayerList();
-    for (int i = 0; i < tempField.size(); i++)
-    {
-      usedPlayers.add(tempField.get(i));
-    }
-    for (int i = 0; i < tempBench.size(); i++)
-    {
-      usedPlayers.add(tempBench.get(i));
-    }
-
-    for (int i = 0; i < usedPlayers.size(); i++)
-    {
-      allPlayersList.getItems().remove(usedPlayers.get(i));
-    }
-  }
-
   public void updatePlayerList()
   {
     allPlayersList.getItems().clear();
@@ -356,8 +344,8 @@ public class AddMatchViewController
           available.add((allPlayers.get(i)));
         }
       }
-
     }
+
     else
     {
       for (int i = 0; i < allPlayers.size(); i++)
@@ -473,7 +461,24 @@ public class AddMatchViewController
     public void changed(ObservableValue<? extends Player> player,
         Player oldPlayer, Player newPlayer)
     {
-      addButton.setDisable(false);
+      if (tempField.size() < 3 && lineUpListBoolean)
+      {
+        addButton.setDisable(false);
+      }
+      else if (!lineUpListBoolean && matchTypeBox.getSelectionModel()
+          .getSelectedItem().equals("League") && tempBench.size() < 5)
+      {
+        addButton.setDisable(false);
+      }
+      else if (!lineUpListBoolean && matchTypeBox.getSelectionModel()
+          .getSelectedItem().equals("Cup") && tempBench.size() < 6)
+      {
+        addButton.setDisable(false);
+      }
+      else if (!lineUpListBoolean&& matchTypeBox.getSelectionModel().getSelectedItem().equals("Friendly"))
+      {
+        addButton.setDisable(false);
+      }
     }
   }
 
@@ -486,3 +491,4 @@ public class AddMatchViewController
     }
   }
 }
+

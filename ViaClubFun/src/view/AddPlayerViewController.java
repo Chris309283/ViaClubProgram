@@ -43,28 +43,24 @@ public class AddPlayerViewController
   public void init(ViewHandler viewHandler, ViaClubModelManager modelManager,
       Region root)
   {
-
     this.modelManager = modelManager;
     this.root = root;
     this.viewHandler = viewHandler;
-
     positionsList.getSelectionModel().selectedItemProperty()
         .addListener((new MyListListener()));
-    positionsBox.getSelectionModel().selectedItemProperty().addListener((new MyListener2()));
+    positionsBox.getSelectionModel().selectedItemProperty()
+        .addListener((new MyListener2()));
     reset();
-
   }
 
   public void reset()
   {
     setNumberBox();
-
     editPlayer = null;
     nameField.clear();
     numberBox.setValue(null);
     positionsList.getItems().clear();
     updatePositionsBox();
-
   }
 
   public Region getRoot()
@@ -74,16 +70,15 @@ public class AddPlayerViewController
 
   public void handleActions(ActionEvent e)
   {
-
     if (e.getSource() == addButton)
     {
-
       positionsList.getItems()
           .add(positionsBox.getSelectionModel().getSelectedItem());
       positionsBox.getItems().clear();
       updatePositionsBox();
       addButton.setDisable(true);
     }
+
     else if (e.getSource() == removeButton)
     {
       positionsList.getItems()
@@ -118,16 +113,18 @@ public class AddPlayerViewController
       }
       modelManager.savePlayers(tempList);
       viewHandler.openView("MainView");
-
     }
+
     else if (e.getSource() == cancelButton)
     {
       viewHandler.openView("MainView");
     }
+
     else if (e.getSource() == positionsBox)
     {
 
     }
+
     else if (e.getSource() == exitMenuItem)
     {
       Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
@@ -143,6 +140,7 @@ public class AddPlayerViewController
         System.exit(0);
       }
     }
+
     else if (e.getSource() == aboutMenuItem)
     {
       Alert alert = new Alert(Alert.AlertType.INFORMATION,
@@ -151,6 +149,7 @@ public class AddPlayerViewController
       alert.setHeaderText(null);
       alert.showAndWait();
     }
+
     else if (e.getSource() == helpMenuItem)
     {
       Alert alert = new Alert(Alert.AlertType.INFORMATION,
@@ -222,7 +221,7 @@ public class AddPlayerViewController
     positions.add("Forward");
     positions.add("Winger");
     positions.add("Striker");
-positionsBox.getItems().clear();
+    positionsBox.getItems().clear();
     ArrayList<String> usedPositions = new ArrayList<String>();
 
     for (int i = 0; i < positionsList.getItems().size(); i++)
@@ -236,12 +235,7 @@ positionsBox.getItems().clear();
       if (!(usedPositions.contains(positions.get(j))))
       {
         positionsBox.getItems().add(positions.get(j));
-
       }
-    }
-    for (int i = 0; i < positionsBox.getItems().size(); i++)
-    {
-      System.out.println(positionsBox.getItems().get(i));
     }
   }
 
@@ -251,7 +245,6 @@ positionsBox.getItems().clear();
         String oldPosition, String newPosition)
     {
       removeButton.setDisable(false);
-
     }
   }
 

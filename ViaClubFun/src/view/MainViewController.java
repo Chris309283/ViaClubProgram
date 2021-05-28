@@ -133,6 +133,7 @@ public class MainViewController
       viewHandler.openView("AddMatchView");
       viewHandler.getAddMatchViewController()
           .setFields(allMatchesList.getSelectionModel().getSelectedItem());
+      disableMatchButtons();
     }
 
     else if (e.getSource() == removeMatchButton)
@@ -153,12 +154,12 @@ public class MainViewController
         modelManager.saveMatches(temp);
 
         updateMatchList();
+        disableMatchButtons();
       }
     }
 
     else if (e.getSource() == exitMenuItem)
     {
-
       Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
           "Do you really want to exit the program?", ButtonType.YES,
           ButtonType.NO);
@@ -172,6 +173,7 @@ public class MainViewController
         System.exit(0);
       }
     }
+
     else if(e.getSource()==aboutMenuItem){
       Alert alert = new Alert(Alert.AlertType.INFORMATION,
           "Here you can manipulate your players and matches.", ButtonType.OK);
@@ -179,6 +181,7 @@ public class MainViewController
       alert.setHeaderText(null);
       alert.showAndWait();
     }
+
     else if(e.getSource()==helpMenuItem){
       Alert alert = new Alert(Alert.AlertType.INFORMATION,
           "For client support, please refer to JavaGods.", ButtonType.OK);
@@ -186,8 +189,6 @@ public class MainViewController
       alert.setHeaderText(null);
       alert.showAndWait();
     }
-
-
   }
 
   private void disableButtons()
@@ -195,6 +196,12 @@ public class MainViewController
     editPlayerButton.setDisable(true);
     removePlayerButton.setDisable(true);
     playerAvailability.setDisable(true);
+  }
+
+  private void disableMatchButtons()
+  {
+    editMatchButton.setDisable(true);
+    removeMatchButton.setDisable(true);
   }
 
   private void updatePlayerList()
@@ -233,6 +240,7 @@ public class MainViewController
     else if (matchListTab.isSelected())
     {
       updateMatchList();
+      disableMatchButtons();
     }
   }
 
