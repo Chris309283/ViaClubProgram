@@ -67,16 +67,16 @@ public class Unavailability implements Serializable
     return type;
   }
 
-
-  public int getNumberOfGames(){
+  public int getNumberOfGames()
+  {
     return numberOfGames;
   }
+
   /**
    * ends the model.Unavailability and sets the end to the current date
    *
    * @param end sets the end of the model.Unavailability as the current date
    */
-
 
   public void setAvailable(Date end)
   {
@@ -142,9 +142,11 @@ public class Unavailability implements Serializable
     this.end = end.copy();
   }
 
-  public void setNumberOfGames(int numberOfGames){
-    this.numberOfGames=numberOfGames;
+  public void setNumberOfGames(int numberOfGames)
+  {
+    this.numberOfGames = numberOfGames;
   }
+
   /**
    * Outputs the number of days the model.Unavailability lasted
    *
@@ -175,7 +177,6 @@ public class Unavailability implements Serializable
     }
   }
 
-
   public int matchesPast()
   {
     int total = 0;
@@ -190,6 +191,7 @@ public class Unavailability implements Serializable
     }
     return total;
   }
+
 
   public String toString()
   {

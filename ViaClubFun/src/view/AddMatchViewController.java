@@ -57,6 +57,7 @@ public class AddMatchViewController
   private boolean lineUpListBoolean;
   private PlayerList tempField;
   private PlayerList tempBench;
+  private boolean searchBoolean;
 
   public void init(ViewHandler viewHandler, ViaClubModelManager modelManager,
       Region root)
@@ -77,6 +78,7 @@ public class AddMatchViewController
 
   public void reset()
   {
+    searchBoolean=false;
     opponentField.clear();
     tempBench.clear();
     tempField.clear();
@@ -99,7 +101,7 @@ public class AddMatchViewController
 
     if (e.getSource() == searchButton)
     {
-
+      searchPlayerList();
     }
     else if (e.getSource() == addButton)
     {
@@ -238,10 +240,10 @@ public class AddMatchViewController
           updateFieldList();
         }
       }
+      updatePlayerList();
     }
 
     else if (e.getSource() == exitMenuItem)
-
     {
       Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
           "Do you really want to exit the program?", ButtonType.YES,
@@ -258,7 +260,6 @@ public class AddMatchViewController
     }
 
     else if (e.getSource() == aboutMenuItem)
-
     {
       Alert alert = new Alert(Alert.AlertType.INFORMATION,
           "Here you can create or edit a match", ButtonType.OK);
@@ -268,7 +269,6 @@ public class AddMatchViewController
     }
 
     else if (e.getSource() == helpMenuItem)
-
     {
       Alert alert = new Alert(Alert.AlertType.INFORMATION,
           "For client support, please refer to JavaGods.", ButtonType.OK);
@@ -369,6 +369,40 @@ public class AddMatchViewController
       allPlayersList.getItems().remove(usedPlayers.get(i));
     }
 
+  }
+
+  public void searchPlayerList()
+  {
+    PlayerList tempList;
+    PlayerList allPlayers = modelManager.getAllPlayers();
+    if (matchTypeBox.getSelectionModel().getSelectedIndex()==2)
+    {
+      tempList = new PlayerList();
+      for (int i = 0; i < allPlayers.size(); i++)
+      {
+        if (!allPlayers.get(i).isSuspended())
+        {
+          tempList.add(allPlayers.get(i));
+        }
+      }
+    }
+    else
+    {
+      tempList = modelManager.getPlayersAvailable();
+    }
+
+    if (searchBox.getSelectionModel().getSelectedItem().equals("Name"))
+    {
+
+    }
+    else if (searchBox.getSelectionModel().getSelectedItem().equals("Number"))
+    {
+
+    }
+    else if (searchBox.getSelectionModel().getSelectedItem().equals("Position"))
+    {
+
+    }
   }
 
   private void updateFieldList()

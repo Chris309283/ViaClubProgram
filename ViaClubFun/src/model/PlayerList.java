@@ -118,6 +118,17 @@ public class PlayerList implements Serializable
     players.clear();
   }
 
+  public boolean equals(Object obj)
+  {
+    if (!(obj instanceof PlayerList))
+    {
+      return false;
+    }
+
+    PlayerList other = (PlayerList) obj;
+    return players.equals(other.players);
+  }
+
   /**
    * the method will run through the loop and print out all matches
    * @return it will return the string of all players
