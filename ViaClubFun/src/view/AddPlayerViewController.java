@@ -39,9 +39,11 @@ public class AddPlayerViewController
   public void init(ViewHandler viewHandler, ViaClubModelManager modelManager,
       Region root)
   {
+
     this.modelManager = modelManager;
     this.root = root;
     this.viewHandler = viewHandler;
+
     positionsList.getSelectionModel().selectedItemProperty()
         .addListener((new MyListListener()));
     reset();
@@ -50,7 +52,9 @@ public class AddPlayerViewController
   public void reset()
   {
     setNumberBox();
+
     updatePositionsBox();
+
     editPlayer = null;
     nameField.clear();
     numberBox.setValue(null);
@@ -67,6 +71,7 @@ public class AddPlayerViewController
 
     if (e.getSource() == addButton)
     {
+
       positionsList.getItems()
           .add(positionsBox.getSelectionModel().getSelectedItem());
       positionsBox.getItems().clear();
@@ -78,6 +83,7 @@ public class AddPlayerViewController
           .remove(positionsList.getSelectionModel().getSelectedItem());
       updatePositionsBox();
     }
+
     else if (e.getSource() == saveButton)
     {
       Player temp = new Player(nameField.getText());
@@ -164,6 +170,8 @@ public class AddPlayerViewController
     }
   }
 
+
+
   private void updatePositionsList(Player player)
   {
     if (modelManager != null)
@@ -213,12 +221,23 @@ public class AddPlayerViewController
     for (int i = 0; i < positionsList.getItems().size(); i++)
     {
       usedPositions.add(positionsList.getItems().get(i));
+      System.out.println(positionsList.getItems().get(i));
     }
+
     if (editPlayer != null)
     {
-      for (int i = 0; i < editPlayer.getPositions().size(); i++)
+      System.out.println("test");
+      ArrayList<String> playerPositions = new ArrayList<String>();
+      int playerIndex = modelManager.getAllPlayers()
+          .getIndex(editPlayer.getName(), editPlayer.getNumber());
+
+      for (int i = 0;
+           i < modelManager.getAllPlayers().get(playerIndex).getPositions()
+               .size(); i++)
       {
-        usedPositions.add(editPlayer.getPositions().get(i));
+        usedPositions.add(
+            modelManager.getAllPlayers().get(playerIndex).getPositions()
+                .get(i));
       }
     }
 
@@ -229,6 +248,7 @@ public class AddPlayerViewController
         positionsBox.getItems().add(positions.get(j));
       }
     }
+
   }
 
   private class MyListListener implements ChangeListener<String>
