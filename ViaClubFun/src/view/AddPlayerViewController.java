@@ -5,11 +5,15 @@ import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.MenuItem;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.Region;
 import model.Player;
 import model.PlayerList;
 import model.ViaClubModelManager;
 
+import java.awt.*;
 import java.util.ArrayList;
 
 public class AddPlayerViewController
@@ -46,14 +50,14 @@ public class AddPlayerViewController
 
     positionsList.getSelectionModel().selectedItemProperty()
         .addListener((new MyListListener()));
+    positionsBox.getSelectionModel().selectedItemProperty().addListener((new MyListener2()));
     reset();
+
   }
 
   public void reset()
   {
     setNumberBox();
-
-
 
     editPlayer = null;
     nameField.clear();
@@ -77,6 +81,7 @@ public class AddPlayerViewController
           .add(positionsBox.getSelectionModel().getSelectedItem());
       positionsBox.getItems().clear();
       updatePositionsBox();
+      addButton.setDisable(true);
     }
     else if (e.getSource() == removeButton)
     {
@@ -171,8 +176,6 @@ public class AddPlayerViewController
     }
   }
 
-
-
   private void updatePositionsList(Player player)
   {
     if (modelManager != null)
@@ -226,9 +229,6 @@ public class AddPlayerViewController
       System.out.println(positionsList.getItems().get(i));
     }
 
-
-
-
     for (int j = 0; j < positions.size(); j++)
     {
       if (!(usedPositions.contains(positions.get(j))))
@@ -245,6 +245,16 @@ public class AddPlayerViewController
         String oldPosition, String newPosition)
     {
       removeButton.setDisable(false);
+
+    }
+  }
+
+  private class MyListener2 implements ChangeListener<String>
+  {
+    public void changed(ObservableValue<? extends String> position,
+        String oldPosition, String newPosition)
+    {
+      addButton.setDisable(false);
     }
   }
 }
