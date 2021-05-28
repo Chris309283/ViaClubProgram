@@ -137,8 +137,6 @@ public class MainViewController
 
     else if (e.getSource() == removeMatchButton)
     {
-      allMatchesList.getSelectionModel().getSelectedItem();
-
       Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
           "Are you sure you want to permanently delete this match?",
           ButtonType.YES, ButtonType.NO);
