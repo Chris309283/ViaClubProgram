@@ -89,7 +89,7 @@
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="5.0">
                      <children>
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Match Type" />
-                        <ComboBox fx:id="matchTypeBox" prefHeight="25.0" prefWidth="135.0" />
+                        <ComboBox fx:id="matchTypeBox" onAction="#handleActions" prefHeight="25.0" prefWidth="135.0" />
                      </children>
                   </HBox>
                   <HBox alignment="BOTTOM_CENTER" prefHeight="26.0" prefWidth="242.0" spacing="20.0">
