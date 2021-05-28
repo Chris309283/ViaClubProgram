@@ -59,6 +59,7 @@ public class MainViewController
     allMatchesList.getSelectionModel().selectedItemProperty()
         .addListener(new MyListListener2());
     modelManager.updateSuspensions();
+
     reset();
   }
 
@@ -70,6 +71,7 @@ public class MainViewController
     setAvailableComboBox();
     playerSearchComboBox.getItems().clear();
     setPlayerSearchComboBox();
+    modelManager.updateBenchedInARow();
     updatePlayerList();
     updateMatchList();
   }

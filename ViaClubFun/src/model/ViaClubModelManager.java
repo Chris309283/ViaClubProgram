@@ -221,16 +221,45 @@ public class ViaClubModelManager
         }
         Player tempPlayer = allPlayers.get(tempList.get(i).getName());
 
-
         if (total >= tempList.get(i).getAllUnavailabilities().get(j)
             .getNumberOfGames())
         {
-          tempPlayer.getAllUnavailabilities().get(j)
-              .setNumberOfGames(0);
+          tempPlayer.getAllUnavailabilities().get(j).setNumberOfGames(0);
         }
 
       }
     }
+    savePlayers(allPlayers);
+  }
+
+  public void updateBenchedInARow()
+  {
+    PlayerList allPlayers = getAllPlayers();
+    for (int i = 0; i < allPlayers.size(); i++)
+    {
+      allPlayers.get(i).setBenchedInARow(0);
+
+    }
+    for (int i = 0; i < allPlayers.size(); i++)
+    {
+      int streak = 0;
+      for (int j = 0; j < getAllMatches().size(); j++)
+      {
+
+        if (getAllMatches().get(j).getBench().contains(allPlayers.get(i))
+            && !(getAllMatches().get(j).getLineUp()
+            .contains(allPlayers.get(i))))
+        {
+          streak++;
+        }
+        else
+        {
+          streak = 0;
+        }
+      }
+      allPlayers.get(i).setBenchedInARow(streak);
+    }
+
     savePlayers(allPlayers);
   }
 }

@@ -63,6 +63,9 @@ public class PlayerList implements Serializable
       return null;
     }
   }
+  public boolean contains(Player player){
+    return players.contains(player);
+  }
 
   /**
    * the method has a loop which go through it and search for a player by the name, if it the statement is true it will get the player.

@@ -16,6 +16,7 @@ public class Player implements Serializable
   private ArrayList<String> positions;
   private ArrayList<Unavailability> unavailabilities;
 
+
   /**
    * Two argument constructor for creating a player object
    *
@@ -227,6 +228,7 @@ public class Player implements Serializable
     else {
       returnStr += " Status: Available";
     }
+    returnStr +=" games benched in a row: "+benchedInARow;
     return returnStr;
   }
 
