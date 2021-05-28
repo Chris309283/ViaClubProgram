@@ -53,12 +53,13 @@ public class AddPlayerViewController
   {
     setNumberBox();
 
-    updatePositionsBox();
+
 
     editPlayer = null;
     nameField.clear();
     numberBox.setValue(null);
     positionsList.getItems().clear();
+
   }
 
   public Region getRoot()
@@ -200,6 +201,7 @@ public class AddPlayerViewController
     }
 
     editPlayer = player;
+    updatePositionsBox();
   }
 
   public void updatePositionsBox()
@@ -224,22 +226,8 @@ public class AddPlayerViewController
       System.out.println(positionsList.getItems().get(i));
     }
 
-    if (editPlayer != null)
-    {
-      System.out.println("test");
-      ArrayList<String> playerPositions = new ArrayList<String>();
-      int playerIndex = modelManager.getAllPlayers()
-          .getIndex(editPlayer.getName(), editPlayer.getNumber());
 
-      for (int i = 0;
-           i < modelManager.getAllPlayers().get(playerIndex).getPositions()
-               .size(); i++)
-      {
-        usedPositions.add(
-            modelManager.getAllPlayers().get(playerIndex).getPositions()
-                .get(i));
-      }
-    }
+
 
     for (int j = 0; j < positions.size(); j++)
     {
