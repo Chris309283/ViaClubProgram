@@ -116,6 +116,16 @@ public class Player implements Serializable
     }
   }
 
+  public boolean isInjured(){
+    for (int i = 0; i < unavailabilities.size(); i++)
+    {
+      if(unavailabilities.get(i).isActive()){
+        return true;
+      }
+    }
+    return false;
+  }
+
   /**
    * adds a unavailability to the unavailabilities array list
    *
