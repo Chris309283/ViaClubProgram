@@ -82,7 +82,7 @@ public class test
     p4.addPosition("loh2");
 
 
-    System.out.println("test here :"+p4.toString2());
+
 
     Match m5= new Match(t1,t1,new Date(1,1,2020),"aarhus", "Cup",false );
     Match m6= new Match(t1,t1,new Date(1,1,2020),"aarhus", "Cup",false );

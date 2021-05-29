@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.GregorianCalendar;
 
 /**
- * A class for creating model.Date objects.
+ * A class representing a Date with a day, month and year.
  *
  * @author Java Gods
  * @version 1.0
@@ -14,11 +14,11 @@ public class Date implements Serializable
   private int day, month, year;
 
   /**
-   * A three-argument constructor initializing the model.Date.
+   * Three-argument constructor initializing the model.Date.
    *
-   * @param day   sets the day of the month.
-   * @param month sets the month of the year.
-   * @param year  sets the year.
+   * @param day   the day of the month.
+   * @param month the month of the year.
+   * @param year  the year.
    */
   public Date(int day, int month, int year)
   {
@@ -27,23 +27,38 @@ public class Date implements Serializable
     this.year = year;
   }
 
+  /**
+   * Gets the day of the date
+   *
+   * @return the day of the date
+   */
   public int getDay()
   {
     return day;
   }
 
+  /**
+   * Gets the month of the date
+   *
+   * @return the month of the date
+   */
   public int getMonth()
   {
     return month;
   }
 
+  /**
+   * Gets the year of the date
+   *
+   * @return the year of the date
+   */
   public int getYear()
   {
     return year;
   }
 
   /**
-   * A method that checks if a this date is before date2.
+   * Checks if a this date is before a second date.
    *
    * @param date2 sets the second date.
    * @return whether or not this date is before date2
@@ -72,7 +87,7 @@ public class Date implements Serializable
   }
 
   /**
-   * A method that checks if this year is a leap year.
+   * Checks if the year is leap.
    *
    * @return true if this year is a leap year, false otherwise.
    */
@@ -83,9 +98,9 @@ public class Date implements Serializable
   }
 
   /**
-   * A method that returns how many days there are in a given month.
+   * Gets how many days there are in the month of the date.
    *
-   * @return An integer with days in given month.
+   * @return the number of days in the month.
    */
   private int daysInMonth()
   {
@@ -113,7 +128,7 @@ public class Date implements Serializable
   }
 
   /**
-   * A method that sets the day to the day after.
+   * Increases the date by one day.
    */
   public void nextDay()
   {
@@ -137,64 +152,9 @@ public class Date implements Serializable
   }
 
   /**
-   * A method that calculates from this date until date2.
+   * Gets the current date.
    *
-   * @param date2 Sets the second date.
-   * @return A time object with the days, months and years between the two dates.
-   */
-  public int daysUntil(Date date2)
-  {
-    Date date1 = copy();
-    int days = 0;
-
-    if (isBefore(date2))
-    {
-      while (!(date1.day == date2.day && date1.month == date2.month
-          && date1.year == date2.year))
-      {
-        date1.nextDay();
-        days++;
-      }
-      return days;
-    }
-    else
-    {
-      return -1;
-    }
-  }
-
-  /**
-   * A method that calculates from this date since date2.
-   *
-   * @param date2 Sets the second date.
-   * @return A time object with the days, months and years between the two dates.
-   */
-  public int daysSince(Date date2)
-  {
-    Date date1 = copy();
-    Date date3 = date2.copy();
-    int days = 0;
-
-    if (!(isBefore(date2)))
-    {
-      while (!(date3.day == date1.day && date3.month == date1.month
-          && date3.year == date1.year))
-      {
-        date3.nextDay();
-        days++;
-      }
-      return days;
-    }
-    else
-    {
-      return -1;
-    }
-  }
-
-  /**
-   * A method that gets you the current date.
-   *
-   * @return A model.Date object with the current date.
+   * @return Today's date.
    */
   public static Date today()
   {
@@ -206,9 +166,9 @@ public class Date implements Serializable
   }
 
   /**
-   * A method for making a copy of the model.Date object.
+   * Makes a copy of the date
    *
-   * @return A copy model.Date object.
+   * @return a copy of the date.
    */
   public Date copy()
   {
@@ -216,12 +176,10 @@ public class Date implements Serializable
   }
 
   /**
-   * Compares this model.Date to the specified object.
-   * The result is true if and only if the argument is not null and
-   * is a model.Date object that represents the same parameters as this object.
+   * Compares day, month and year of two dates
    *
-   * @param obj The object to compare this model.Date against.
-   * @return true if the given object represents a model.Date equivalent to this date, false otherwise.
+   * @param obj The object to compare with
+   * @return true if the given object to this date
    */
   public boolean equals(Object obj)
   {
@@ -236,9 +194,9 @@ public class Date implements Serializable
   }
 
   /**
-   * A method that gives a string representation of the object.
+   * Returns a string representation of the date.
    *
-   * @return A string representation of the object.
+   * @return A string representation of the date in the format dd/mm/yyyy;
    */
   public String toString()
   {

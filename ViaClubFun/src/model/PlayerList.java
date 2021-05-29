@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
- * a class, which is a list of players
+ * A class representing a list of players
  * @author Java Gods
  * @version 1.0
  */
@@ -13,7 +13,7 @@ public class PlayerList implements Serializable
   private ArrayList<Player> players;
 
   /**
-   * a constructor with none argument which initialize the players
+   * No-argument constructor initializing the player list
    */
   public PlayerList()
   {
@@ -21,16 +21,17 @@ public class PlayerList implements Serializable
   }
 
   /**
-   * the method add player to the players
-   * @param player which is object input that can be added to our playerList
+   * Adds a player to the player's list
+   * @param player the player added to the list
    */
   public void add(Player player)
   {
     players.add(player);
   }
+
   /**
-   * the method remove player to the players
-   * @param player which is object input that can be removed from our playerList
+   * Removes a player from the list
+   * @param player the player removed form the list
    */
   public void remove(Player player)
   {
@@ -38,8 +39,8 @@ public class PlayerList implements Serializable
   }
 
   /**
-   * the method which gets the size of players
-   * @return it returns the int of the size of matches
+   * Gets the size of the player list
+   * @return the size of the player list
    */
 
   public int size()
@@ -48,9 +49,9 @@ public class PlayerList implements Serializable
   }
 
   /**
-   * the method gets the player from a specific index, if it exist.
-   * @param index which is a specific location of list
-   * @return if player does not exist it returns null, otherwise it return the player.
+   * Gets the player at a specific position in the list
+   * @param index the position in the list
+   * @return the player at the specified index in the list
    */
   public Player get(int index)
   {
@@ -63,14 +64,22 @@ public class PlayerList implements Serializable
       return null;
     }
   }
+
+  /**
+   * Checks if a player is contained in the player list
+   *
+   * @param player sets the player which is checked if is contained in the list
+   * @return  true if the player is inside the list
+   */
+
   public boolean contains(Player player){
     return players.contains(player);
   }
 
   /**
-   * the method has a loop which go through it and search for a player by the name, if it the statement is true it will get the player.
-   * @param name which is input that we are search for
-   * @return it return the player if the loop find it, otherwise it will return null
+   * Gets a player from the list by the name
+   * @param name is searched for in the player list
+   * @return a player if it has the same name
    */
   public Player get(String name)
   {
@@ -86,9 +95,10 @@ public class PlayerList implements Serializable
     return null;
   }
   /**
-   * the method sets/changes a player to a specific index
-   * @param index is a location in the list
-   * @param player is match to that index
+   * Sets the player at a specific index in the player list
+   *
+   * @param index the position in the list
+   * @param player the player which is set to the position
    */
   public void set(int index, Player player)
   {
@@ -96,11 +106,11 @@ public class PlayerList implements Serializable
   }
 
   /**
-   * the method has a loop which go through the size of players and to parameters which are input,
-   * and it checks i objects of each index is equal to input, it return the number of objects which are equal to each other.
-   * @param name which is the name of player
-   * @param number which is the number of player
-   * @return it return int of player if the name and number are equal to our parameter, otherwise it will return nothing.
+   *Gets the index of the player that has a specific name and number
+   *
+   * @param name the name of the player looked for
+   * @param number the number of the player looked for
+   * @return the position of the player with the specified name and number in the player list
    */
   public int getIndex(String name, int number)
   {
@@ -116,11 +126,20 @@ public class PlayerList implements Serializable
     return -1;
   }
 
+  /**
+   * Clears the player list
+   */
   public void clear()
   {
     players.clear();
   }
 
+  /**
+   * Compares two player lists
+   *
+   * @param obj the object compared with
+   * @return true if the given object is equal to the player list
+   */
   public boolean equals(Object obj)
   {
     if (!(obj instanceof PlayerList))
@@ -133,8 +152,9 @@ public class PlayerList implements Serializable
   }
 
   /**
-   * the method will run through the loop and print out all matches
-   * @return it will return the string of all players
+   * A string representation of the player list
+   *
+   * @return the string representation of the player list
    */
   public String toString()
   {
@@ -147,6 +167,4 @@ public class PlayerList implements Serializable
     }
     return returnStr;
   }
-
-  //method that checks the number
 }

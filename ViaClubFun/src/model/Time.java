@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.time.LocalTime;
 
 /**
- * A class for creating time objects.
+ * A class representing time with hours, minutes and seconds.
  *
  * @author Java Gods
  * @version 1.0
@@ -14,11 +14,11 @@ public class Time implements Serializable
   private int hour, minute, second;
 
   /**
-   * A three-argument constructor initializing the model.Time.
+   * Three-argument constructor initializing the model.Time.
    *
-   * @param h sets the hour of the day.
-   * @param m sets the minute of the hour.
-   * @param s sets the second of the minute.
+   * @param h the hour of the day.
+   * @param m the minute of the hour.
+   * @param s the second of the minute.
    */
   public Time(int h, int m, int s)
   {
@@ -28,7 +28,7 @@ public class Time implements Serializable
   }
 
   /**
-   * A one-argument constructor initializing the model.Time.
+   * One-argument constructor initializing the model.Time.
    *
    * @param totalTimeInSeconds sets the time of the day from total seconds.
    */
@@ -41,16 +41,31 @@ public class Time implements Serializable
     second = totalTimeInSeconds;
   }
 
+  /**
+   * Gets the hour of the day
+   *
+   * @return the hour of the day
+   */
   public int getHour()
   {
     return hour;
   }
 
+  /**
+   * Gets the minute of the hour
+   *
+   * @return
+   */
   public int getMinute()
   {
     return minute;
   }
 
+  /**
+   * Gets the second of the minute
+   *
+   * @return the second of the minute
+   */
   public int getSecond()
   {
     return second;
@@ -59,7 +74,7 @@ public class Time implements Serializable
   /**
    * A method for converting this time into seconds.
    *
-   * @return An integer with the sum of hour, minute and second as seconds.
+   * @return The total number of seconds of the time.
    */
   public int convertToSeconds()
   {
@@ -67,10 +82,10 @@ public class Time implements Serializable
   }
 
   /**
-   * A method that checks if a this time is before time2.
+   * Checks if a this time is before time2.
    *
-   * @param time2 sets the second time.
-   * @return whether or not this time is before time2
+   * @param time2 time compared with.
+   * @return true if the time is before time2
    */
   public boolean isBefore(Time time2)
   {
@@ -78,76 +93,10 @@ public class Time implements Serializable
   }
 
   /**
-   * A method that calculates from this time until time2.
+   * Compares the hour, minute and second of two times
    *
-   * @param time2 Sets the second time.
-   * @return A time object with the hours, minutes and seconds between the two times.
-   */
-  public Time timeUntil(Time time2)
-  {
-    int totalTimeInSeconds;
-    if (isBefore(time2))
-    {
-      totalTimeInSeconds = time2.convertToSeconds() - convertToSeconds();
-    }
-    else
-    {
-      totalTimeInSeconds =
-          24 * 3600 - convertToSeconds() + time2.convertToSeconds();
-    }
-
-    return new Time(totalTimeInSeconds);
-  }
-
-  /**
-   * A method that calculates from this time since time2.
-   *
-   * @param time2 Sets the second time.
-   * @return A time object with the hours, minutes and seconds between the two times.
-   */
-  public Time timeSince(Time time2)
-  {
-    int totalTimeInSeconds;
-    if (!(isBefore(time2)))
-    {
-      totalTimeInSeconds = convertToSeconds() - time2.convertToSeconds();
-    }
-    else
-    {
-      totalTimeInSeconds =
-          24 * 3600 - time2.convertToSeconds() + convertToSeconds();
-    }
-    return new Time(totalTimeInSeconds);
-  }
-
-  /**
-   * A method that gives the current local time.
-   *
-   * @return A time object with the local time.
-   */
-  public static Time now()
-  {
-    return new Time(LocalTime.now().getHour(), LocalTime.now().getMinute(),
-        LocalTime.now().getSecond());
-  }
-
-  /**
-   * A method for making a copy of the model.Time object.
-   *
-   * @return A copy model.Time object.
-   */
-  public Time copy()
-  {
-    return new Time(hour, minute, second);
-  }
-
-  /**
-   * Compares this model.Time to the specified object.
-   * The result is true if and only if the argument is not null and
-   * is a model.Time object that represents the same parameters as this object.
-   *
-   * @param obj The object to compare this model.Time against.
-   * @return true if the given object represents a model.Time equivalent to this time, false otherwise.
+   * @param obj The object to compare this time against.
+   * @return true if the given object is equal to this time.
    */
   public boolean equals(Object obj)
   {
@@ -155,7 +104,6 @@ public class Time implements Serializable
     {
       return false;
     }
-
     Time other = (Time) obj;
 
     return hour == other.hour && minute == other.minute
@@ -163,8 +111,9 @@ public class Time implements Serializable
   }
 
   /**
-   * A method that gives a string representation of the object.
-   * @return A string representation of the object.
+   * Gives a string representation of the object.
+   *
+   * @return A string representation of the time in the format hh:mm:ss.
    */
   public String toString()
   {

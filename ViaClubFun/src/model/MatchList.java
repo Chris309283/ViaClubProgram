@@ -4,19 +4,19 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
  /**
- * a class of which is a list of matches
+ * A class for creating match lists
+  *
  * @author Java Gods
  * @version 1.0
  */
 public class MatchList implements Serializable
 {
-
-
   private ArrayList<Match> matches;
 
-
   /**
-   * a constructor, which initialize the matches. it is without parameter
+   * No-argument constructor
+   *
+   * initializes the matches list
    */
   public MatchList()
   {
@@ -24,8 +24,9 @@ public class MatchList implements Serializable
   }
 
   /**
-   * the method  add match to our list
-   * @param match of type Match which will be added to the list
+   * Add a match to the match list
+   *
+   * @param match is added to the match list
    */
   public void add(Match match)
   {
@@ -33,8 +34,9 @@ public class MatchList implements Serializable
   }
 
   /**
-   * the method remove a match from the list
-   * @param match is input to the parameter which the user can remove a match from matches
+   * Removes a match from the match list
+   *
+   * @param match is removed from the match list
    */
 
   public void remove(Match match)
@@ -43,8 +45,9 @@ public class MatchList implements Serializable
   }
 
   /**
-   * the method which gets the size of matches
-   * @return it returns the int of the size of matches
+   * Return the size of the match list
+   *
+   * @return returns the size of the match list
    */
   public int size()
   {
@@ -52,9 +55,10 @@ public class MatchList implements Serializable
   }
 
   /**
-   * the method gets the match from a specific index, if it exist.
-   * @param index which is a specific location of list
-   * @return if match does not exist it returns null, otherwise it return the match.
+   * Gets a match from a specific position in the match list
+   *
+   * @param index the position of the match in the list
+   * @return the match from the specific position in the list
    */
   public Match get(int index)
   {
@@ -69,7 +73,7 @@ public class MatchList implements Serializable
   }
 
   /**
-   * the method sets/changesa match to a specific index
+   *
    * @param index is a location in the list
    * @param match is match to that index
    */
