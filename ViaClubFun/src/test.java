@@ -78,5 +78,15 @@ public class test
     Player p4= new Player("bob2");
     p4.incrementBenchedInARow();
     System.out.println(p4);
+    p4.addPosition("loh");
+    p4.addPosition("loh2");
+
+
+    System.out.println("test here :"+p4.toString2());
+
+    Match m5= new Match(t1,t1,new Date(1,1,2020),"aarhus", "Cup",false );
+    Match m6= new Match(t1,t1,new Date(1,1,2020),"aarhus", "Cup",false );
+    System.out.println("jeb");
+    System.out.println(m.getAllMatchesPast());
   }
 }

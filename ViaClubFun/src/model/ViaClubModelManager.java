@@ -5,7 +5,6 @@ import utils.MyFileHandler;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-
 public class ViaClubModelManager
 {
   private String playerFileName;
@@ -81,28 +80,51 @@ public class ViaClubModelManager
   {
     MatchList allMatches = getAllMatches();
     MatchList betweenMatches = new MatchList();
+
+    Date dateStart = date1.copy();
     for (int i = 0; i < allMatches.size(); i++)
     {
-      if (allMatches.get(i).getDate().isBefore(date1)&&!allMatches.get(i).getDate().isBefore(date2))
+      while (!dateStart.equals(date2))
       {
-        betweenMatches.add(allMatches.get(i));
+        if (getMatchesOnDate(date1) != null)
+        {
+          for (int j = 0; j < getMatchesOnDate(dateStart).size(); j++)
+          {
+            betweenMatches.add(getMatchesOnDate(dateStart).get(j));
+          }
+
+        }
+        dateStart.nextDay();
       }
     }
     return betweenMatches;
   }
 
-  public MatchList getMatchesAgainst(String opponent)
+  public MatchList getMatchesAgainst(String opponent, MatchList matchList)
   {
-    MatchList allMatches = getAllMatches();
+    MatchList allMatches = matchList;
     MatchList opponentList = new MatchList();
     for (int i = 0; i < allMatches.size(); i++)
     {
-      if (allMatches.get(i).getOpponent().toLowerCase().contains(opponent.toLowerCase()))
+      if (allMatches.get(i).getOpponent().toLowerCase()
+          .contains(opponent.toLowerCase()))
       {
         opponentList.add(allMatches.get(i));
       }
     }
     return opponentList;
+  }
+  public MatchList getTypeMatches(String type,MatchList matchList){
+    MatchList allMatches= matchList;
+    MatchList temp= new MatchList();
+
+    for (int i = 0; i < allMatches.size(); i++)
+    {
+      if(allMatches.get(i).getMatchType().equals(type)){
+        temp.add(allMatches.get(i));
+      }
+    }
+    return temp;
   }
 
   public MatchList getMatchesWon()
@@ -112,7 +134,8 @@ public class ViaClubModelManager
 
     for (int i = 0; i < allMatches.size(); i++)
     {
-      if (allMatches.get(i).getScoreHomeTeam()>allMatches.get(i).getScoreOpponent())
+      if (allMatches.get(i).getScoreHomeTeam() > allMatches.get(i)
+          .getScoreOpponent())
       {
         wonList.add(allMatches.get(i));
       }
@@ -127,13 +150,15 @@ public class ViaClubModelManager
 
     for (int i = 0; i < allMatches.size(); i++)
     {
-      if (allMatches.get(i).getScoreHomeTeam()<allMatches.get(i).getScoreOpponent())
+      if (allMatches.get(i).getScoreHomeTeam() < allMatches.get(i)
+          .getScoreOpponent())
       {
         lostList.add(allMatches.get(i));
       }
     }
     return lostList;
   }
+
   public MatchList getMatchesDraw()
   {
     MatchList allMatches = getAllMatches();
@@ -141,10 +166,12 @@ public class ViaClubModelManager
 
     for (int i = 0; i < allMatches.size(); i++)
     {
-        if ((allMatches.get(i).getScoreHomeTeam()==allMatches.get(i).getScoreOpponent())&&allMatches.get(i).getDate().isBefore(Date.today()))
-        {
-          drawList.add(allMatches.get(i));
-        }
+      if ((allMatches.get(i).getScoreHomeTeam() == allMatches.get(i)
+          .getScoreOpponent()) && allMatches.get(i).getDate()
+          .isBefore(Date.today()))
+      {
+        drawList.add(allMatches.get(i));
+      }
     }
     return drawList;
   }
@@ -224,8 +251,6 @@ public class ViaClubModelManager
     }
     return allPlayersByPositions;
   }
-
-
 
   public void saveMatches(MatchList matches)
   {
@@ -334,5 +359,38 @@ public class ViaClubModelManager
     }
 
     savePlayers(allPlayers);
+  }
+
+  public MatchList getAllMatchesToday()
+  {
+    MatchList temp = new MatchList();
+    temp = getMatchesOnDate(Date.today());
+    return temp;
+  }
+
+  public MatchList getAllMatchesPast()
+  {
+  MatchList allMatches= getAllMatches();
+  MatchList matchesBetween=new MatchList();
+    for (int i = 0; i <allMatches.size() ; i++)
+    {
+      if (allMatches.get(i).getDate().isBefore(Date.today())){
+        matchesBetween.add(allMatches.get(i));
+      }
+    }
+    return matchesBetween;
+  }
+
+  public MatchList getAllFutureMatches()
+  {
+    MatchList allMatches= getAllMatches();
+    MatchList matchesBetween=new MatchList();
+    for (int i = 0; i <allMatches.size() ; i++)
+    {
+      if (Date.today().isBefore(allMatches.get(i).getDate())){
+        matchesBetween.add(allMatches.get(i));
+      }
+    }
+    return matchesBetween;
   }
 }

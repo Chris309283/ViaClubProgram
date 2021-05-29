@@ -232,6 +232,33 @@ public class Player implements Serializable
     return returnStr;
   }
 
+  public String toString2(){
+    String returnStr = "Name: " + name + " Number: " + number + "\nPositions: ";
+    for (int i = 0; i < positions.size(); i++)
+    {
+      if (i + 1 != positions.size())
+      {
+        returnStr += positions.get(i) + ", ";
+      }
+      else
+      {
+        returnStr += positions.get(i);
+      }
+    }
+
+    if(isInjured()){
+      returnStr+="\nStatus: Injured";
+    }
+    else if(isSuspended()){
+      returnStr+="\nStatus: Suspended";
+    }
+    else {
+      returnStr += "\nStatus: Available";
+    }
+    returnStr +=" games benched in a row: "+benchedInARow;
+    return returnStr;
+  }
+
 
   public int getBenchedInARow()
   {
