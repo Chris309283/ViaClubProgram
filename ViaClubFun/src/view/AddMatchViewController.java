@@ -412,7 +412,6 @@ public class AddMatchViewController
       tempList = modelManager.getPlayersAvailable();
     }
 
-
       if (searchBox.getSelectionModel().getSelectedItem().equals("Name"))
     {
       PlayerList tempListOutput = modelManager.getPlayersByName(searchField.getText(),tempList);
