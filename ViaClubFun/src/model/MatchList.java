@@ -3,9 +3,9 @@ package model;
 import java.io.Serializable;
 import java.util.ArrayList;
 
- /**
+/**
  * A class for creating match lists
-  *
+ *
  * @author Java Gods
  * @version 1.0
  */
@@ -15,7 +15,6 @@ public class MatchList implements Serializable
 
   /**
    * No-argument constructor
-   *
    * initializes the matches list
    */
   public MatchList()
@@ -73,9 +72,10 @@ public class MatchList implements Serializable
   }
 
   /**
+   * Sets the match in the match list at a specific position
    *
-   * @param index is a location in the list
-   * @param match is match to that index
+   * @param index the position in the list
+   * @param match the match which is set to the position in the list
    */
   public void set(int index, Match match)
   {
@@ -83,24 +83,27 @@ public class MatchList implements Serializable
   }
 
   /**
-   * the method has 6 parameter and a loop and inside it there is temp variable reference of type match,
-   * so it goes through the loop and check if temp is equal to all parameter it returns the index as a number from that match..
-   * @param startTime it is input of start time of the match
-   * @param endTime it is input of end time of the match
-   * @param date it is the date of the match
-   * @param opponent it is the opponent in the match
-   * @param matchType it is match type
-   * @param isAwayGame it is is away game
-   * @return it returns the int
+   * Gets the index of the match in the list
+   *
+   * @param startTime  the start time of the match
+   * @param endTime    the end time of the match
+   * @param date       the date of the match
+   * @param opponent   the opponent in the match
+   * @param matchType  the match type
+   * @param isAwayGame whether or not is away game
+   * @return the position of the match in the list
    */
-  public int getIndex(Time startTime, Time endTime, Date date, String opponent, String matchType, boolean isAwayGame)
+  public int getIndex(Time startTime, Time endTime, Date date, String opponent,
+      String matchType, boolean isAwayGame)
   {
     for (int i = 0; i < matches.size(); i++)
     {
       Match temp = matches.get(i);
 
-      if (temp.getStartTime().equals(startTime) && temp.getEndTime().equals(endTime) && temp.getDate().equals(date)&&temp.getOpponent().equals(opponent)&&temp.getMatchType().equals(matchType)&& temp
-          .getIsAwayGame()==isAwayGame)
+      if (temp.getStartTime().equals(startTime) && temp.getEndTime()
+          .equals(endTime) && temp.getDate().equals(date) && temp.getOpponent()
+          .equals(opponent) && temp.getMatchType().equals(matchType)
+          && temp.getIsAwayGame() == isAwayGame)
       {
         return i;
       }
@@ -108,11 +111,10 @@ public class MatchList implements Serializable
     return -1;
   }
 
-
-
   /**
-   * the method will run through the loop and print out all matches
-   * @return it will return the string of all all matches
+   * A string representation of the match list
+   *
+   * @return the string representation of the match list
    */
   public String toString()
   {

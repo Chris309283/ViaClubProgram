@@ -5,7 +5,7 @@ import model.Date;
 import java.io.Serializable;
 
 /**
- * a class for creating unavailability objects
+ * A class for creating unavailability objects
  *
  * @author Java Gods
  * @version 1.0
@@ -19,7 +19,7 @@ public class Unavailability implements Serializable
   private ViaClubModelManager modelManager;
 
   /**
-   * Three-argument constructor initializing the model.Unavailability
+   * Three-argument constructor
    *
    * @param start         sets the start date of the model.Unavailability
    * @param numberOfGames sets the number of games the model.Unavailability is for
@@ -34,10 +34,10 @@ public class Unavailability implements Serializable
   }
 
   /**
-   * Two-argument constructor initializing the model.Unavailability
+   * One-argument constructor
    *
-   * @param start sets the start date of the model.Unavailability
-   *              isAvailable method is set initially to false
+   * @param start sets the start date of the unavailability
+   *              type is set to injury
    */
   public Unavailability(Date start)
   {
@@ -48,6 +48,12 @@ public class Unavailability implements Serializable
 
   }
 
+  /**
+   * Two-argument constructor
+   *
+   * @param start sets the start of the unvailability
+   * @param end   sets the end of the unavailability
+   */
   public Unavailability(Date start, Date end)
   {
     this.type = "Injured";
@@ -58,24 +64,29 @@ public class Unavailability implements Serializable
   }
 
   /**
-   * Gets the type of model.Unavailability
+   * Gets the type of the unavailability
    *
-   * @return the type of model.Unavailability
+   * @return the type the unavailability
    */
   public String getType()
   {
     return type;
   }
 
+  /**
+   * gets the number of games for the suspension
+   *
+   * @return the number of games for the suspension
+   */
   public int getNumberOfGames()
   {
     return numberOfGames;
   }
 
   /**
-   * ends the model.Unavailability and sets the end to the current date
+   * ends the unavailability and sets the end to the current date
    *
-   * @param end sets the end of the model.Unavailability as the current date
+   * @param end sets the end of the unavailability as the current date
    */
 
   public void setAvailable(Date end)
@@ -86,6 +97,11 @@ public class Unavailability implements Serializable
 
   }
 
+  /**
+   * Checks if the unavailability is active
+   *
+   * @return true if the unavailability is active
+   */
   public boolean isActive()
   {
     if (type.equals("Suspended") && numberOfGames > 0)
@@ -102,9 +118,9 @@ public class Unavailability implements Serializable
   }
 
   /**
-   * Gets the start date of the model.Unavailability
+   * Gets the start date of the unavailability
    *
-   * @return the start date of the model.Unavailability
+   * @return the start date of the unavailability
    */
 
   public Date getStart()
@@ -113,44 +129,20 @@ public class Unavailability implements Serializable
   }
 
   /**
-   * Sets the start date of the model.Unavailability
+   * Sets the number of games of the suspension
    *
-   * @param start sets the start date of the model.Unavailability
+   * @param numberOfGames sets the number of games of the suspension
    */
-  public void setStart(Date start)
-  {
-    this.start = start.copy();
-  }
-
-  /**
-   * Gets the end date of the model.Unavailability
-   *
-   * @return the end date of the model.Unavailability
-   */
-  public Date getEnd()
-  {
-    return end.copy();
-  }
-
-  /**
-   * Sets the end date of the model.Unavailability
-   *
-   * @param end sets the end date of the model.Unavailability
-   */
-  public void setEnd(Date end)
-  {
-    this.end = end.copy();
-  }
-
   public void setNumberOfGames(int numberOfGames)
   {
     this.numberOfGames = numberOfGames;
   }
 
   /**
-   * Outputs the number of days the model.Unavailability lasted
+   * Compares two unavailabilities
    *
-   * @return the number of days from start date to end date
+   * @param obj the object compared with
+   * @return true if the object given equals the unavailability
    */
 
   public boolean equals(Object obj)
@@ -172,6 +164,12 @@ public class Unavailability implements Serializable
           && other.end == null && type.equals(other.type);
     }
   }
+
+  /**
+   * Returns a string representation of the unavailability
+   *
+   * @return a string representation of the unavailability
+   */
 
   public String toString()
   {

@@ -5,17 +5,33 @@ import utils.MyFileHandler;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+/**
+ * A model manager providing a singe access point to the model
+ *
+ * @author JavaGods
+ * @version 1.0
+ */
 public class ViaClubModelManager
 {
   private String playerFileName;
   private String matchFileName;
 
+  /**
+   * Two-argument constructor setting the file names
+   *
+   * @param playerFileName the name and the path of the file where players will be saved and retrieved
+   * @param matchFileName the name and the path of the file where matches will be sabed and retrieved
+   */
   public ViaClubModelManager(String playerFileName, String matchFileName)
   {
     this.playerFileName = playerFileName;
     this.matchFileName = matchFileName;
   }
 
+  /**
+   * Gets
+   * @return
+   */
   public PlayerList getAllPlayers()
   {
     PlayerList allPlayers = new PlayerList();
