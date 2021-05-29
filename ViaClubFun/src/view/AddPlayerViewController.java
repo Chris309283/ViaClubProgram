@@ -263,6 +263,7 @@ public class AddPlayerViewController
     }
   }
 
+
   private class MyListListener implements ChangeListener<String>
   {
     public void changed(ObservableValue<? extends String> position,

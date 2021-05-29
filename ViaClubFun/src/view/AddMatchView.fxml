@@ -63,9 +63,9 @@
                               <Insets right="5.0" />
                            </HBox.margin>
                         </Text>
-                        <ComboBox fx:id="startTimeHourBox" prefHeight="25.0" prefWidth="60.0" />
+                        <ComboBox fx:id="startTimeHourBox" onAction="#checkTime" prefHeight="25.0" prefWidth="60.0" />
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text=":" />
-                        <ComboBox fx:id="startTimeMinuteBox" prefHeight="25.0" prefWidth="60.0" />
+                        <ComboBox fx:id="startTimeMinuteBox" onAction="#checkTime" prefHeight="25.0" prefWidth="60.0" />
                      </children>
                      <padding>
                         <Insets right="5.0" />
@@ -77,9 +77,9 @@
                            <HBox.margin>
                               <Insets right="5.0" />
                            </HBox.margin></Text>
-                        <ComboBox fx:id="endTimeHourBox" prefHeight="25.0" prefWidth="60.0" />
+                        <ComboBox fx:id="endTimeHourBox" onAction="#checkTime" prefHeight="25.0" prefWidth="60.0" />
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text=":" />
-                        <ComboBox fx:id="endTimeMinuteBox" prefHeight="25.0" prefWidth="60.0" />
+                        <ComboBox fx:id="endTimeMinuteBox" onAction="#checkTime" prefHeight="25.0" prefWidth="60.0" />
                      </children>
                   </HBox>
                </children>

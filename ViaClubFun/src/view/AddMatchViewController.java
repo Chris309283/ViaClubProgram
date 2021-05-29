@@ -58,7 +58,6 @@ public class AddMatchViewController
   private PlayerList tempField;
   private PlayerList tempBench;
 
-
   public void init(ViewHandler viewHandler, ViaClubModelManager modelManager,
       Region root)
   {
@@ -313,15 +312,16 @@ public class AddMatchViewController
       endTimeHourBox.getItems().add(i);
     }
     startTimeHourBox.getSelectionModel().select(12);
-    endTimeHourBox.getSelectionModel().select(12);
+    startTimeHourBox.setValue(19);
+    endTimeHourBox.setValue(21);
 
     for (int i = 0; i < 60; i++)
     {
       startTimeMinuteBox.getItems().add(i);
       endTimeMinuteBox.getItems().add(i);
     }
-    startTimeMinuteBox.getSelectionModel().select(30);
-    endTimeMinuteBox.getSelectionModel().select(30);
+    startTimeMinuteBox.setValue(30);
+    endTimeMinuteBox.setValue(30);
   }
 
   private void setToggle()
@@ -396,7 +396,7 @@ public class AddMatchViewController
   {
     PlayerList tempList;
     PlayerList allPlayers = modelManager.getAllPlayers();
-    if (matchTypeBox.getSelectionModel().getSelectedIndex()==2)
+    if (matchTypeBox.getSelectionModel().getSelectedIndex() == 2)
     {
       tempList = new PlayerList();
       for (int i = 0; i < allPlayers.size(); i++)
@@ -412,18 +412,22 @@ public class AddMatchViewController
       tempList = modelManager.getPlayersAvailable();
     }
 
-      if (searchBox.getSelectionModel().getSelectedItem().equals("Name"))
+    if (searchBox.getSelectionModel().getSelectedItem().equals("Name"))
     {
-      PlayerList tempListOutput = modelManager.getPlayersByName(searchField.getText(),tempList);
+      PlayerList tempListOutput = modelManager
+          .getPlayersByName(searchField.getText(), tempList);
       allPlayersList.getItems().clear();
       for (int i = 0; i < tempListOutput.size(); i++)
       {
         allPlayersList.getItems().add(tempListOutput.get(i));
       }
     }
-    else if (searchBox.getSelectionModel().getSelectedItem().equals("Number")&&!searchField.getText().equals(""))
+    else if (searchBox.getSelectionModel().getSelectedItem().equals("Number")
+        && !searchField.getText().equals(""))
     {
-      PlayerList tempListOutput = modelManager.getPlayersByNumber(Integer.parseInt(searchField.getText()),tempList);
+      PlayerList tempListOutput = modelManager
+          .getPlayersByNumber(Integer.parseInt(searchField.getText()),
+              tempList);
       allPlayersList.getItems().clear();
       for (int i = 0; i < tempListOutput.size(); i++)
       {
@@ -433,7 +437,8 @@ public class AddMatchViewController
     }
     else if (searchBox.getSelectionModel().getSelectedItem().equals("Position"))
     {
-      PlayerList tempListOutput = modelManager.getPlayersByPositions(searchField.getText(),tempList);
+      PlayerList tempListOutput = modelManager
+          .getPlayersByPositions(searchField.getText(), tempList);
       allPlayersList.getItems().clear();
       for (int i = 0; i < tempListOutput.size(); i++)
       {
@@ -512,6 +517,35 @@ public class AddMatchViewController
 
     editMatch = match;
     updatePlayerList();
+  }
+
+  public void checkTime()
+  {
+    if (startTimeHourBox.getSelectionModel().getSelectedItem() != null
+        && startTimeMinuteBox.getSelectionModel().getSelectedItem() != null
+        && endTimeHourBox.getSelectionModel().getSelectedItem() != null
+        && endTimeMinuteBox.getSelectionModel().getSelectedItem() != null)
+    {
+      if (startTimeHourBox.getValue() > endTimeHourBox.getValue())
+      {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION,
+            "Start time can't be after end time", ButtonType.OK);
+        alert.setTitle("Invalid input");
+        alert.setHeaderText(null);
+        alert.showAndWait();
+        updateTimeBoxes();
+
+      }
+      else if (startTimeHourBox.getValue() == endTimeHourBox.getValue()
+          && startTimeMinuteBox.getValue() >= endTimeMinuteBox.getValue()){
+        Alert alert = new Alert(Alert.AlertType.INFORMATION,
+            "Start time can't be after end time", ButtonType.OK);
+        alert.setTitle("Invalid input");
+        alert.setHeaderText(null);
+        alert.showAndWait();
+        updateTimeBoxes();
+      }
+    }
   }
 
   private void disableButtons()
