@@ -148,10 +148,12 @@ public class MainViewController
     {
       updatePlayerList();
     }
-    else if(e.getSource()==matchDateComboBox){
+    else if (e.getSource() == matchDateComboBox)
+    {
       updateMatchList();
     }
-    else if(e.getSource()==matchSearchButton){
+    else if (e.getSource() == matchSearchButton)
+    {
       searchMatchList();
     }
 
@@ -337,49 +339,65 @@ public class MainViewController
 
   private void searchMatchList()
   {
-    MatchList tempList= new MatchList();
-    MatchList tempListOutput= new MatchList();
+    MatchList tempList = new MatchList();
+    MatchList tempListOutput = new MatchList();
 
-    if(matchDateComboBox.getSelectionModel().getSelectedItem().equals("All")){
-      tempList=modelManager.getAllMatches();
+    if (matchDateComboBox.getSelectionModel().getSelectedItem().equals("All"))
+    {
+      tempList = modelManager.getAllMatches();
     }
-    else if(matchDateComboBox.getSelectionModel().getSelectedItem().equals("Today")){
-      tempList=modelManager.getAllMatchesToday();
+    else if (matchDateComboBox.getSelectionModel().getSelectedItem()
+        .equals("Today"))
+    {
+      tempList = modelManager.getAllMatchesToday();
     }
-    else if(matchDateComboBox.getSelectionModel().getSelectedItem().equals("Past")){
-  tempList=modelManager.getAllMatchesPast();
+    else if (matchDateComboBox.getSelectionModel().getSelectedItem()
+        .equals("Past"))
+    {
+      tempList = modelManager.getAllMatchesPast();
     }
-    else if(matchDateComboBox.getSelectionModel().getSelectedItem().equals("Future")){
-      tempList=modelManager.getAllFutureMatches();
+    else if (matchDateComboBox.getSelectionModel().getSelectedItem()
+        .equals("Future"))
+    {
+      tempList = modelManager.getAllFutureMatches();
     }
-    if(matchSearchComboBox.getSelectionModel().getSelectedItem().equals("Opponent")){
-    tempListOutput=modelManager.getMatchesAgainst(searchMatchesField.getText(), tempList);
+    if (matchSearchComboBox.getSelectionModel().getSelectedItem()
+        .equals("Opponent"))
+    {
+      tempListOutput = modelManager
+          .getMatchesAgainst(searchMatchesField.getText(), tempList);
 
-    allMatchesList.getItems().clear();
+      allMatchesList.getItems().clear();
 
       for (int i = 0; i < tempListOutput.size(); i++)
       {
         allMatchesList.getItems().add(tempListOutput.get(i));
       }
     }
-    else if(matchSearchComboBox.getSelectionModel().getSelectedItem().equals("League")){
-      tempListOutput=modelManager.getTypeMatches("League", tempList);
+    else if (matchSearchComboBox.getSelectionModel().getSelectedItem()
+        .equals("League"))
+    {
+      tempListOutput = modelManager.getTypeMatches("League", tempList);
       allMatchesList.getItems().clear();
       for (int i = 0; i < tempListOutput.size(); i++)
       {
         allMatchesList.getItems().add(tempListOutput.get(i));
       }
     }
-    else if(matchSearchComboBox.getSelectionModel().getSelectedItem().equals("Cup")){
-      tempListOutput=modelManager.getTypeMatches("Cup", tempList);
+    else if (matchSearchComboBox.getSelectionModel().getSelectedItem()
+        .equals("Cup"))
+    {
+      tempListOutput = modelManager.getTypeMatches("Cup", tempList);
       allMatchesList.getItems().clear();
       for (int i = 0; i < tempListOutput.size(); i++)
       {
         allMatchesList.getItems().add(tempListOutput.get(i));
       }
     }
-    else if(matchSearchComboBox.getSelectionModel().getSelectedItem().equals("Friendly")){
-      tempListOutput=modelManager.getTypeMatches("Friendly", tempList);
+    else if (matchSearchComboBox.getSelectionModel().getSelectedItem()
+        .equals("Friendly"))
+    {
+      tempListOutput = modelManager.getTypeMatches("Friendly", tempList);
       allMatchesList.getItems().clear();
       for (int i = 0; i < tempListOutput.size(); i++)
       {
@@ -427,47 +445,54 @@ public class MainViewController
     {
       searchPlayersList();
     }
+
   }
 
   private void updateMatchList()
   {
-
-
     allMatchesList.getItems().clear();
-    if(searchMatchesField.getText().equals("")){
-      if(matchDateComboBox.getSelectionModel().getSelectedItem().equals("All")){
-        MatchList matches= modelManager.getAllMatches();
+    if (searchMatchesField.getText().equals(""))
+    {
+      if (matchDateComboBox.getSelectionModel().getSelectedItem().equals("All"))
+      {
+        MatchList matches = modelManager.getAllMatches();
         for (int i = 0; i < matches.size(); i++)
         {
           allMatchesList.getItems().add(matches.get(i));
         }
       }
-      else if(matchDateComboBox.getSelectionModel().getSelectedItem().equals("Today")){
-        MatchList matches= modelManager.getAllMatchesToday();
+      else if (matchDateComboBox.getSelectionModel().getSelectedItem()
+          .equals("Today"))
+      {
+        MatchList matches = modelManager.getAllMatchesToday();
         for (int i = 0; i < matches.size(); i++)
         {
           allMatchesList.getItems().add(matches.get(i));
         }
       }
-      else if(matchDateComboBox.getSelectionModel().getSelectedItem().equals("Past")){
-        MatchList matches= modelManager.getAllMatchesPast();
+      else if (matchDateComboBox.getSelectionModel().getSelectedItem()
+          .equals("Past"))
+      {
+        MatchList matches = modelManager.getAllMatchesPast();
         for (int i = 0; i < matches.size(); i++)
         {
           allMatchesList.getItems().add(matches.get(i));
         }
       }
-      else if(matchDateComboBox.getSelectionModel().getSelectedItem().equals("Future")){
-        MatchList matches= modelManager.getAllFutureMatches();
+      else if (matchDateComboBox.getSelectionModel().getSelectedItem()
+          .equals("Future"))
+      {
+        MatchList matches = modelManager.getAllFutureMatches();
 
         for (int i = 0; i < matches.size(); i++)
         {
           allMatchesList.getItems().add(matches.get(i));
         }
       }
-      else{
+      else
+      {
         searchMatchList();
       }
-
     }
   }
 
