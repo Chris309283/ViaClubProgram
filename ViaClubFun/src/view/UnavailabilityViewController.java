@@ -90,6 +90,7 @@ public class UnavailabilityViewController
       modelManager.savePlayers(tempPlayerList);
 
       viewHandler.openView("MainView");
+      viewHandler.getMainViewController().reset();
     }
     else if (e.getSource() == cancelButton)
     {

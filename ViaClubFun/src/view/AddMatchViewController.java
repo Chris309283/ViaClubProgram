@@ -65,9 +65,10 @@ public class AddMatchViewController
     this.modelManager = modelManager;
     this.root = root;
     this.viewHandler = viewHandler;
-    datePicker.setValue(LocalDate.now());
+
     tempField = new PlayerList();
     tempBench = new PlayerList();
+
     allPlayersList.getSelectionModel().selectedItemProperty()
         .addListener((new MyListListener()));
     lineUpAndBenchList.getSelectionModel().selectedItemProperty()
@@ -78,6 +79,7 @@ public class AddMatchViewController
 
   public void reset()
   {
+    datePicker.setValue(LocalDate.now());
     opponentField.clear();
     tempBench.clear();
     tempField.clear();
@@ -103,6 +105,7 @@ public class AddMatchViewController
     {
       searchPlayerList();
     }
+
     if (e.getSource() == searchBox)
     {
       if (searchBox.getSelectionModel().getSelectedItem().equals(""))
@@ -321,13 +324,13 @@ public class AddMatchViewController
     endTimeMinuteBox.getSelectionModel().select(30);
   }
 
-  public void setToggle()
+  private void setToggle()
   {
     fieldRadio.setSelected(true);
     homeRadio.setSelected(true);
   }
 
-  public void setMatchTypeBox()
+  private void setMatchTypeBox()
   {
     matchTypeBox.getItems().clear();
     matchTypeBox.getItems().add("League");
@@ -336,7 +339,7 @@ public class AddMatchViewController
     matchTypeBox.getSelectionModel().select(0);
   }
 
-  public void updatePlayerList()
+  private void updatePlayerList()
   {
     allPlayersList.getItems().clear();
 
@@ -389,7 +392,7 @@ public class AddMatchViewController
 
   }
 
-  public void searchPlayerList()
+  private void searchPlayerList()
   {
     PlayerList tempList;
     PlayerList allPlayers = modelManager.getAllPlayers();
@@ -409,12 +412,8 @@ public class AddMatchViewController
       tempList = modelManager.getPlayersAvailable();
     }
 
-    if (searchBox.getSelectionModel().getSelectedItem().equals(""))
-    {
-      updatePlayerList();
-    }
 
-     else if (searchBox.getSelectionModel().getSelectedItem().equals("Name"))
+      if (searchBox.getSelectionModel().getSelectedItem().equals("Name"))
     {
       PlayerList tempListOutput = modelManager.getPlayersByName(searchField.getText(),tempList);
       allPlayersList.getItems().clear();
