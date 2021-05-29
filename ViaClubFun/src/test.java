@@ -74,7 +74,6 @@ public class test
     Player p3= new Player("bob");
     p3.addUnavailability(u1);
 
-    System.out.println(p3.getAllUnavailabilities().get(0).matchesPast());
 
     Player p4= new Player("bob2");
     p4.incrementBenchedInARow();
