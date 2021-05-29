@@ -147,7 +147,7 @@
                   <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="350.0" spacing="7.0">
                      <children>
                         <TextField fx:id="searchField" promptText="Search" />
-                        <ComboBox fx:id="searchBox" prefHeight="25.0" prefWidth="106.0" promptText="Search By" />
+                        <ComboBox fx:id="searchBox" onAction="#handleActions" prefHeight="25.0" prefWidth="106.0" promptText="Search By" />
                         <Button fx:id="searchButton" mnemonicParsing="false" onAction="#handleActions" prefHeight="25.0" prefWidth="81.0" text="Search" />
                      </children>
                      <VBox.margin>

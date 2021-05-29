@@ -57,7 +57,7 @@ public class AddMatchViewController
   private boolean lineUpListBoolean;
   private PlayerList tempField;
   private PlayerList tempBench;
-  private boolean searchBoolean;
+
 
   public void init(ViewHandler viewHandler, ViaClubModelManager modelManager,
       Region root)
@@ -78,10 +78,10 @@ public class AddMatchViewController
 
   public void reset()
   {
-    searchBoolean=false;
     opponentField.clear();
     tempBench.clear();
     tempField.clear();
+    setSearchBox();
     setSpinners();
     setMatchTypeBox();
     updatePlayerList();
@@ -103,6 +103,15 @@ public class AddMatchViewController
     {
       searchPlayerList();
     }
+    if (e.getSource() == searchBox)
+    {
+      if (searchBox.getSelectionModel().getSelectedItem().equals(""))
+      {
+        searchField.clear();
+        updatePlayerList();
+      }
+    }
+
     else if (e.getSource() == addButton)
     {
       if (lineUpListBoolean)
@@ -240,7 +249,7 @@ public class AddMatchViewController
           updateFieldList();
         }
       }
-      updatePlayerList();
+      updatePlayerList(); // ask allan!!
     }
 
     else if (e.getSource() == exitMenuItem)
@@ -279,7 +288,16 @@ public class AddMatchViewController
 
   }
 
-  public void updateTimeBoxes()
+  private void setSearchBox()
+  {
+    searchBox.getItems().clear();
+    searchBox.getItems().add("Name");
+    searchBox.getItems().add("Number");
+    searchBox.getItems().add("Position");
+    searchBox.getItems().add("");
+  }
+
+  private void updateTimeBoxes()
   {
     startTimeHourBox.getItems().clear();
     startTimeMinuteBox.getItems().clear();
@@ -391,17 +409,38 @@ public class AddMatchViewController
       tempList = modelManager.getPlayersAvailable();
     }
 
-    if (searchBox.getSelectionModel().getSelectedItem().equals("Name"))
+    if (searchBox.getSelectionModel().getSelectedItem().equals(""))
     {
-
+      updatePlayerList();
     }
-    else if (searchBox.getSelectionModel().getSelectedItem().equals("Number"))
+
+     else if (searchBox.getSelectionModel().getSelectedItem().equals("Name"))
     {
+      PlayerList tempListOutput = modelManager.getPlayersByName(searchField.getText(),tempList);
+      allPlayersList.getItems().clear();
+      for (int i = 0; i < tempListOutput.size(); i++)
+      {
+        allPlayersList.getItems().add(tempListOutput.get(i));
+      }
+    }
+    else if (searchBox.getSelectionModel().getSelectedItem().equals("Number")&&!searchField.getText().equals(""))
+    {
+      PlayerList tempListOutput = modelManager.getPlayersByNumber(Integer.parseInt(searchField.getText()),tempList);
+      allPlayersList.getItems().clear();
+      for (int i = 0; i < tempListOutput.size(); i++)
+      {
+        allPlayersList.getItems().add(tempListOutput.get(i));
+      }
 
     }
     else if (searchBox.getSelectionModel().getSelectedItem().equals("Position"))
     {
-
+      PlayerList tempListOutput = modelManager.getPlayersByPositions(searchField.getText(),tempList);
+      allPlayersList.getItems().clear();
+      for (int i = 0; i < tempListOutput.size(); i++)
+      {
+        allPlayersList.getItems().add(tempListOutput.get(i));
+      }
     }
   }
 

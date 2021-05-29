@@ -4,7 +4,7 @@ import utils.MyFileHandler;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Locale;
+
 
 public class ViaClubModelManager
 {
@@ -75,6 +75,78 @@ public class ViaClubModelManager
       }
     }
     return temp;
+  }
+
+  public MatchList getMatchesBetweenDates(Date date1, Date date2)
+  {
+    MatchList allMatches = getAllMatches();
+    MatchList betweenMatches = new MatchList();
+    for (int i = 0; i < allMatches.size(); i++)
+    {
+      if (allMatches.get(i).getDate().isBefore(date1)&&!allMatches.get(i).getDate().isBefore(date2))
+      {
+        betweenMatches.add(allMatches.get(i));
+      }
+    }
+    return betweenMatches;
+  }
+
+  public MatchList getMatchesAgainst(String opponent)
+  {
+    MatchList allMatches = getAllMatches();
+    MatchList opponentList = new MatchList();
+    for (int i = 0; i < allMatches.size(); i++)
+    {
+      if (allMatches.get(i).getOpponent().toLowerCase().contains(opponent.toLowerCase()))
+      {
+        opponentList.add(allMatches.get(i));
+      }
+    }
+    return opponentList;
+  }
+
+  public MatchList getMatchesWon()
+  {
+    MatchList allMatches = getAllMatches();
+    MatchList wonList = new MatchList();
+
+    for (int i = 0; i < allMatches.size(); i++)
+    {
+      if (allMatches.get(i).getScoreHomeTeam()>allMatches.get(i).getScoreOpponent())
+      {
+        wonList.add(allMatches.get(i));
+      }
+    }
+    return wonList;
+  }
+
+  public MatchList getMatchesLost()
+  {
+    MatchList allMatches = getAllMatches();
+    MatchList lostList = new MatchList();
+
+    for (int i = 0; i < allMatches.size(); i++)
+    {
+      if (allMatches.get(i).getScoreHomeTeam()<allMatches.get(i).getScoreOpponent())
+      {
+        lostList.add(allMatches.get(i));
+      }
+    }
+    return lostList;
+  }
+  public MatchList getMatchesDraw()
+  {
+    MatchList allMatches = getAllMatches();
+    MatchList drawList = new MatchList();
+
+    for (int i = 0; i < allMatches.size(); i++)
+    {
+        if ((allMatches.get(i).getScoreHomeTeam()==allMatches.get(i).getScoreOpponent())&&allMatches.get(i).getDate().isBefore(Date.today()))
+        {
+          drawList.add(allMatches.get(i));
+        }
+    }
+    return drawList;
   }
 
   public PlayerList getPlayersAvailable()
@@ -153,6 +225,8 @@ public class ViaClubModelManager
     return allPlayersByPositions;
   }
 
+
+
   public void saveMatches(MatchList matches)
   {
     try
@@ -226,7 +300,6 @@ public class ViaClubModelManager
         {
           tempPlayer.getAllUnavailabilities().get(j).setNumberOfGames(0);
         }
-
       }
     }
     savePlayers(allPlayers);

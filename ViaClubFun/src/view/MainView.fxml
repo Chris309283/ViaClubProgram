@@ -49,9 +49,9 @@
                                     <Insets />
                                  </HBox.margin>
                               </Text>
-                              <ComboBox fx:id="availableComboBox" onAction="#handleActions" prefHeight="25.0" prefWidth="113.0" />
+                              <ComboBox fx:id="availableComboBox" onAction="#handleActions" prefHeight="25.0" prefWidth="129.0" />
                               <TextField fx:id="searchPlayersField" />
-                              <ComboBox fx:id="playerSearchComboBox" prefWidth="150.0" promptText="Search By" />
+                              <ComboBox fx:id="playerSearchComboBox" onAction="#handleActions" prefWidth="150.0" promptText="Search By" />
                               <Button fx:id="playerSearchButton" mnemonicParsing="false" onAction="#handleActions" text="Search" />
                            </children>
                            <padding>

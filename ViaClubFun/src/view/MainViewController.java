@@ -132,6 +132,14 @@ public class MainViewController
     {
 
     }
+    else if (e.getSource() == playerSearchComboBox)
+    {
+      if (playerSearchComboBox.getSelectionModel().getSelectedItem().equals(""))
+      {
+        searchPlayersField.clear();
+        updatePlayerList();
+      }
+    }
 
     else if (e.getSource() == playerSearchButton)
     {
@@ -141,6 +149,8 @@ public class MainViewController
     {
       updatePlayerList();
     }
+
+
 
     else if (e.getSource() == addMatchButton)
     {
