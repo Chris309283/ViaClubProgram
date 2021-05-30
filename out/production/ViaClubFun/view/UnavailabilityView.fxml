@@ -24,14 +24,14 @@
               <MenuItem fx:id="exitMenuItem" mnemonicParsing="false" onAction="#handleActions" text="Close" />
             </items>
           </Menu>
-          <Menu mnemonicParsing="false" text="Edit">
+          <Menu mnemonicParsing="false" text="About">
             <items>
-              <MenuItem mnemonicParsing="false" text="Delete" />
+              <MenuItem fx:id="aboutMenuItem" mnemonicParsing="false" onAction="#handleActions" text="Player Unavailability" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Help">
             <items>
-              <MenuItem mnemonicParsing="false" text="About" />
+              <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleActions" text="Client Support" />
             </items>
           </Menu>
         </menus>
@@ -72,7 +72,7 @@
                <children>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Add Suspension" />
                   <ComboBox fx:id="numberOfGamesBox" onAction="#handleActions" prefWidth="150.0" promptText="number of games" />
-                  <Button fx:id="addSuspensionButton" mnemonicParsing="false" onAction="#handleActions" text="Add Suspension" />
+                  <Button fx:id="addSuspensionButton" disable="true" mnemonicParsing="false" onAction="#handleActions" text="Add Suspension" />
                </children>
             </VBox>
             <VBox alignment="CENTER" prefHeight="200.0" prefWidth="400.0">
@@ -101,7 +101,7 @@
                         <Insets left="5.0" />
                      </padding>
                   </FlowPane>
-                  <Button fx:id="addInjuryButton" mnemonicParsing="false" onAction="#handleActions" text="Add Injury">
+                  <Button fx:id="addInjuryButton" disable="true" mnemonicParsing="false" onAction="#handleActions" text="Add Injury">
                      <VBox.margin>
                         <Insets top="10.0" />
                      </VBox.margin>

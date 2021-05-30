@@ -23,14 +23,14 @@
               <MenuItem fx:id="exitMenuItem" mnemonicParsing="false" onAction="#handleActions" text="Close" />
             </items>
           </Menu>
-          <Menu mnemonicParsing="false" text="Edit">
+          <Menu mnemonicParsing="false" text="About">
             <items>
-              <MenuItem mnemonicParsing="false" text="Delete" />
+              <MenuItem fx:id="aboutMenuItem" mnemonicParsing="false" onAction="#handleActions" text="Player View" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Help">
             <items>
-              <MenuItem mnemonicParsing="false" text="About" />
+              <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleActions" text="Client Support" />
             </items>
           </Menu>
         </menus>
@@ -42,7 +42,7 @@
                   <Font size="15.0" />
                </font>
             </Text>
-            <TextField fx:id="nameField" prefHeight="26.0" prefWidth="200.0" />
+            <TextField fx:id="nameField" onAction="#handleActions" onKeyTyped="#checkForInput" onMouseExited="#checkForInput" onMouseMoved="#checkForInput" prefHeight="26.0" prefWidth="200.0" />
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Jersey Number">
                <HBox.margin>
                   <Insets left="50.0" />
@@ -51,7 +51,7 @@
                   <Font size="15.0" />
                </font>
             </Text>
-            <TextField fx:id="numberField" prefHeight="25.0" prefWidth="79.0" />
+            <ComboBox fx:id="numberBox" onAction="#handleActions" prefHeight="25.0" prefWidth="59.0" />
          </children>
       </HBox>
       <HBox alignment="CENTER" prefHeight="334.0" prefWidth="800.0" spacing="100.0">
@@ -68,7 +68,7 @@
             </VBox>
             <VBox alignment="TOP_RIGHT" prefHeight="146.0" prefWidth="151.0" spacing="10.0">
                <children>
-                  <ComboBox fx:id="positionsBox" editable="true" prefHeight="25.0" prefWidth="160.0" promptText="Positions">
+                  <ComboBox fx:id="positionsBox" editable="true" onAction="#handleActions" prefHeight="25.0" prefWidth="160.0" promptText="Positions">
                      <VBox.margin>
                         <Insets top="100.0" />
                      </VBox.margin></ComboBox>
@@ -76,7 +76,7 @@
                      <children>
                         <ButtonBar prefHeight="47.0" prefWidth="148.0">
                           <buttons>
-                              <Button fx:id="addButton" mnemonicParsing="false" onAction="#handleActions" text="Add" />
+                              <Button fx:id="addButton" disable="true" mnemonicParsing="false" onAction="#handleActions" text="Add" />
                               <Button fx:id="removeButton" disable="true" mnemonicParsing="false" onAction="#handleActions" text="Remove" />
                           </buttons>
                         </ButtonBar>

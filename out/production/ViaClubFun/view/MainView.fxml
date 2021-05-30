@@ -10,10 +10,10 @@
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
-<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
 
 <VBox maxHeight="600.0" maxWidth="800.0" minHeight="600.0" minWidth="800.0" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.MainViewController">
    <children>
@@ -24,14 +24,14 @@
               <MenuItem fx:id="exitMenuItem" mnemonicParsing="false" onAction="#handleActions" text="Close" />
             </items>
           </Menu>
-          <Menu mnemonicParsing="false" text="Edit">
+          <Menu mnemonicParsing="false" text="About">
             <items>
-              <MenuItem mnemonicParsing="false" text="Delete" />
+              <MenuItem fx:id="aboutMenuItem" mnemonicParsing="false" onAction="#handleActions" text="Main View" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Help">
             <items>
-              <MenuItem mnemonicParsing="false" text="About" />
+              <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleActions" text="Client Support" />
             </items>
           </Menu>
         </menus>
@@ -44,9 +44,15 @@
                      <children>
                         <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="800.0" spacing="10.0">
                            <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Show">
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                              </Text>
+                              <ComboBox fx:id="availableComboBox" onAction="#handleActions" prefHeight="25.0" prefWidth="129.0" />
                               <TextField fx:id="searchPlayersField" />
-                              <ComboBox fx:id="playerSearchComboBox" prefWidth="150.0" promptText="Search By" />
-                              <Button fx:id="playerSearchButton" mnemonicParsing="false" text="Search" />
+                              <ComboBox fx:id="playerSearchComboBox" onAction="#handleActions" prefWidth="150.0" promptText="Search By" />
+                              <Button fx:id="playerSearchButton" mnemonicParsing="false" onAction="#handleActions" text="Search" />
                            </children>
                            <padding>
                               <Insets left="10.0" />
@@ -78,22 +84,23 @@
                      <children>
                         <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="600.0" spacing="10.0">
                            <children>
-                              <ComboBox fx:id="matchDateComboBox" prefHeight="25.0" prefWidth="116.0" promptText="Search Date" />
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Show" />
+                              <ComboBox fx:id="matchDateComboBox" onAction="#handleActions" prefHeight="25.0" prefWidth="116.0" promptText="Search Date" />
                               <TextField fx:id="searchMatchesField" />
                               <ComboBox fx:id="matchSearchComboBox" prefWidth="150.0" promptText="Search By" />
-                              <Button fx:id="matchSearchButton" mnemonicParsing="false" text="Search" />
+                              <Button fx:id="matchSearchButton" mnemonicParsing="false" onAction="#handleActions" text="Search" />
                            </children>
                            <padding>
                               <Insets left="10.0" />
                            </padding>
                         </HBox>
-                        <TextArea fx:id="allMatchesArea" editable="false" prefHeight="470.0" prefWidth="800.0" />
+                        <ListView fx:id="allMatchesList" prefHeight="471.0" prefWidth="800.0" />
                         <HBox prefHeight="35.0" prefWidth="600.0">
                            <children>
                               <ButtonBar prefHeight="35.0" prefWidth="828.0">
                                 <buttons>
-                                  <Button fx:id="editMatchButton" disable="true" mnemonicParsing="false" text="Edit Match" />
-                                    <Button fx:id="removeMatchButton" disable="true" mnemonicParsing="false" text="Remove Match" />
+                                  <Button fx:id="editMatchButton" disable="true" mnemonicParsing="false" onAction="#handleActions" text="Edit Match" />
+                                    <Button fx:id="removeMatchButton" disable="true" mnemonicParsing="false" onAction="#handleActions" text="Remove Match" />
                                     <Button fx:id="addMatchButton" mnemonicParsing="false" onAction="#handleActions" text="Add Match" />
                                 </buttons>
                                  <padding>

@@ -64,8 +64,29 @@ public class test
 
     System.out.println(pl2.getAllUnavailabilities()==null);
 
-  u1.setAvailable(Date.today());
+
 
     System.out.println(u1);
+
+    Time t1= new Time(12,30,00);
+    Match m3= new Match(t1,t1,new Date(1,1,2020),"aarhus", "Cup",false );
+    Match m4= new Match(t1,t1,new Date(1,1,2020),"aarhus", "Cup",false );
+    Player p3= new Player("bob");
+    p3.addUnavailability(u1);
+
+
+    Player p4= new Player("bob2");
+    p4.incrementBenchedInARow();
+    System.out.println(p4);
+    p4.addPosition("loh");
+    p4.addPosition("loh2");
+
+
+
+
+    Match m5= new Match(t1,t1,new Date(1,1,2020),"aarhus", "Cup",false );
+    Match m6= new Match(t1,t1,new Date(1,1,2020),"aarhus", "Cup",false );
+    System.out.println("jeb");
+    System.out.println(m.getAllMatchesPast());
   }
 }

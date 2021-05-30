@@ -5,10 +5,16 @@ import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.MenuItem;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.Region;
 import model.Player;
 import model.PlayerList;
 import model.ViaClubModelManager;
+
+import java.awt.*;
+import java.util.ArrayList;
 
 public class AddPlayerViewController
 {
@@ -20,10 +26,13 @@ public class AddPlayerViewController
   @FXML private Button removeButton;
   @FXML private Button saveButton;
   @FXML private Button cancelButton;
+
   @FXML private MenuItem exitMenuItem;
+  @FXML private MenuItem aboutMenuItem;
+  @FXML private MenuItem helpMenuItem;
 
   @FXML private TextField nameField;
-  @FXML private TextField numberField;
+  @FXML private ComboBox<Integer> numberBox;
 
   @FXML private ListView<String> positionsList;
 
@@ -39,16 +48,21 @@ public class AddPlayerViewController
     this.viewHandler = viewHandler;
     positionsList.getSelectionModel().selectedItemProperty()
         .addListener((new MyListListener()));
+    positionsBox.getSelectionModel().selectedItemProperty()
+        .addListener((new MyListener2()));
     reset();
   }
 
   public void reset()
   {
-    updatePositionsBox();
+    setNumberBox();
     editPlayer = null;
     nameField.clear();
-    numberField.clear();
+    numberBox.setValue(null);
     positionsList.getItems().clear();
+    updatePositionsBox();
+    saveButton.setDisable(true);
+    checkForInput();
   }
 
   public Region getRoot()
@@ -58,23 +72,28 @@ public class AddPlayerViewController
 
   public void handleActions(ActionEvent e)
   {
-
     if (e.getSource() == addButton)
     {
       positionsList.getItems()
           .add(positionsBox.getSelectionModel().getSelectedItem());
+      positionsBox.getItems().clear();
+      updatePositionsBox();
+      addButton.setDisable(true);
     }
+
     else if (e.getSource() == removeButton)
     {
       positionsList.getItems()
           .remove(positionsList.getSelectionModel().getSelectedItem());
+      updatePositionsBox();
     }
+
     else if (e.getSource() == saveButton)
     {
       Player temp = new Player(nameField.getText());
-      if (!(numberField.getText().equals("")))
+      if (numberBox.getSelectionModel().getSelectedItem() != null)
       {
-        temp.setNumber(Integer.parseInt(numberField.getText()));
+        temp.setNumber(numberBox.getSelectionModel().getSelectedItem());
       }
 
       for (int i = 0; i < positionsList.getItems().size(); i++)
@@ -96,16 +115,33 @@ public class AddPlayerViewController
       }
       modelManager.savePlayers(tempList);
       viewHandler.openView("MainView");
-
     }
+
     else if (e.getSource() == cancelButton)
     {
       viewHandler.openView("MainView");
+      viewHandler.getMainViewController().reset();
     }
+
     else if (e.getSource() == positionsBox)
     {
 
     }
+    else if (e.getSource() == nameField)
+    {
+      if (nameField.getText().length() > 0 && numberBox.getValue() != null)
+      {
+        saveButton.setDisable(false);
+      }
+    }
+    else if (e.getSource() == numberBox)
+    {
+      if (nameField.getText().length() > 0 && numberBox.getValue() != null)
+      {
+        saveButton.setDisable(false);
+      }
+    }
+
     else if (e.getSource() == exitMenuItem)
     {
       Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
@@ -119,6 +155,40 @@ public class AddPlayerViewController
       if (alert.getResult() == ButtonType.YES)
       {
         System.exit(0);
+      }
+    }
+
+    else if (e.getSource() == aboutMenuItem)
+    {
+      Alert alert = new Alert(Alert.AlertType.INFORMATION,
+          "Here you can add or edit a player.", ButtonType.OK);
+      alert.setTitle("About");
+      alert.setHeaderText(null);
+      alert.showAndWait();
+    }
+
+    else if (e.getSource() == helpMenuItem)
+    {
+      Alert alert = new Alert(Alert.AlertType.INFORMATION,
+          "For client support, please refer to JavaGods.", ButtonType.OK);
+      alert.setTitle("About");
+      alert.setHeaderText(null);
+      alert.showAndWait();
+    }
+  }
+
+  public void setNumberBox()
+  {
+    ArrayList<Integer> usedNumbers = new ArrayList<Integer>();
+    for (int i = 0; i < modelManager.getAllPlayers().size(); i++)
+    {
+      usedNumbers.add(modelManager.getAllPlayers().get(i).getNumber());
+    }
+    for (int i = 0; i < 99; i++)
+    {
+      if (!(usedNumbers.contains(i + 1)))
+      {
+        numberBox.getItems().add(i + 1);
       }
     }
   }
@@ -139,7 +209,8 @@ public class AddPlayerViewController
   {
 
     nameField.setText(player.getName());
-    numberField.setText(player.getNumber() + "");
+    numberBox.setValue(player.getNumber());
+
     if (player.getPositions().size() > 0)
     {
       positionsList.getItems().clear();
@@ -150,21 +221,48 @@ public class AddPlayerViewController
     }
 
     editPlayer = player;
+    updatePositionsBox();
   }
 
-  private void updatePositionsBox()
+  public void checkForInput()
   {
-    positionsBox.getItems().add("Goalkeeper");
-    positionsBox.getItems().add("Sweeper");
-    positionsBox.getItems().add("Centre-Back");
-    positionsBox.getItems().add("Full-Back");
-    positionsBox.getItems().add("Defensive Midfielder");
-    positionsBox.getItems().add("Central Midfielder");
-    positionsBox.getItems().add("Attacking Midfielder");
-    positionsBox.getItems().add("Forward");
-    positionsBox.getItems().add("Winger");
-    positionsBox.getItems().add("Striker");
+    if (nameField.getText().length() > 0 && numberBox.getValue() != null)
+    {
+      saveButton.setDisable(false);
+    }
   }
+
+  public void updatePositionsBox()
+  {
+
+    ArrayList<String> positions = new ArrayList<String>();
+    positions.add("Goalkeeper");
+    positions.add("Sweeper");
+    positions.add("Centre-Back");
+    positions.add("Full-Back");
+    positions.add("Defensive Midfielder");
+    positions.add("Central Midfielder");
+    positions.add("Attacking Midfielder");
+    positions.add("Forward");
+    positions.add("Winger");
+    positions.add("Striker");
+    positionsBox.getItems().clear();
+    ArrayList<String> usedPositions = new ArrayList<String>();
+
+    for (int i = 0; i < positionsList.getItems().size(); i++)
+    {
+      usedPositions.add(positionsList.getItems().get(i));
+    }
+
+    for (int j = 0; j < positions.size(); j++)
+    {
+      if (!(usedPositions.contains(positions.get(j))))
+      {
+        positionsBox.getItems().add(positions.get(j));
+      }
+    }
+  }
+
 
   private class MyListListener implements ChangeListener<String>
   {
@@ -172,6 +270,15 @@ public class AddPlayerViewController
         String oldPosition, String newPosition)
     {
       removeButton.setDisable(false);
+    }
+  }
+
+  private class MyListener2 implements ChangeListener<String>
+  {
+    public void changed(ObservableValue<? extends String> position,
+        String oldPosition, String newPosition)
+    {
+      addButton.setDisable(false);
     }
   }
 }

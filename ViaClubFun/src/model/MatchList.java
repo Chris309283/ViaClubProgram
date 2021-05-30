@@ -3,20 +3,19 @@ package model;
 import java.io.Serializable;
 import java.util.ArrayList;
 
- /**
- * a class of which is a list of matches
+/**
+ * A class for creating match lists
+ *
  * @author Java Gods
  * @version 1.0
  */
 public class MatchList implements Serializable
 {
-
-
   private ArrayList<Match> matches;
 
-
   /**
-   * a constructor, which initialize the matches. it is without parameter
+   * No-argument constructor
+   * initializes the matches list
    */
   public MatchList()
   {
@@ -24,8 +23,9 @@ public class MatchList implements Serializable
   }
 
   /**
-   * the method  add match to our list
-   * @param match of type Match which will be added to the list
+   * Add a match to the match list
+   *
+   * @param match is added to the match list
    */
   public void add(Match match)
   {
@@ -33,8 +33,9 @@ public class MatchList implements Serializable
   }
 
   /**
-   * the method remove a match from the list
-   * @param match is input to the parameter which the user can remove a match from matches
+   * Removes a match from the match list
+   *
+   * @param match is removed from the match list
    */
 
   public void remove(Match match)
@@ -43,8 +44,9 @@ public class MatchList implements Serializable
   }
 
   /**
-   * the method which gets the size of matches
-   * @return it returns the int of the size of matches
+   * Return the size of the match list
+   *
+   * @return returns the size of the match list
    */
   public int size()
   {
@@ -52,9 +54,10 @@ public class MatchList implements Serializable
   }
 
   /**
-   * the method gets the match from a specific index, if it exist.
-   * @param index which is a specific location of list
-   * @return if match does not exist it returns null.
+   * Gets a match from a specific position in the match list
+   *
+   * @param index the position of the match in the list
+   * @return the match from the specific position in the list
    */
   public Match get(int index)
   {
@@ -69,9 +72,10 @@ public class MatchList implements Serializable
   }
 
   /**
-   * the method sets a match to a specific index
-   * @param index is a location in the list
-   * @param match is match to that index
+   * Sets the match in the match list at a specific position
+   *
+   * @param index the position in the list
+   * @param match the match which is set to the position in the list
    */
   public void set(int index, Match match)
   {
@@ -79,24 +83,27 @@ public class MatchList implements Serializable
   }
 
   /**
-   * the method has 6 parameter and a loop and inside it there is temp variable reference of type match,
-   * so it goes through the loop and check if temp is equal to all parameter it returns the index as a number from that match..
-   * @param startTime it is input of start time of the match
-   * @param endTime it is input of end time of the match
-   * @param date it is the date of the match
-   * @param opponent it is the opponent in the match
-   * @param matchType it is match type
-   * @param isAwayGame it is is away game
-   * @return it returns the int
+   * Gets the index of the match in the list
+   *
+   * @param startTime  the start time of the match
+   * @param endTime    the end time of the match
+   * @param date       the date of the match
+   * @param opponent   the opponent in the match
+   * @param matchType  the match type
+   * @param isAwayGame whether or not is away game
+   * @return the position of the match in the list
    */
-  public int getIndex(Time startTime, Time endTime, Date date, String opponent, String matchType, boolean isAwayGame)
+  public int getIndex(Time startTime, Time endTime, Date date, String opponent,
+      String matchType, boolean isAwayGame)
   {
     for (int i = 0; i < matches.size(); i++)
     {
       Match temp = matches.get(i);
 
-      if (temp.getStartTime().equals(startTime) && temp.getEndTime().equals(endTime) && temp.getDate().equals(date)&&temp.getOpponent().equals(opponent)&&temp.getMatchType().equals(matchType)&& temp
-          .getIsAwayGame()==isAwayGame)
+      if (temp.getStartTime().equals(startTime) && temp.getEndTime()
+          .equals(endTime) && temp.getDate().equals(date) && temp.getOpponent()
+          .equals(opponent) && temp.getMatchType().equals(matchType)
+          && temp.getIsAwayGame() == isAwayGame)
       {
         return i;
       }
@@ -105,8 +112,9 @@ public class MatchList implements Serializable
   }
 
   /**
-   * the method will run through the loop and print out all matches
-   * @return it will return the string
+   * A string representation of the match list
+   *
+   * @return the string representation of the match list
    */
   public String toString()
   {

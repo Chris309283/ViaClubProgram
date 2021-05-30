@@ -5,7 +5,7 @@ import model.Date;
 import java.io.Serializable;
 
 /**
- * a class for creating unavailability objects
+ * A class for creating unavailability objects
  *
  * @author Java Gods
  * @version 1.0
@@ -13,12 +13,13 @@ import java.io.Serializable;
 public class Unavailability implements Serializable
 {
   private String type;
-  // private boolean isAvailable;
+
   private int numberOfGames;
   private Date start, end;
+  private ViaClubModelManager modelManager;
 
   /**
-   * Three-argument constructor initializing the model.Unavailability
+   * Three-argument constructor
    *
    * @param start         sets the start date of the model.Unavailability
    * @param numberOfGames sets the number of games the model.Unavailability is for
@@ -29,37 +30,43 @@ public class Unavailability implements Serializable
     this.type = "Suspended";
     this.start = start.copy();
     this.numberOfGames = numberOfGames;
-    //isAvailable=false;
+
   }
 
   /**
-   * Two-argument constructor initializing the model.Unavailability
+   * One-argument constructor
    *
-   * @param start sets the start date of the model.Unavailability
-   *              isAvailable method is set initially to false
+   * @param start sets the start date of the unavailability
+   *              type is set to injury
    */
   public Unavailability(Date start)
   {
     this.type = "Injury";
     this.start = start.copy();
-    // isAvailable=false;
+
     numberOfGames = -1;
 
   }
 
+  /**
+   * Two-argument constructor
+   *
+   * @param start sets the start of the unvailability
+   * @param end   sets the end of the unavailability
+   */
   public Unavailability(Date start, Date end)
   {
     this.type = "Injured";
     this.start = start.copy();
     this.end = end.copy();
-    //isAvailable = false;
+
     numberOfGames = -1;
   }
 
   /**
-   * Gets the type of model.Unavailability
+   * Gets the type of the unavailability
    *
-   * @return the type of model.Unavailability
+   * @return the type the unavailability
    */
   public String getType()
   {
@@ -67,28 +74,41 @@ public class Unavailability implements Serializable
   }
 
   /**
-   * ends the model.Unavailability and sets the end to the current date
+   * gets the number of games for the suspension
    *
-   * @param end sets the end of the model.Unavailability as the current date
+   * @return the number of games for the suspension
    */
+  public int getNumberOfGames()
+  {
+    return numberOfGames;
+  }
+
+  /**
+   * ends the unavailability and sets the end to the current date
+   *
+   * @param end sets the end of the unavailability as the current date
+   */
+
   public void setAvailable(Date end)
   {
 
     this.end = end;
     numberOfGames = 0;
-    //isAvailable=true;
+
   }
 
+  /**
+   * Checks if the unavailability is active
+   *
+   * @return true if the unavailability is active
+   */
   public boolean isActive()
   {
     if (type.equals("Suspended") && numberOfGames > 0)
     {
       return true;
     }
-    else if (end.equals(Date.today()) || end.isBefore(Date.today()))
-    {
-      return false;
-    }
+
     else if ((type.equals("Injured") && !(end.isBefore(Date.today()))))
     {
       return true;
@@ -98,9 +118,9 @@ public class Unavailability implements Serializable
   }
 
   /**
-   * Gets the start date of the model.Unavailability
+   * Gets the start date of the unavailability
    *
-   * @return the start date of the model.Unavailability
+   * @return the start date of the unavailability
    */
 
   public Date getStart()
@@ -109,44 +129,47 @@ public class Unavailability implements Serializable
   }
 
   /**
-   * Sets the start date of the model.Unavailability
+   * Sets the number of games of the suspension
    *
-   * @param start sets the start date of the model.Unavailability
+   * @param numberOfGames sets the number of games of the suspension
    */
-  public void setStart(Date start)
+  public void setNumberOfGames(int numberOfGames)
   {
-    this.start = start.copy();
+    this.numberOfGames = numberOfGames;
   }
 
   /**
-   * Gets the end date of the model.Unavailability
+   * Compares two unavailabilities
    *
-   * @return the end date of the model.Unavailability
+   * @param obj the object compared with
+   * @return true if the object given equals the unavailability
    */
-  public Date getEnd()
+
+  public boolean equals(Object obj)
   {
-    return end.copy();
+    if (!(obj instanceof Unavailability))
+    {
+      return false;
+    }
+
+    Unavailability other = (Unavailability) obj;
+    if (end != null)
+    {
+      return numberOfGames == other.numberOfGames && start.equals(other.start)
+          && end.equals(other.end) && type.equals(other.type);
+    }
+    else
+    {
+      return numberOfGames == other.numberOfGames && start.equals(other.start)
+          && other.end == null && type.equals(other.type);
+    }
   }
 
   /**
-   * Sets the end date of the model.Unavailability
+   * Returns a string representation of the unavailability
    *
-   * @param end sets the end date of the model.Unavailability
+   * @return a string representation of the unavailability
    */
-  public void setEnd(Date end)
-  {
-    this.end = end.copy();
-  }
-
-  /**
-   * Outputs the number of days the model.Unavailability lasted
-   *
-   * @return the number of days from start date to end date
-   */
-  public int lasted()
-  {
-    return start.daysUntil(end);
-  }
 
   public String toString()
   {
@@ -162,7 +185,7 @@ public class Unavailability implements Serializable
           "Type: Injured; Start Date: " + start + "; End Date: " + end;
     }
 
-    finalString += " is active: " + isActive();
+    finalString += "; is active: " + isActive();
     return finalString;
   }
 }
