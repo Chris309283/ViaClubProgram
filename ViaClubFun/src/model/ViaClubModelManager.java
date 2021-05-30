@@ -20,17 +20,16 @@ public class ViaClubModelManager
    * Two-argument constructor setting the file names
    *
    * @param playerFileName the name and the path of the file where players will be saved and retrieved
-   * @param matchFileName the name and the path of the file where matches will be sabed and retrieved
+   * @param matchFileName the name and the path of the file where matches will be saved and retrieved
    */
   public ViaClubModelManager(String playerFileName, String matchFileName)
   {
     this.playerFileName = playerFileName;
     this.matchFileName = matchFileName;
   }
-
   /**
-   * Gets
-   * @return
+   * Get  a list of all players
+   * @return a List of all players from the file where players are saved and retrieved
    */
   public PlayerList getAllPlayers()
   {
@@ -55,7 +54,10 @@ public class ViaClubModelManager
     }
     return allPlayers;
   }
-
+/**
+ *Get a list of all matches
+ * @return a List of all matches from the file where matches are saved and retrieved
+ */
   public MatchList getAllMatches()
   {
     MatchList allMatches = new MatchList();
@@ -78,6 +80,12 @@ public class ViaClubModelManager
     }
     return allMatches;
   }
+/**
+ *Get a matches on specified date
+ * @param date set the date to search for
+ * @return  a List of all matches during the given date
+ *
+ */
 
   public MatchList getMatchesOnDate(Date date)
   {
