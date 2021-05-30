@@ -13,7 +13,7 @@ import model.Player;
 import model.PlayerList;
 import model.ViaClubModelManager;
 
-import java.awt.*;
+
 import java.util.ArrayList;
 
 /**
