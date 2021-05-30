@@ -10,6 +10,12 @@ import model.*;
 
 import java.time.LocalDate;
 
+/**
+ * A class for controlling the add match view
+ * @author JavaGods
+ * @version 1.0
+ */
+
 public class AddMatchViewController
 {
   private Region root;
@@ -58,6 +64,11 @@ public class AddMatchViewController
   private PlayerList tempField;
   private PlayerList tempBench;
 
+  /**
+   * Initializes the data in the view
+   * @param viewHandler links the views
+   * @param modelManager single access point for the functionality
+   */
   public void init(ViewHandler viewHandler, ViaClubModelManager modelManager,
       Region root)
   {
@@ -75,7 +86,9 @@ public class AddMatchViewController
 
     reset();
   }
-
+  /**
+   * Resets the page and updates the displayed data
+   */
   public void reset()
   {
     datePicker.setValue(LocalDate.now());
@@ -91,11 +104,15 @@ public class AddMatchViewController
     updateFieldList();
     lineUpListBoolean = true;
   }
-
+  /**
+   * Get the root of the view
+   * @return the root of the view
+   */
   public Region getRoot()
   {
     return root;
   }
+
 
   public void handleActions(ActionEvent e)
   {
@@ -289,6 +306,9 @@ public class AddMatchViewController
     }
 
   }
+  /**
+   * Sets the search combo box
+   */
 
   private void setSearchBox()
   {
@@ -298,7 +318,9 @@ public class AddMatchViewController
     searchBox.getItems().add("Position");
     searchBox.getItems().add("");
   }
-
+  /**
+   * Update the time combo box
+   */
   private void updateTimeBoxes()
   {
     startTimeHourBox.getItems().clear();
