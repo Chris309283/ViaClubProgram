@@ -20,15 +20,17 @@ public class ViaClubModelManager
    * Two-argument constructor setting the file names
    *
    * @param playerFileName the name and the path of the file where players will be saved and retrieved
-   * @param matchFileName the name and the path of the file where matches will be saved and retrieved
+   * @param matchFileName  the name and the path of the file where matches will be saved and retrieved
    */
   public ViaClubModelManager(String playerFileName, String matchFileName)
   {
     this.playerFileName = playerFileName;
     this.matchFileName = matchFileName;
   }
+
   /**
    * Get  a list of all players
+   *
    * @return a List of all players from the file where players are saved and retrieved
    */
   public PlayerList getAllPlayers()
@@ -54,10 +56,12 @@ public class ViaClubModelManager
     }
     return allPlayers;
   }
-/**
- *Get a list of all matches
- * @return a List of all matches from the file where matches are saved and retrieved
- */
+
+  /**
+   * Get a list of all matches
+   *
+   * @return a List of all matches from the file where matches are saved and retrieved
+   */
   public MatchList getAllMatches()
   {
     MatchList allMatches = new MatchList();
@@ -80,12 +84,13 @@ public class ViaClubModelManager
     }
     return allMatches;
   }
-/**
- *Get a matches on specified date
- * @param date set the date to search for
- * @return  a List of all matches during the given date
- *
- */
+
+  /**
+   * Get  matches on specified date
+   *
+   * @param date set the date to search for
+   * @return a List of all matches during the given date
+   */
 
   public MatchList getMatchesOnDate(Date date)
   {
@@ -99,6 +104,14 @@ public class ViaClubModelManager
     }
     return temp;
   }
+
+  /**
+   * Get  matches in between two dates
+   *
+   * @param date1 set the first date
+   * @param date2 set the second date
+   * @return a List of all matches between the two dates
+   */
 
   public MatchList getMatchesBetweenDates(Date date1, Date date2)
   {
@@ -124,6 +137,14 @@ public class ViaClubModelManager
     return betweenMatches;
   }
 
+  /**
+   * Get  matches  against an opponent
+   *
+   * @param opponent  set the opponent
+   * @param matchList the list to search for matches
+   * @return a List of matches against the given opponent in the given match list
+   */
+
   public MatchList getMatchesAgainst(String opponent, MatchList matchList)
   {
     MatchList allMatches = matchList;
@@ -138,18 +159,34 @@ public class ViaClubModelManager
     }
     return opponentList;
   }
-  public MatchList getTypeMatches(String type,MatchList matchList){
-    MatchList allMatches= matchList;
-    MatchList temp= new MatchList();
+
+  /**
+   * Get  matches by type
+   *
+   * @param type      set the match type
+   * @param matchList set the list to search for matches
+   * @return a List of all matches by type
+   */
+  public MatchList getTypeMatches(String type, MatchList matchList)
+  {
+    MatchList allMatches = matchList;
+    MatchList temp = new MatchList();
 
     for (int i = 0; i < allMatches.size(); i++)
     {
-      if(allMatches.get(i).getMatchType().equals(type)){
+      if (allMatches.get(i).getMatchType().equals(type))
+      {
         temp.add(allMatches.get(i));
       }
     }
     return temp;
   }
+
+  /**
+   * Get matches won
+   *
+   * @return a List of all matches won
+   */
 
   public MatchList getMatchesWon()
   {
@@ -167,6 +204,11 @@ public class ViaClubModelManager
     return wonList;
   }
 
+  /**
+   *Get  matches lost
+   * @return  a List of all matches lost
+   *
+   */
   public MatchList getMatchesLost()
   {
     MatchList allMatches = getAllMatches();
@@ -182,7 +224,12 @@ public class ViaClubModelManager
     }
     return lostList;
   }
+  /**
+   *Get  matches draw
 
+   * @return  a List of all matches drow
+   *
+   */
   public MatchList getMatchesDraw()
   {
     MatchList allMatches = getAllMatches();
@@ -199,6 +246,11 @@ public class ViaClubModelManager
     }
     return drawList;
   }
+  /**
+   *Get  players available
+   * @return  a List of all players available
+   *
+   */
 
   public PlayerList getPlayersAvailable()
   {
