@@ -11,7 +11,7 @@ public class Match implements Serializable
   private Date date;
   private PlayerList bench, lineUp;
   private String opponent, matchType;
-  private int scoreHomeTeam, scoreOpponent, benchSize, teamSize;
+  private int scoreHomeTeam, scoreOpponent;
   private boolean isAwayGame;
 
   /**
@@ -36,23 +36,8 @@ public class Match implements Serializable
     this.lineUp = null;
     this.scoreHomeTeam = 0;
     this.scoreOpponent = 0;
-    this.teamSize = 11;
     this.isAwayGame = isAwayGame;
 
-    switch (matchType)
-    {
-      case "Cup":
-        this.benchSize = 6;
-        break;
-      case "League":
-        this.benchSize = 5;
-        break;
-      case "Friendly":
-        this.benchSize = 100;
-        break;
-      default:
-        this.benchSize = 0;
-    }
   }
 
   /**
@@ -128,6 +113,16 @@ public class Match implements Serializable
   }
 
   /**
+   * Sets the date of the match
+   *
+   * @param date sets the date of the match
+   */
+  public void setDate(Date date)
+  {
+    this.date = date;
+  }
+
+  /**
    * Gets the opponent of the match
    *
    * @return the opponent of the match
@@ -137,15 +132,6 @@ public class Match implements Serializable
     return opponent;
   }
 
-  /**
-   * Sets the date of the match
-   *
-   * @param date sets the date of the match
-   */
-  public void setDate(Date date)
-  {
-    this.date = date;
-  }
 
   /**
    * Gets the start of the match
@@ -236,8 +222,7 @@ public class Match implements Serializable
         && date.equals(other.date) && lineUp.equals(other.lineUp) && bench
         .equals(other.bench) && opponent.equals(other.opponent) && matchType
         .equals(other.matchType) && scoreHomeTeam == other.scoreHomeTeam
-        && scoreOpponent == other.scoreOpponent && benchSize == other.benchSize
-        && teamSize == other.teamSize && isAwayGame == other.isAwayGame;
+        && scoreOpponent == other.scoreOpponent && isAwayGame == other.isAwayGame;
   }
 
   /**

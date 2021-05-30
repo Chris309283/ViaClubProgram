@@ -62,37 +62,6 @@ public class Time implements Serializable
   }
 
   /**
-   * Gets the second of the minute
-   *
-   * @return the second of the minute
-   */
-  public int getSecond()
-  {
-    return second;
-  }
-
-  /**
-   * A method for converting this time into seconds.
-   *
-   * @return The total number of seconds of the time.
-   */
-  public int convertToSeconds()
-  {
-    return (hour * 3600) + (minute * 60) + second;
-  }
-
-  /**
-   * Checks if a this time is before time2.
-   *
-   * @param time2 time compared with.
-   * @return true if the time is before time2
-   */
-  public boolean isBefore(Time time2)
-  {
-    return time2.convertToSeconds() > convertToSeconds();
-  }
-
-  /**
    * Compares the hour, minute and second of two times
    *
    * @param obj The object to compare this time against.

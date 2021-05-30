@@ -58,103 +58,9 @@ public class ViaClubModelManager
   }
 
   /**
-   * Get a list of all matches
-   *
-   * @return a List of all matches from the file where matches are saved and retrieved
-   */
-  public MatchList getAllMatches()
-  {
-    MatchList allMatches = new MatchList();
-
-    try
-    {
-      allMatches = (MatchList) MyFileHandler.readFromBinaryFile(matchFileName);
-    }
-    catch (FileNotFoundException e)
-    {
-      System.out.println("Match file not found");
-    }
-    catch (IOException e)
-    {
-      System.out.println("IO Error reading match file");
-    }
-    catch (ClassNotFoundException e)
-    {
-      System.out.println("Class Not Found");
-    }
-    return allMatches;
-  }
-
-  /**
-   * Get  matches on specified date
-   *
-   * @param date set the date to search for
-   * @return a List of all matches during the given date
-   */
-
-  public MatchList getMatchesOnDate(Date date)
-  {
-    MatchList temp = new MatchList();
-    for (int i = 0; i < getAllMatches().size(); i++)
-    {
-      if (getAllMatches().get(i).getDate().equals(date))
-      {
-        temp.add(getAllMatches().get(i));
-      }
-    }
-    return temp;
-  }
-
-
-  /**
-   * Get  matches  against an opponent
-   *
-   * @param opponent  set the opponent
-   * @param matchList the list to search for matches
-   * @return a List of matches against the given opponent in the given match list
-   */
-
-  public MatchList getMatchesAgainst(String opponent, MatchList matchList)
-  {
-    MatchList allMatches = matchList;
-    MatchList opponentList = new MatchList();
-    for (int i = 0; i < allMatches.size(); i++)
-    {
-      if (allMatches.get(i).getOpponent().toLowerCase()
-          .contains(opponent.toLowerCase()))
-      {
-        opponentList.add(allMatches.get(i));
-      }
-    }
-    return opponentList;
-  }
-
-  /**
-   * Get  matches by type
-   *
-   * @param type      set the match type
-   * @param matchList set the list to search for matches
-   * @return a List of all matches by type
-   */
-  public MatchList getTypeMatches(String type, MatchList matchList)
-  {
-    MatchList allMatches = matchList;
-    MatchList temp = new MatchList();
-
-    for (int i = 0; i < allMatches.size(); i++)
-    {
-      if (allMatches.get(i).getMatchType().equals(type))
-      {
-        temp.add(allMatches.get(i));
-      }
-    }
-    return temp;
-  }
-  /**
    *Get  players available
    * @return  a List of all players available
    */
-
   public PlayerList getPlayersAvailable()
   {
     PlayerList allAvailablePlayers = new PlayerList();
@@ -188,6 +94,7 @@ public class ViaClubModelManager
     }
     return allUnavailablePlayers;
   }
+
   /**
    *Get players by name
    * @param name set the player name
@@ -207,13 +114,13 @@ public class ViaClubModelManager
     }
     return allPlayersNamed;
   }
+
   /**
    *Get players by number
    * @param number set the player number
    * @param list set the player list
    * @return  a List of all players by number
    */
-
   public PlayerList getPlayersByNumber(int number, PlayerList list)
   {
     PlayerList allPlayersNumbered = new PlayerList();
@@ -227,13 +134,13 @@ public class ViaClubModelManager
     }
     return allPlayersNumbered;
   }
+
   /**
    *Get players by positions
    * @param position set the player position
    * @param list set the player list
    * @return  a List of all players by position
    */
-
   public PlayerList getPlayersByPositions(String position, PlayerList list)
   {
     PlayerList allPlayersByPositions = new PlayerList();
@@ -251,31 +158,11 @@ public class ViaClubModelManager
     }
     return allPlayersByPositions;
   }
-  /**
-   * save matches
-   * @param matches set the list of matches to be saved to the file of matches
-   */
 
-  public void saveMatches(MatchList matches)
-  {
-    try
-    {
-      MyFileHandler.writeToBinaryFile(matchFileName, matches);
-    }
-    catch (FileNotFoundException e)
-    {
-      System.out.println("Match file not found");
-    }
-    catch (IOException e)
-    {
-      System.out.println("IO Error writing to match file");
-    }
-  }
   /**
    * save players
    * @param players set the list of players to be saved to the file of players
    */
-
   public void savePlayers(PlayerList players)
   {
     try
@@ -291,11 +178,11 @@ public class ViaClubModelManager
       System.out.println("IO Error writing to player file");
     }
   }
+
   /**
    * update the number of games for the suspended players
    * And save all changes to the list of players
    */
-
   public void updateSuspensions()
   {
     PlayerList allPlayers = getAllPlayers();
@@ -341,11 +228,11 @@ public class ViaClubModelManager
     }
     savePlayers(allPlayers);
   }
+
   /**
    * update the number of matches where the players are benched in a row
    * And save all changes to the list of players
    */
-
   public void updateBenchedInARow()
   {
     PlayerList allPlayers = getAllPlayers();
@@ -376,27 +263,117 @@ public class ViaClubModelManager
 
     savePlayers(allPlayers);
   }
+
+  /**
+   * Get a list of all matches
+   *
+   * @return a List of all matches from the file where matches are saved and retrieved
+   */
+  public MatchList getAllMatches()
+  {
+    MatchList allMatches = new MatchList();
+
+    try
+    {
+      allMatches = (MatchList) MyFileHandler.readFromBinaryFile(matchFileName);
+    }
+    catch (FileNotFoundException e)
+    {
+      System.out.println("Match file not found");
+    }
+    catch (IOException e)
+    {
+      System.out.println("IO Error reading match file");
+    }
+    catch (ClassNotFoundException e)
+    {
+      System.out.println("Class Not Found");
+    }
+    return allMatches;
+  }
+
+  /**
+   * Get  matches on specified date
+   *
+   * @param date set the date to search for
+   * @return a List of all matches during the given date
+   */
+  public MatchList getMatchesOnDate(Date date)
+  {
+    MatchList temp = new MatchList();
+    for (int i = 0; i < getAllMatches().size(); i++)
+    {
+      if (getAllMatches().get(i).getDate().equals(date))
+      {
+        temp.add(getAllMatches().get(i));
+      }
+    }
+    return temp;
+  }
+
+  /**
+   * Get  matches  against an opponent
+   *
+   * @param opponent  set the opponent
+   * @param matchList the list to search for matches
+   * @return a List of matches against the given opponent in the given match list
+   */
+  public MatchList getMatchesAgainst(String opponent, MatchList matchList)
+  {
+    MatchList allMatches = matchList;
+    MatchList opponentList = new MatchList();
+    for (int i = 0; i < allMatches.size(); i++)
+    {
+      if (allMatches.get(i).getOpponent().toLowerCase()
+          .contains(opponent.toLowerCase()))
+      {
+        opponentList.add(allMatches.get(i));
+      }
+    }
+    return opponentList;
+  }
+
+  /**
+   * Get  matches by type
+   *
+   * @param type      set the match type
+   * @param matchList set the list to search for matches
+   * @return a List of all matches by type
+   */
+  public MatchList getTypeMatches(String type, MatchList matchList)
+  {
+    MatchList allMatches = matchList;
+    MatchList temp = new MatchList();
+
+    for (int i = 0; i < allMatches.size(); i++)
+    {
+      if (allMatches.get(i).getMatchType().equals(type))
+      {
+        temp.add(allMatches.get(i));
+      }
+    }
+    return temp;
+  }
+
   /**
    * Get a list of all matches happening today
    * @return a list of matches happening today
    */
-
   public MatchList getAllMatchesToday()
   {
     MatchList temp = new MatchList();
     temp = getMatchesOnDate(Date.today());
     return temp;
   }
+
   /**
    * Get a list of all matches in the past (Before today)
    * @return a list of matches in the past
    */
-
-
   public MatchList getAllMatchesPast()
   {
-  MatchList allMatches= getAllMatches();
-  MatchList matchesBetween=new MatchList();
+    MatchList allMatches= getAllMatches();
+    MatchList matchesBetween=new MatchList();
     for (int i = 0; i <allMatches.size() ; i++)
     {
       if (allMatches.get(i).getDate().isBefore(Date.today())){
@@ -405,12 +382,11 @@ public class ViaClubModelManager
     }
     return matchesBetween;
   }
+
   /**
    * Get a list of matches in the future
    * @return a list of matches in the future
    */
-
-
   public MatchList getAllFutureMatches()
   {
     MatchList allMatches= getAllMatches();
@@ -422,5 +398,25 @@ public class ViaClubModelManager
       }
     }
     return matchesBetween;
+  }
+
+  /**
+   * save matches
+   * @param matches set the list of matches to be saved to the file of matches
+   */
+  public void saveMatches(MatchList matches)
+  {
+    try
+    {
+      MyFileHandler.writeToBinaryFile(matchFileName, matches);
+    }
+    catch (FileNotFoundException e)
+    {
+      System.out.println("Match file not found");
+    }
+    catch (IOException e)
+    {
+      System.out.println("IO Error writing to match file");
+    }
   }
 }

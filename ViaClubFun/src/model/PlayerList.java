@@ -66,17 +66,6 @@ public class PlayerList implements Serializable
   }
 
   /**
-   * Checks if a player is contained in the player list
-   *
-   * @param player sets the player which is checked if is contained in the list
-   * @return  true if the player is inside the list
-   */
-
-  public boolean contains(Player player){
-    return players.contains(player);
-  }
-
-  /**
    * Gets a player from the list by the name
    * @param name is searched for in the player list
    * @return a player if it has the same name
@@ -94,6 +83,18 @@ public class PlayerList implements Serializable
     }
     return null;
   }
+
+  /**
+   * Checks if a player is contained in the player list
+   *
+   * @param player sets the player which is checked if is contained in the list
+   * @return  true if the player is inside the list
+   */
+
+  public boolean contains(Player player){
+    return players.contains(player);
+  }
+
   /**
    * Sets the player at a specific index in the player list
    *

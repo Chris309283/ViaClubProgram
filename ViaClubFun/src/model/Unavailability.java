@@ -1,7 +1,5 @@
 package model;
 
-import model.Date;
-
 import java.io.Serializable;
 
 /**
@@ -13,10 +11,8 @@ import java.io.Serializable;
 public class Unavailability implements Serializable
 {
   private String type;
-
   private int numberOfGames;
   private Date start, end;
-  private ViaClubModelManager modelManager;
 
   /**
    * Three-argument constructor
@@ -84,11 +80,20 @@ public class Unavailability implements Serializable
   }
 
   /**
+   * Sets the number of games of the suspension
+   *
+   * @param numberOfGames sets the number of games of the suspension
+   */
+  public void setNumberOfGames(int numberOfGames)
+  {
+    this.numberOfGames = numberOfGames;
+  }
+
+  /**
    * ends the unavailability and sets the end to the current date
    *
    * @param end sets the end of the unavailability as the current date
    */
-
   public void setAvailable(Date end)
   {
 
@@ -122,20 +127,9 @@ public class Unavailability implements Serializable
    *
    * @return the start date of the unavailability
    */
-
   public Date getStart()
   {
     return start.copy();
-  }
-
-  /**
-   * Sets the number of games of the suspension
-   *
-   * @param numberOfGames sets the number of games of the suspension
-   */
-  public void setNumberOfGames(int numberOfGames)
-  {
-    this.numberOfGames = numberOfGames;
   }
 
   /**
@@ -144,7 +138,6 @@ public class Unavailability implements Serializable
    * @param obj the object compared with
    * @return true if the object given equals the unavailability
    */
-
   public boolean equals(Object obj)
   {
     if (!(obj instanceof Unavailability))
@@ -170,7 +163,6 @@ public class Unavailability implements Serializable
    *
    * @return a string representation of the unavailability
    */
-
   public String toString()
   {
     String finalString = "";

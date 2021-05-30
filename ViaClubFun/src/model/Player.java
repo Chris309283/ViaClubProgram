@@ -60,7 +60,6 @@ public class Player implements Serializable
    *
    * @return the jersey number of the player
    */
-
   public int getNumber()
   {
     return number;
@@ -71,7 +70,6 @@ public class Player implements Serializable
    *
    * @param number sets the jersey number of the player
    */
-
   public void setNumber(int number)
   {
     this.number = number;
@@ -82,10 +80,19 @@ public class Player implements Serializable
    *
    * @param position the position added to the array list
    */
-
   public void addPosition(String position)
   {
     positions.add(position);
+  }
+
+  /**
+   * Gets the trained positions of the player
+   *
+   * @return the positions of the player
+   */
+  public ArrayList<String> getPositions()
+  {
+    return positions;
   }
 
   /**
@@ -129,7 +136,6 @@ public class Player implements Serializable
    *
    * @param unavailability is added the the unavaliabilities array list
    */
-
   public void addUnavailability(Unavailability unavailability)
   {
     unavailabilities.add(unavailability);
@@ -143,16 +149,6 @@ public class Player implements Serializable
   public ArrayList<Unavailability> getAllUnavailabilities()
   {
     return unavailabilities;
-  }
-
-  /**
-   * Gets the trained positions of the player
-   *
-   * @return the positions of the player
-   */
-  public ArrayList<String> getPositions()
-  {
-    return positions;
   }
 
   /**
