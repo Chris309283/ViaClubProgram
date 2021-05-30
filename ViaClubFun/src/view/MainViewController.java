@@ -13,6 +13,12 @@ import model.*;
 import javafx.fxml.FXML;
 import javafx.scene.layout.Region;
 
+/**
+ *A user interface that allows displaying and modifying information about players and matches
+ *
+ * @author JavaGods
+ * @version 1.0
+ */
 public class MainViewController
 {
   private Region root;
@@ -47,6 +53,13 @@ public class MainViewController
   @FXML private ComboBox<String> matchSearchComboBox;
   @FXML private ComboBox<String> matchDateComboBox;
 
+  /**
+   *Initializes the necessary data in the main view
+   *
+   * @param viewHandler links the views
+   * @param modelManager single access point for the functionality
+   * @param root
+   */
   public void init(ViewHandler viewHandler, ViaClubModelManager modelManager,
       Region root)
   {
@@ -62,6 +75,9 @@ public class MainViewController
     reset();
   }
 
+  /**
+   * Resets the page by updating the displayed data
+   */
   public void reset()
   {
     disableMatchButtons();
@@ -75,11 +91,21 @@ public class MainViewController
     updateMatchList();
   }
 
+  /**
+   * Gets the root of the view
+   *
+   * @return the root of the view
+   */
   public Region getRoot()
   {
     return root;
   }
 
+  /**
+   *Main method for handling events in the GUI
+   *
+   * @param e the event that is targeted
+   */
   public void handleActions(ActionEvent e)
   {
     if (e.getSource() == addPlayerButton)
@@ -227,6 +253,9 @@ public class MainViewController
     }
   }
 
+  /**
+   * Disables the edit, remove and unavailability player buttons
+   */
   private void disableButtons()
   {
     editPlayerButton.setDisable(true);
@@ -234,12 +263,18 @@ public class MainViewController
     playerAvailability.setDisable(true);
   }
 
+  /**
+   * Disables the edit and remove match buttons
+   */
   private void disableMatchButtons()
   {
     editMatchButton.setDisable(true);
     removeMatchButton.setDisable(true);
   }
 
+  /**
+   * Sets the items in the player combo box
+   */
   private void setAvailableComboBox()
   {
     availableComboBox.getItems().clear();
@@ -249,6 +284,9 @@ public class MainViewController
     availableComboBox.getSelectionModel().select(0);
   }
 
+  /**
+   * Sets the items in the match combo box
+   */
   private void setMatchDateComboBox()
   {
     matchDateComboBox.getItems().clear();
@@ -259,6 +297,9 @@ public class MainViewController
     matchDateComboBox.getSelectionModel().select(0);
   }
 
+  /**
+   * Sets the items in the second player combo box
+   */
   private void setPlayerSearchComboBox()
   {
     playerSearchComboBox.getItems().clear();
@@ -268,6 +309,9 @@ public class MainViewController
     playerSearchComboBox.getItems().add("");
   }
 
+  /**
+   * Sets the items in the second match combo box
+   */
   private void setMatchSearchComboBox()
   {
     matchSearchComboBox.getItems().clear();
@@ -278,6 +322,9 @@ public class MainViewController
     matchSearchComboBox.getItems().add("Show All");
   }
 
+  /**
+   * Searches for players based on the user input
+   */
   private void searchPlayersList()
   {
     PlayerList tempList;
@@ -337,6 +384,9 @@ public class MainViewController
     }
   }
 
+  /**
+   * Searches for matches based on use input
+   */
   private void searchMatchList()
   {
     MatchList tempList = new MatchList();
@@ -407,6 +457,9 @@ public class MainViewController
 
   }
 
+  /**
+   * Updates the player list displayed based on the search
+   */
   private void updatePlayerList()
   {
     if (searchPlayersField.getText().equals(""))
@@ -448,6 +501,9 @@ public class MainViewController
 
   }
 
+  /**
+   * Updates the match list displayed based on the search
+   */
   private void updateMatchList()
   {
     allMatchesList.getItems().clear();
@@ -496,6 +552,10 @@ public class MainViewController
     }
   }
 
+  /**
+   *Updates the data displayed when changing tabs
+   * @param e the targeted event
+   */
   public void tabChanged(Event e)
   {
     if (playerListTab.isSelected())
@@ -511,6 +571,9 @@ public class MainViewController
     }
   }
 
+  /**
+   * Inner action listener class for enabling player buttons on player selection
+   */
   private class MyListListener implements ChangeListener<Player>
   {
     public void changed(ObservableValue<? extends Player> player,
@@ -522,6 +585,9 @@ public class MainViewController
     }
   }
 
+  /**
+   * Inner action listener class for enabling match buttons on match selection
+   */
   private class MyListListener2 implements ChangeListener<Match>
   {
     public void changed(ObservableValue<? extends Match> match, Match oldMatch,
