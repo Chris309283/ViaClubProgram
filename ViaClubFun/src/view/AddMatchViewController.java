@@ -10,6 +10,12 @@ import model.*;
 
 import java.time.LocalDate;
 
+/**
+ * A class for controlling the add match view
+ * @author JavaGods
+ * @version 1.0
+ */
+
 public class AddMatchViewController
 {
   private Region root;
@@ -58,6 +64,11 @@ public class AddMatchViewController
   private PlayerList tempField;
   private PlayerList tempBench;
 
+  /**
+   * Initializes the data in the view
+   * @param viewHandler links the views
+   * @param modelManager single access point for the functionality
+   */
   public void init(ViewHandler viewHandler, ViaClubModelManager modelManager,
       Region root)
   {
@@ -75,7 +86,9 @@ public class AddMatchViewController
 
     reset();
   }
-
+  /**
+   * Resets the page and updates the displayed data
+   */
   public void reset()
   {
     datePicker.setValue(LocalDate.now());
@@ -91,11 +104,15 @@ public class AddMatchViewController
     updateFieldList();
     lineUpListBoolean = true;
   }
-
+  /**
+   * Get the root of the view
+   * @return the root of the view
+   */
   public Region getRoot()
   {
     return root;
   }
+
 
   public void handleActions(ActionEvent e)
   {
@@ -289,6 +306,9 @@ public class AddMatchViewController
     }
 
   }
+  /**
+   * Set the search combo box
+   */
 
   private void setSearchBox()
   {
@@ -298,7 +318,9 @@ public class AddMatchViewController
     searchBox.getItems().add("Position");
     searchBox.getItems().add("");
   }
-
+  /**
+   * Update the time combo box
+   */
   private void updateTimeBoxes()
   {
     startTimeHourBox.getItems().clear();
@@ -323,13 +345,17 @@ public class AddMatchViewController
     startTimeMinuteBox.setValue(30);
     endTimeMinuteBox.setValue(30);
   }
-
+  /**
+   * Sets the toggle combo box
+   */
   private void setToggle()
   {
     fieldRadio.setSelected(true);
     homeRadio.setSelected(true);
   }
-
+  /**
+   * Sets match type combo box
+   */
   private void setMatchTypeBox()
   {
     matchTypeBox.getItems().clear();
@@ -338,7 +364,9 @@ public class AddMatchViewController
     matchTypeBox.getItems().add("Friendly");
     matchTypeBox.getSelectionModel().select(0);
   }
-
+  /**
+   * update  the list of the players
+   */
   private void updatePlayerList()
   {
     allPlayersList.getItems().clear();
@@ -391,6 +419,9 @@ public class AddMatchViewController
     }
 
   }
+  /**
+   * Search the list of players
+   */
 
   private void searchPlayerList()
   {
@@ -446,6 +477,9 @@ public class AddMatchViewController
       }
     }
   }
+  /**
+   * update the field list
+   */
 
   private void updateFieldList()
   {
@@ -456,7 +490,9 @@ public class AddMatchViewController
       lineUpAndBenchList.getItems().add(tempField.get(i));
     }
   }
-
+  /**
+   * update the list of the players in the bench
+   */
   private void updateBenchList()
   {
     lineUpAndBenchList.getItems().clear();
@@ -466,7 +502,9 @@ public class AddMatchViewController
       lineUpAndBenchList.getItems().add(tempBench.get(i));
     }
   }
-
+  /**
+   * set spinners
+   */
   private void setSpinners()
   {
     SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(
@@ -476,6 +514,10 @@ public class AddMatchViewController
     homeScoreSpinner.setValueFactory(valueFactory);
     opponentScoreSpinner.setValueFactory(valueFactory2);
   }
+  /**
+   *Set the match fields with preloaded data from the match
+   * @param match set the file match the data is taken from
+   */
 
   public void setFields(Match match)
   {

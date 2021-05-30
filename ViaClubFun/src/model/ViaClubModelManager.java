@@ -105,37 +105,6 @@ public class ViaClubModelManager
     return temp;
   }
 
-  /**
-   * Get  matches in between two dates
-   *
-   * @param date1 set the first date
-   * @param date2 set the second date
-   * @return a List of all matches between the two dates
-   */
-
-  public MatchList getMatchesBetweenDates(Date date1, Date date2)
-  {
-    MatchList allMatches = getAllMatches();
-    MatchList betweenMatches = new MatchList();
-
-    Date dateStart = date1.copy();
-    for (int i = 0; i < allMatches.size(); i++)
-    {
-      while (!dateStart.equals(date2))
-      {
-        if (getMatchesOnDate(date1) != null)
-        {
-          for (int j = 0; j < getMatchesOnDate(dateStart).size(); j++)
-          {
-            betweenMatches.add(getMatchesOnDate(dateStart).get(j));
-          }
-
-        }
-        dateStart.nextDay();
-      }
-    }
-    return betweenMatches;
-  }
 
   /**
    * Get  matches  against an opponent
@@ -180,67 +149,6 @@ public class ViaClubModelManager
       }
     }
     return temp;
-  }
-
-  /**
-   * Get matches won
-   * @return a List of all matches won
-   */
-
-  public MatchList getMatchesWon()
-  {
-    MatchList allMatches = getAllMatches();
-    MatchList wonList = new MatchList();
-
-    for (int i = 0; i < allMatches.size(); i++)
-    {
-      if (allMatches.get(i).getScoreHomeTeam() > allMatches.get(i)
-          .getScoreOpponent())
-      {
-        wonList.add(allMatches.get(i));
-      }
-    }
-    return wonList;
-  }
-
-  /**
-   *Get  matches lost
-   * @return  a List of all matches lost
-   */
-  public MatchList getMatchesLost()
-  {
-    MatchList allMatches = getAllMatches();
-    MatchList lostList = new MatchList();
-
-    for (int i = 0; i < allMatches.size(); i++)
-    {
-      if (allMatches.get(i).getScoreHomeTeam() < allMatches.get(i)
-          .getScoreOpponent())
-      {
-        lostList.add(allMatches.get(i));
-      }
-    }
-    return lostList;
-  }
-  /**
-   *Get  matches draw
-   * @return  a List of all matches drow
-   */
-  public MatchList getMatchesDraw()
-  {
-    MatchList allMatches = getAllMatches();
-    MatchList drawList = new MatchList();
-
-    for (int i = 0; i < allMatches.size(); i++)
-    {
-      if ((allMatches.get(i).getScoreHomeTeam() == allMatches.get(i)
-          .getScoreOpponent()) && allMatches.get(i).getDate()
-          .isBefore(Date.today()))
-      {
-        drawList.add(allMatches.get(i));
-      }
-    }
-    return drawList;
   }
   /**
    *Get  players available
