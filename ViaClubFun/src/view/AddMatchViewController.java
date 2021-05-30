@@ -307,7 +307,7 @@ public class AddMatchViewController
 
   }
   /**
-   * Sets the search combo box
+   * Set the search combo box
    */
 
   private void setSearchBox()
@@ -345,13 +345,17 @@ public class AddMatchViewController
     startTimeMinuteBox.setValue(30);
     endTimeMinuteBox.setValue(30);
   }
-
+  /**
+   * Sets the toggle combo box
+   */
   private void setToggle()
   {
     fieldRadio.setSelected(true);
     homeRadio.setSelected(true);
   }
-
+  /**
+   * Sets match type combo box
+   */
   private void setMatchTypeBox()
   {
     matchTypeBox.getItems().clear();
@@ -360,7 +364,9 @@ public class AddMatchViewController
     matchTypeBox.getItems().add("Friendly");
     matchTypeBox.getSelectionModel().select(0);
   }
-
+  /**
+   * update  the list of the players
+   */
   private void updatePlayerList()
   {
     allPlayersList.getItems().clear();
@@ -413,6 +419,9 @@ public class AddMatchViewController
     }
 
   }
+  /**
+   * Search the list of players
+   */
 
   private void searchPlayerList()
   {
@@ -468,6 +477,9 @@ public class AddMatchViewController
       }
     }
   }
+  /**
+   * update the field list
+   */
 
   private void updateFieldList()
   {
@@ -478,7 +490,9 @@ public class AddMatchViewController
       lineUpAndBenchList.getItems().add(tempField.get(i));
     }
   }
-
+  /**
+   * update the list of the players in the bench
+   */
   private void updateBenchList()
   {
     lineUpAndBenchList.getItems().clear();
@@ -488,7 +502,9 @@ public class AddMatchViewController
       lineUpAndBenchList.getItems().add(tempBench.get(i));
     }
   }
-
+  /**
+   * set spinners
+   */
   private void setSpinners()
   {
     SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(
@@ -498,6 +514,10 @@ public class AddMatchViewController
     homeScoreSpinner.setValueFactory(valueFactory);
     opponentScoreSpinner.setValueFactory(valueFactory2);
   }
+  /**
+   *Set the match fields with preloaded data from the match
+   * @param match set the file match the data is taken from
+   */
 
   public void setFields(Match match)
   {
