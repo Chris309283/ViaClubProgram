@@ -184,7 +184,6 @@ public class ViaClubModelManager
 
   /**
    * Get matches won
-   *
    * @return a List of all matches won
    */
 
@@ -207,7 +206,6 @@ public class ViaClubModelManager
   /**
    *Get  matches lost
    * @return  a List of all matches lost
-   *
    */
   public MatchList getMatchesLost()
   {
@@ -226,9 +224,7 @@ public class ViaClubModelManager
   }
   /**
    *Get  matches draw
-
    * @return  a List of all matches drow
-   *
    */
   public MatchList getMatchesDraw()
   {
@@ -249,7 +245,6 @@ public class ViaClubModelManager
   /**
    *Get  players available
    * @return  a List of all players available
-   *
    */
 
   public PlayerList getPlayersAvailable()
@@ -270,7 +265,6 @@ public class ViaClubModelManager
   /**
    *Get players unAvailable
    * @return  a List of all players unAvailable
-   *
    */
   public PlayerList getPlayersUnavailable()
   {
@@ -390,8 +384,8 @@ public class ViaClubModelManager
     }
   }
   /**
-   * update suspensions
-
+   * update the number of games for the suspended players
+   * And save all changes to the list of players
    */
 
   public void updateSuspensions()
@@ -439,6 +433,10 @@ public class ViaClubModelManager
     }
     savePlayers(allPlayers);
   }
+  /**
+   * update the number of games for the suspended players
+   * And save all changes to the list of players
+   */
 
   public void updateBenchedInARow()
   {
