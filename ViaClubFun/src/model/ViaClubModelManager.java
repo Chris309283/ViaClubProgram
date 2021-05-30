@@ -267,6 +267,11 @@ public class ViaClubModelManager
     return allAvailablePlayers;
   }
 
+  /**
+   *Get players unAvailable
+   * @return  a List of all players unAvailable
+   *
+   */
   public PlayerList getPlayersUnavailable()
   {
     PlayerList allUnavailablePlayers = new PlayerList();
@@ -281,7 +286,12 @@ public class ViaClubModelManager
     }
     return allUnavailablePlayers;
   }
-
+  /**
+   *Get players by name
+   * @param name set the player name
+   * @param list set the player list
+   * @return  a List of all players by name
+   */
   public PlayerList getPlayersByName(String name, PlayerList list)
   {
     PlayerList allPlayersNamed = new PlayerList();
@@ -295,6 +305,12 @@ public class ViaClubModelManager
     }
     return allPlayersNamed;
   }
+  /**
+   *Get players by number
+   * @param number set the player number
+   * @param list set the player list
+   * @return  a List of all players by number
+   */
 
   public PlayerList getPlayersByNumber(int number, PlayerList list)
   {
@@ -309,6 +325,12 @@ public class ViaClubModelManager
     }
     return allPlayersNumbered;
   }
+  /**
+   *Get players by positions
+   * @param position set the player position
+   * @param list set the player list
+   * @return  a List of all players by position
+   */
 
   public PlayerList getPlayersByPositions(String position, PlayerList list)
   {
@@ -327,6 +349,10 @@ public class ViaClubModelManager
     }
     return allPlayersByPositions;
   }
+  /**
+   * save matches
+   * @param matches set the list of matches to be saved to the file of matches
+   */
 
   public void saveMatches(MatchList matches)
   {
@@ -343,6 +369,10 @@ public class ViaClubModelManager
       System.out.println("IO Error writing to match file");
     }
   }
+  /**
+   * save players
+   * @param players set the list of players to be saved to the file of players
+   */
 
   public void savePlayers(PlayerList players)
   {
@@ -359,6 +389,10 @@ public class ViaClubModelManager
       System.out.println("IO Error writing to player file");
     }
   }
+  /**
+   * update suspensions
+
+   */
 
   public void updateSuspensions()
   {
