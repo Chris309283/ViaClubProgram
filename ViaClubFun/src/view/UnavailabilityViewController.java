@@ -10,6 +10,12 @@ import model.*;
 
 import java.util.ArrayList;
 
+/**
+ * A class for controlling the unavailability view
+ *
+ * @author JavaGods
+ * @version 1.0
+ */
 public class UnavailabilityViewController
 {
   private Region root;
@@ -36,6 +42,13 @@ public class UnavailabilityViewController
   private Player player;
   private ArrayList<Unavailability> tempUnavailabilities;
 
+  /**
+   * Initializes the necessary data in the view
+   *
+   * @param viewHandler links the views
+   * @param modelManager a single access point for the functionality
+   * @param root
+   */
   public void init(ViewHandler viewHandler, ViaClubModelManager modelManager,
       Region root)
   {
@@ -48,6 +61,9 @@ public class UnavailabilityViewController
     reset();
   }
 
+  /**
+   *Resets the page and updates the displayed data
+   */
   public void reset()
   {
     setNumberOfGamesBox();
@@ -61,6 +77,9 @@ public class UnavailabilityViewController
     setUnavailabilityList();
   }
 
+  /**
+   * Disables the remove, and injury adn add suspension buttons
+   */
   public void disableButtons()
   {
     removeButton.setDisable(true);
@@ -68,11 +87,20 @@ public class UnavailabilityViewController
     addSuspensionButton.setDisable(true);
   }
 
+  /**
+   * gets the root of the view
+   * @return the root of the view
+   */
   public Region getRoot()
   {
     return root;
   }
 
+  /**
+   * Main method for handling events in the GUI
+   *
+   * @param e the targeted event
+   */
   public void handleActions(ActionEvent e)
   {
     if (e.getSource() == saveButton)
@@ -206,6 +234,11 @@ public class UnavailabilityViewController
     }
   }
 
+  /**
+   * Sets the fields with the preloaded data from the player
+   *
+   * @param player  sets the player the data is taken from
+   */
   public void setFields(Player player)
   {
     reset();
@@ -229,6 +262,9 @@ public class UnavailabilityViewController
     this.player = player;
   }
 
+  /**
+   * Sets the numbers in the suspension combo box
+   */
   public void setNumberOfGamesBox()
   {
     for (int i = 0; i < 10; i++)
@@ -237,6 +273,9 @@ public class UnavailabilityViewController
     }
   }
 
+  /**
+   * Updates the unavailability list
+   */
   public void updateUnavailabilityListView()
   {
     if (modelManager != null && player != null)
@@ -252,6 +291,9 @@ public class UnavailabilityViewController
     }
   }
 
+  /**
+   * Sets the unavailability list
+   */
   public void setUnavailabilityList()
   {
     if (modelManager != null && player != null)
@@ -266,6 +308,9 @@ public class UnavailabilityViewController
     }
   }
 
+  /**
+   * Inner action listener class for enabling the remove button on unavailability selection
+   */
   private class MyListListener implements ChangeListener<Unavailability>
   {
     public void changed(
