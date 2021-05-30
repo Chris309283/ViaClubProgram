@@ -16,6 +16,11 @@ import model.ViaClubModelManager;
 import java.awt.*;
 import java.util.ArrayList;
 
+/**
+ * A class for controlling the add player view
+ * @author JavaGods
+ * @version 1.0
+ */
 public class AddPlayerViewController
 {
   private Region root;
@@ -40,6 +45,13 @@ public class AddPlayerViewController
 
   private Player editPlayer;
 
+  /**
+   * Initializes the necessary data in the view
+   *
+   * @param viewHandler links the views
+   * @param modelManager single access point for the funcuinality
+   * @param root
+   */
   public void init(ViewHandler viewHandler, ViaClubModelManager modelManager,
       Region root)
   {
@@ -53,6 +65,9 @@ public class AddPlayerViewController
     reset();
   }
 
+  /**
+   * Resets the page and updates the displayed data
+   */
   public void reset()
   {
     setNumberBox();
@@ -65,11 +80,21 @@ public class AddPlayerViewController
     checkForInput();
   }
 
+  /**
+   * Gets the root of the view
+   *
+   * @return the root of the view
+   */
   public Region getRoot()
   {
     return root;
   }
 
+  /**
+   * Main method for handling events in the GUI
+   *
+   * @param e the targeted event
+   */
   public void handleActions(ActionEvent e)
   {
     if (e.getSource() == addButton)
@@ -177,6 +202,9 @@ public class AddPlayerViewController
     }
   }
 
+  /**
+   * Sets the jersey number combo box
+   */
   public void setNumberBox()
   {
     ArrayList<Integer> usedNumbers = new ArrayList<Integer>();
@@ -193,18 +221,11 @@ public class AddPlayerViewController
     }
   }
 
-  private void updatePositionsList(Player player)
-  {
-    if (modelManager != null)
-    {
-      positionsList.getItems().clear();
-      for (int i = 0; i < player.getPositions().size(); i++)
-      {
-        positionsList.getItems().add(player.getPositions().get(i));
-      }
-    }
-  }
-
+  /**
+   * Sets the fields with preloaded data from the player
+   *
+   * @param player sets the player the data is taken from
+   */
   public void setFields(Player player)
   {
 
@@ -224,6 +245,9 @@ public class AddPlayerViewController
     updatePositionsBox();
   }
 
+  /**
+   * Enables the save button after the name field and the number combo box have some input
+   */
   public void checkForInput()
   {
     if (nameField.getText().length() > 0 && numberBox.getValue() != null)
@@ -232,6 +256,9 @@ public class AddPlayerViewController
     }
   }
 
+  /**
+   * Updates the positions combo box
+   */
   public void updatePositionsBox()
   {
 
@@ -263,6 +290,9 @@ public class AddPlayerViewController
     }
   }
 
+  /**
+   * Inner action listener class for enabling the remove button on position selection
+   */
 
   private class MyListListener implements ChangeListener<String>
   {
@@ -273,6 +303,9 @@ public class AddPlayerViewController
     }
   }
 
+  /**
+   * Inner action listener class for enabling the add position button on position selection
+   */
   private class MyListener2 implements ChangeListener<String>
   {
     public void changed(ObservableValue<? extends String> position,
