@@ -434,7 +434,7 @@ public class ViaClubModelManager
     savePlayers(allPlayers);
   }
   /**
-   * update the number of games for the suspended players
+   * update the number of matches where the players are benched in a row
    * And save all changes to the list of players
    */
 
@@ -468,6 +468,10 @@ public class ViaClubModelManager
 
     savePlayers(allPlayers);
   }
+  /**
+   * Get a list of all matches happening today
+   * @return a list of matches happening today
+   */
 
   public MatchList getAllMatchesToday()
   {
@@ -475,6 +479,11 @@ public class ViaClubModelManager
     temp = getMatchesOnDate(Date.today());
     return temp;
   }
+  /**
+   * Get a list of all matches in the past (Before today)
+   * @return a list of matches in the past
+   */
+
 
   public MatchList getAllMatchesPast()
   {
@@ -488,6 +497,11 @@ public class ViaClubModelManager
     }
     return matchesBetween;
   }
+  /**
+   * Get a list of matches in the future
+   * @return a list of matches in the future
+   */
+
 
   public MatchList getAllFutureMatches()
   {
