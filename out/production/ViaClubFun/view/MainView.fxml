@@ -63,10 +63,11 @@
                            <children>
                               <ButtonBar prefHeight="40.0" prefWidth="800.0">
                                  <buttons>
+                                    <Button fx:id="exportPlayerListButton" mnemonicParsing="false" onAction="#handleActions" text="Export Player List" />
                                     <Button fx:id="playerAvailability" disable="true" mnemonicParsing="false" onAction="#handleActions" text="Player Availability" />
-                                    <Button fx:id="addPlayerButton" mnemonicParsing="false" onAction="#handleActions" text="Add Player" />
-                                    <Button fx:id="removePlayerButton" disable="true" mnemonicParsing="false" onAction="#handleActions" text="Remove Player" />
                                     <Button fx:id="editPlayerButton" disable="true" mnemonicParsing="false" onAction="#handleActions" text="Edit Player" />
+                                    <Button fx:id="removePlayerButton" disable="true" mnemonicParsing="false" onAction="#handleActions" text="Remove Player" />
+                                    <Button fx:id="addPlayerButton" mnemonicParsing="false" onAction="#handleActions" text="Add Player" />
                                  </buttons>
                                  <padding>
                                     <Insets right="10.0" />
@@ -99,6 +100,7 @@
                            <children>
                               <ButtonBar prefHeight="35.0" prefWidth="828.0">
                                 <buttons>
+                                    <Button fx:id="exportMatchButton" disable="true" mnemonicParsing="false" onAction="#handleActions" text="Export Match" />
                                   <Button fx:id="editMatchButton" disable="true" mnemonicParsing="false" onAction="#handleActions" text="Edit Match" />
                                     <Button fx:id="removeMatchButton" disable="true" mnemonicParsing="false" onAction="#handleActions" text="Remove Match" />
                                     <Button fx:id="addMatchButton" mnemonicParsing="false" onAction="#handleActions" text="Add Match" />

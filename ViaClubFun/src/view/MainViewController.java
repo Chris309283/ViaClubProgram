@@ -12,9 +12,11 @@ import model.*;
 
 import javafx.fxml.FXML;
 import javafx.scene.layout.Region;
+import parser.ParserException;
+import parser.XmlJsonParser;
 
 /**
- *A user interface that allows displaying and modifying information about players and matches
+ * A user interface that allows displaying and modifying information about players and matches
  *
  * @author JavaGods
  * @version 1.0
@@ -34,6 +36,8 @@ public class MainViewController
   @FXML private Button editPlayerButton;
   @FXML private Button editMatchButton;
   @FXML private Button playerAvailability;
+  @FXML private Button exportPlayerListButton;
+  @FXML private Button exportMatchButton;
 
   @FXML private MenuItem exitMenuItem;
   @FXML private MenuItem aboutMenuItem;
@@ -53,12 +57,14 @@ public class MainViewController
   @FXML private ComboBox<String> matchSearchComboBox;
   @FXML private ComboBox<String> matchDateComboBox;
 
+  private XmlJsonParser parser;
+
   /**
-   *Initializes the necessary data in the main view
+   * Initializes the necessary data in the main view
    *
-   * @param viewHandler links the views
+   * @param viewHandler  links the views
    * @param modelManager single access point for the functionality
-   * @param root
+   * @param root the main layout of the view
    */
   public void init(ViewHandler viewHandler, ViaClubModelManager modelManager,
       Region root)
@@ -66,6 +72,9 @@ public class MainViewController
     this.modelManager = modelManager;
     this.root = root;
     this.viewHandler = viewHandler;
+
+    parser = new XmlJsonParser();
+
     allPlayersList.getSelectionModel().selectedItemProperty()
         .addListener((new MyListListener()));
     allMatchesList.getSelectionModel().selectedItemProperty()
@@ -102,7 +111,7 @@ public class MainViewController
   }
 
   /**
-   *Main method for handling events in the GUI
+   * Main method for handling events in the GUI
    *
    * @param e the event that is targeted
    */
@@ -153,9 +162,17 @@ public class MainViewController
           .setFields(allPlayersList.getSelectionModel().getSelectedItem());
     }
 
-    else if (e.getSource() == searchPlayersField)
+    else if (e.getSource() == exportPlayerListButton)
     {
-
+      try
+      {
+        parser.toXml(modelManager.getAllPlayers(),
+            "ViaClubFun\\src\\playerList.xml");
+      }
+      catch (ParserException parserException)
+      {
+        parserException.printStackTrace();
+      }
     }
     else if (e.getSource() == playerSearchComboBox)
     {
@@ -176,7 +193,10 @@ public class MainViewController
     }
     else if (e.getSource() == matchDateComboBox)
     {
-      updateMatchList();
+      if (matchDateComboBox.getSelectionModel().getSelectedItem() != null)
+      {
+        updateMatchList();
+      }
     }
     else if (e.getSource() == matchSearchButton)
     {
@@ -215,6 +235,23 @@ public class MainViewController
 
         updateMatchList();
         disableMatchButtons();
+      }
+    }
+
+    else if (e.getSource() == exportMatchButton)
+    {
+      try
+      {
+        parser.toXml(allMatchesList.getSelectionModel().getSelectedItem(),
+            "ViaClubFun\\src\\match " + allMatchesList.getSelectionModel()
+                .getSelectedItem().getDate().getDay() + "-" + allMatchesList
+                .getSelectionModel().getSelectedItem().getDate().getMonth()
+                + "-" + allMatchesList.getSelectionModel().getSelectedItem()
+                .getDate().getYear() + ".xml");
+      }
+      catch (ParserException parserException)
+      {
+        parserException.printStackTrace();
       }
     }
 
@@ -270,6 +307,7 @@ public class MainViewController
   {
     editMatchButton.setDisable(true);
     removeMatchButton.setDisable(true);
+    exportMatchButton.setDisable(true);
   }
 
   /**
@@ -553,7 +591,8 @@ public class MainViewController
   }
 
   /**
-   *Updates the data displayed when changing tabs
+   * Updates the data displayed when changing tabs
+   *
    * @param e the targeted event
    */
   public void tabChanged(Event e)
@@ -595,6 +634,7 @@ public class MainViewController
     {
       editMatchButton.setDisable(false);
       removeMatchButton.setDisable(false);
+      exportMatchButton.setDisable(false);
     }
   }
 }
