@@ -269,7 +269,12 @@ public class AddMatchViewController
           updateFieldList();
         }
       }
-      updatePlayerList(); // ask allan!!
+
+      if (matchTypeBox.getSelectionModel().getSelectedItem()!= null)
+      {
+        updatePlayerList(); // ask allan!!
+      }
+
     }
 
     else if (e.getSource() == exitMenuItem)

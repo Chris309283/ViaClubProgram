@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Match>
+  <date>
+    <month>5</month>
+    <year>2021</year>
+    <day>31</day>
+  </date>
+  <scoreHomeTeam>0</scoreHomeTeam>
+  <bench/>
+  <matchType>League</matchType>
+  <opponent>Unknown</opponent>
+  <lineUp>
+    <players>
+      <number>1</number>
+      <benchedInARow>0</benchedInARow>
+      <name>playerTest</name>
+      <positions>Goalkeeper</positions>
+    </players>
+  </lineUp>
+  <startTime>
+    <hour>19</hour>
+    <minute>30</minute>
+    <second>0</second>
+  </startTime>
+  <isAwayGame>false</isAwayGame>
+  <endTime>
+    <hour>21</hour>
+    <minute>30</minute>
+    <second>0</second>
+  </endTime>
+  <scoreOpponent>0</scoreOpponent>
+</Match>
