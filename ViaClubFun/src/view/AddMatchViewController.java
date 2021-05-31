@@ -268,7 +268,12 @@ public class AddMatchViewController
           updateFieldList();
         }
       }
-      updatePlayerList(); // ask allan!!
+
+      if (matchTypeBox.getSelectionModel().getSelectedItem()!= null)
+      {
+        updatePlayerList(); // ask allan!!
+      }
+
     }
 
     else if (e.getSource() == exitMenuItem)
@@ -516,7 +521,7 @@ public class AddMatchViewController
   }
   /**
    *Set the match fields with preloaded data from the match
-   * @param match set the file match the data is taken from
+   * @param match set the file match
    */
 
   public void setFields(Match match)
@@ -589,13 +594,18 @@ public class AddMatchViewController
       }
     }
   }
+  /**
+   * disable buttons,  add and remove
+   */
 
   private void disableButtons()
   {
     addButton.setDisable(true);
     removeButton.setDisable(true);
   }
-
+  /**
+   * Inner action listener class for enabling the data of the player in add player button on player selection
+   */
   private class MyListListener implements ChangeListener<Player>
   {
     public void changed(ObservableValue<? extends Player> player,
@@ -622,7 +632,9 @@ public class AddMatchViewController
       }
     }
   }
-
+  /**
+   * Inner action listener class for enabling the remove button on player selection
+   */
   private class MyListListener2 implements ChangeListener<Player>
   {
     public void changed(ObservableValue<? extends Player> player,
