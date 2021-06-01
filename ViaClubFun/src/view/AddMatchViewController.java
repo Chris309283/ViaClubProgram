@@ -68,6 +68,7 @@ public class AddMatchViewController
    * Initializes the data in the view
    * @param viewHandler links the views
    * @param modelManager single access point for the functionality
+   * @param root returns the main layout of the view
    */
   public void init(ViewHandler viewHandler, ViaClubModelManager modelManager,
       Region root)

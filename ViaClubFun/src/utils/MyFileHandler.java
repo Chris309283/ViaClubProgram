@@ -84,7 +84,7 @@ public class MyFileHandler
     writeText(fileName, strs, true);
   }
 
-  /*
+  /**
    * Again, the writeArrayToTextFile and appendArrayToTextFile methods are almost identical.
    * So this private method is called by both those methods
    */
