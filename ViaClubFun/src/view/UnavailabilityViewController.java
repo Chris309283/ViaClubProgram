@@ -105,7 +105,7 @@ public class UnavailabilityViewController
   {
     if (e.getSource() == saveButton)
     {
-      System.out.println(tempUnavailabilities.size());
+
       player.getAllUnavailabilities().clear();
       for (int i = 0; i < tempUnavailabilities.size(); i++)
       {
@@ -282,7 +282,7 @@ public class UnavailabilityViewController
     {
       unavailabilityListView.getItems().clear();
 
-      System.out.println(tempUnavailabilities.size());
+
       for (int i = 0; i < tempUnavailabilities.size(); i++)
       {
 
@@ -298,7 +298,7 @@ public class UnavailabilityViewController
   {
     if (modelManager != null && player != null)
     {
-      System.out.println(tempUnavailabilities.size());
+
       unavailabilityListView.getItems().clear();
       tempUnavailabilities = player.getAllUnavailabilities();
       for (int i = 0; i < tempUnavailabilities.size(); i++)
