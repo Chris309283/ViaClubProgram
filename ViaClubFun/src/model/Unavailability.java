@@ -114,12 +114,9 @@ public class Unavailability implements Serializable
       return true;
     }
 
-    else if ((type.equals("Injured") && !(end.isBefore(Date.today()))))
-    {
-      return true;
-    }
-
-    return false;
+    else
+      return type.equals("Injured") && !(end.isBefore(Date.today())) && !end
+          .equals(Date.today());
   }
 
   /**

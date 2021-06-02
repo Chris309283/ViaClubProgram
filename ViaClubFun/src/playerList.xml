@@ -1,123 +1,30 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <PlayerList>
   <players>
-    <unavailabilities>
-      <numberOfGames>3</numberOfGames>
-      <start>
-        <month>5</month>
-        <year>2021</year>
-        <day>31</day>
-      </start>
-      <type>Suspended</type>
-    </unavailabilities>
-    <number>10</number>
+    <number>1</number>
     <benchedInARow>0</benchedInARow>
-    <name>playerTest</name>
-    <positions>Goalkeeper</positions>
-  </players>
-  <players>
-    <number>6</number>
-    <benchedInARow>1</benchedInARow>
-    <name>test</name>
-    <positions>Goalkeeper</positions>
-  </players>
-  <players>
-    <number>13</number>
-    <benchedInARow>0</benchedInARow>
-    <name>test</name>
-    <positions>Goalkeeper</positions>
+    <name>Christopher</name>
+    <positions>Sweeper</positions>
     <positions>Full-Back</positions>
   </players>
   <players>
-    <number>5</number>
+    <number>2</number>
     <benchedInARow>0</benchedInARow>
-    <name>test5</name>
+    <name>Vlad</name>
+    <positions>Sweeper</positions>
   </players>
   <players>
-    <number>14</number>
-    <benchedInARow>1</benchedInARow>
-    <name>test</name>
-  </players>
-  <players>
-    <number>8</number>
-    <benchedInARow>1</benchedInARow>
-    <name>test55</name>
-  </players>
-  <players>
-    <number>12</number>
-    <benchedInARow>1</benchedInARow>
-    <name>test5555</name>
-  </players>
-  <players>
-    <unavailabilities>
-      <numberOfGames>0</numberOfGames>
-      <start>
-        <month>6</month>
-        <year>2021</year>
-        <day>1</day>
-      </start>
-      <end>
-        <month>6</month>
-        <year>2021</year>
-        <day>1</day>
-      </end>
-      <type>Injured</type>
-    </unavailabilities>
-    <unavailabilities>
-      <numberOfGames>0</numberOfGames>
-      <start>
-        <month>6</month>
-        <year>2021</year>
-        <day>1</day>
-      </start>
-      <end>
-        <month>6</month>
-        <year>2021</year>
-        <day>1</day>
-      </end>
-      <type>Suspended</type>
-    </unavailabilities>
-    <unavailabilities>
-      <numberOfGames>0</numberOfGames>
-      <start>
-        <month>6</month>
-        <year>2021</year>
-        <day>1</day>
-      </start>
-      <end>
-        <month>6</month>
-        <year>2021</year>
-        <day>1</day>
-      </end>
-      <type>Suspended</type>
-    </unavailabilities>
-    <unavailabilities>
-      <numberOfGames>0</numberOfGames>
-      <start>
-        <month>6</month>
-        <year>2021</year>
-        <day>1</day>
-      </start>
-      <end>
-        <month>6</month>
-        <year>2021</year>
-        <day>1</day>
-      </end>
-      <type>Injured</type>
-    </unavailabilities>
-    <number>15</number>
+    <number>3</number>
     <benchedInARow>0</benchedInARow>
-    <name>allan</name>
+    <name>Miguel</name>
+    <positions>Defensive Midfielder</positions>
+    <positions>Full-Back</positions>
   </players>
   <players>
-    <number>9</number>
-    <benchedInARow>1</benchedInARow>
-    <name>test5553</name>
-  </players>
-  <players>
-    <number>13</number>
+    <number>4</number>
     <benchedInARow>0</benchedInARow>
-    <name>mona</name>
-    <positions>Centre-Back</positions>
+    <name>Julie</name>
+    <positions>Central Midfielder</positions>
+    <positions>Forward</positions>
   </players>
 </PlayerList>

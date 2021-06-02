@@ -136,33 +136,33 @@ public class UnavailabilityViewController
 
     else if (e.getSource() == addInjuryButton)
     {
+        Date tempStart = new Date(fromDatePicker.getValue().getDayOfMonth(),
+            fromDatePicker.getValue().getMonthValue(),
+            fromDatePicker.getValue().getYear());
 
-      Date tempStart = new Date(fromDatePicker.getValue().getDayOfMonth(),
-          fromDatePicker.getValue().getMonthValue(),
-          fromDatePicker.getValue().getYear());
-      Date tempEnd = new Date(toDatePicker.getValue().getDayOfMonth(),
-          toDatePicker.getValue().getMonthValue(),
-          toDatePicker.getValue().getYear());
-      if (tempStart != null && tempEnd != null && tempStart.isBefore(tempEnd))
-      {
-        tempUnavailabilities.add(new Unavailability(tempStart, tempEnd));
-        unavailabilityListView.getItems()
-            .add(new Unavailability(tempStart, tempEnd));
-      }
-      else
-      {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION,
-            "The start date should be before the end date.", ButtonType.OK);
-        alert.setTitle("Exit");
-        alert.setHeaderText(null);
-
-        alert.showAndWait();
-        if (alert.getResult() == ButtonType.OK)
+        Date tempEnd = new Date(toDatePicker.getValue().getDayOfMonth(),
+            toDatePicker.getValue().getMonthValue(),
+            toDatePicker.getValue().getYear());
+        if (tempStart != null && tempEnd != null && tempStart.isBefore(tempEnd))
         {
-          fromDatePicker.setValue(null);
-          toDatePicker.setValue(null);
+          tempUnavailabilities.add(new Unavailability(tempStart, tempEnd));
+          unavailabilityListView.getItems()
+              .add(new Unavailability(tempStart, tempEnd));
         }
-      }
+        else
+        {
+          Alert alert = new Alert(Alert.AlertType.INFORMATION,
+              "The start date should be before the end date.", ButtonType.OK);
+          alert.setTitle("Exit");
+          alert.setHeaderText(null);
+
+          alert.showAndWait();
+          if (alert.getResult() == ButtonType.OK)
+          {
+            fromDatePicker.setValue(null);
+            toDatePicker.setValue(null);
+          }
+        }
     }
 
     else if (e.getSource() == exitMenuItem)
@@ -214,10 +214,8 @@ public class UnavailabilityViewController
       {
         for (int i = 0; i < tempUnavailabilities.size(); i++)
         {
-
           if (tempUnavailabilities.get(i).isActive())
           {
-
             tempUnavailabilities.get(i).setAvailable(Date.today());
           }
         }
@@ -230,7 +228,11 @@ public class UnavailabilityViewController
     }
     else if (e.getSource() == fromDatePicker)
     {
-      addInjuryButton.setDisable(false);
+      makeAddInjuryButtonAvailable();
+    }
+    else if (e.getSource() == toDatePicker)
+    {
+      makeAddInjuryButtonAvailable();
     }
   }
 
@@ -262,6 +264,14 @@ public class UnavailabilityViewController
     this.player = player;
   }
 
+  private void makeAddInjuryButtonAvailable()
+  {
+    if (fromDatePicker.getValue()!=null && toDatePicker.getValue()!=null)
+    {
+      addInjuryButton.setDisable(false);
+    }
+  }
+
   /**
    * Sets the numbers in the suspension combo box
    */
@@ -281,11 +291,8 @@ public class UnavailabilityViewController
     if (modelManager != null && player != null)
     {
       unavailabilityListView.getItems().clear();
-
-
       for (int i = 0; i < tempUnavailabilities.size(); i++)
       {
-
         unavailabilityListView.getItems().add(tempUnavailabilities.get(i));
       }
     }
