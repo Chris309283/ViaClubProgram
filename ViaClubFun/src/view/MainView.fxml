@@ -85,10 +85,11 @@
                      <children>
                         <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="600.0" spacing="10.0">
                            <children>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Show" />
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Show By Date" />
                               <ComboBox fx:id="matchDateComboBox" onAction="#handleActions" prefHeight="25.0" prefWidth="116.0" promptText="Search Date" />
-                              <TextField fx:id="searchMatchesField" />
-                              <ComboBox fx:id="matchSearchComboBox" prefWidth="150.0" promptText="Search By" />
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Show By type" />
+                              <ComboBox fx:id="matchSearchComboBox" onAction="#handleActions" prefWidth="150.0" />
+                              <TextField fx:id="searchMatchesField" promptText="Opponent" />
                               <Button fx:id="matchSearchButton" mnemonicParsing="false" onAction="#handleActions" text="Search" />
                            </children>
                            <padding>

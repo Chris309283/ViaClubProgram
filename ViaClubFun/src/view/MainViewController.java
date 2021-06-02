@@ -64,7 +64,7 @@ public class MainViewController
    *
    * @param viewHandler  links the views
    * @param modelManager single access point for the functionality
-   * @param root the main layout of the view
+   * @param root         the main layout of the view
    */
   public void init(ViewHandler viewHandler, ViaClubModelManager modelManager,
       Region root)
@@ -97,7 +97,7 @@ public class MainViewController
     setMatchSearchComboBox();
     modelManager.updateBenchedInARow();
     updatePlayerList();
-    updateMatchList();
+    searchMatchList();
   }
 
   /**
@@ -195,12 +195,20 @@ public class MainViewController
     {
       if (matchDateComboBox.getSelectionModel().getSelectedItem() != null)
       {
-        updateMatchList();
+        searchMatchList();
       }
     }
     else if (e.getSource() == matchSearchButton)
     {
       searchMatchList();
+    }
+
+    else if (e.getSource() == matchSearchComboBox)
+    {
+      if (matchSearchComboBox.getSelectionModel().getSelectedItem() != null)
+      {
+        searchMatchList();
+      }
     }
 
     else if (e.getSource() == addMatchButton)
@@ -233,7 +241,7 @@ public class MainViewController
 
         modelManager.saveMatches(temp);
 
-        updateMatchList();
+        searchMatchList();
         disableMatchButtons();
       }
     }
@@ -353,11 +361,11 @@ public class MainViewController
   private void setMatchSearchComboBox()
   {
     matchSearchComboBox.getItems().clear();
-    matchSearchComboBox.getItems().add("Opponent");
     matchSearchComboBox.getItems().add("League");
     matchSearchComboBox.getItems().add("Cup");
     matchSearchComboBox.getItems().add("Friendly");
     matchSearchComboBox.getItems().add("Show All");
+    matchSearchComboBox.getSelectionModel().select(3);
   }
 
   /**
@@ -428,33 +436,62 @@ public class MainViewController
   private void searchMatchList()
   {
     MatchList tempList = new MatchList();
-    MatchList tempListOutput = new MatchList();
+    MatchList tempListOutput;
 
-    if (matchDateComboBox.getSelectionModel().getSelectedItem().equals("All"))
+    switch (matchDateComboBox.getSelectionModel().getSelectedItem())
     {
-      tempList = modelManager.getAllMatches();
+      case "All":
+        tempList = modelManager.getAllMatches();
+        break;
+      case "Today":
+        tempList = modelManager.getAllMatchesToday();
+        break;
+      case "Past":
+        tempList = modelManager.getAllMatchesPast();
+        break;
+      case "Future":
+        tempList = modelManager.getAllFutureMatches();
+        break;
     }
-    else if (matchDateComboBox.getSelectionModel().getSelectedItem()
-        .equals("Today"))
+
+    switch (matchSearchComboBox.getSelectionModel().getSelectedItem())
     {
-      tempList = modelManager.getAllMatchesToday();
+      case "League":
+        tempListOutput = modelManager.getTypeMatches("League", tempList);
+        allMatchesList.getItems().clear();
+        for (int i = 0; i < tempListOutput.size(); i++)
+        {
+          allMatchesList.getItems().add(tempListOutput.get(i));
+        }
+        break;
+      case "Cup":
+        tempListOutput = modelManager.getTypeMatches("Cup", tempList);
+        allMatchesList.getItems().clear();
+        for (int i = 0; i < tempListOutput.size(); i++)
+        {
+          allMatchesList.getItems().add(tempListOutput.get(i));
+        }
+        break;
+      case "Friendly":
+        tempListOutput = modelManager.getTypeMatches("Friendly", tempList);
+        allMatchesList.getItems().clear();
+        for (int i = 0; i < tempListOutput.size(); i++)
+        {
+          allMatchesList.getItems().add(tempListOutput.get(i));
+        }
+        break;
+      default:
+        tempListOutput = tempList;
+        allMatchesList.getItems().clear();
+        for (int i = 0; i < tempListOutput.size(); i++)
+        {
+          allMatchesList.getItems().add(tempListOutput.get(i));
+        }
     }
-    else if (matchDateComboBox.getSelectionModel().getSelectedItem()
-        .equals("Past"))
-    {
-      tempList = modelManager.getAllMatchesPast();
-    }
-    else if (matchDateComboBox.getSelectionModel().getSelectedItem()
-        .equals("Future"))
-    {
-      tempList = modelManager.getAllFutureMatches();
-    }
-    if (matchSearchComboBox.getSelectionModel().getSelectedItem()
-        .equals("Opponent"))
+    if (!searchMatchesField.getText().equals(""))
     {
       tempListOutput = modelManager
-          .getMatchesAgainst(searchMatchesField.getText(), tempList);
-
+          .getMatchesAgainst(searchMatchesField.getText(), tempListOutput);
       allMatchesList.getItems().clear();
 
       for (int i = 0; i < tempListOutput.size(); i++)
@@ -462,37 +499,6 @@ public class MainViewController
         allMatchesList.getItems().add(tempListOutput.get(i));
       }
     }
-    else if (matchSearchComboBox.getSelectionModel().getSelectedItem()
-        .equals("League"))
-    {
-      tempListOutput = modelManager.getTypeMatches("League", tempList);
-      allMatchesList.getItems().clear();
-      for (int i = 0; i < tempListOutput.size(); i++)
-      {
-        allMatchesList.getItems().add(tempListOutput.get(i));
-      }
-    }
-    else if (matchSearchComboBox.getSelectionModel().getSelectedItem()
-        .equals("Cup"))
-    {
-      tempListOutput = modelManager.getTypeMatches("Cup", tempList);
-      allMatchesList.getItems().clear();
-      for (int i = 0; i < tempListOutput.size(); i++)
-      {
-        allMatchesList.getItems().add(tempListOutput.get(i));
-      }
-    }
-    else if (matchSearchComboBox.getSelectionModel().getSelectedItem()
-        .equals("Friendly"))
-    {
-      tempListOutput = modelManager.getTypeMatches("Friendly", tempList);
-      allMatchesList.getItems().clear();
-      for (int i = 0; i < tempListOutput.size(); i++)
-      {
-        allMatchesList.getItems().add(tempListOutput.get(i));
-      }
-    }
-
   }
 
   /**
@@ -540,57 +546,6 @@ public class MainViewController
   }
 
   /**
-   * Updates the match list displayed based on the search
-   */
-  private void updateMatchList()
-  {
-    allMatchesList.getItems().clear();
-    if (searchMatchesField.getText().equals(""))
-    {
-      if (matchDateComboBox.getSelectionModel().getSelectedItem().equals("All"))
-      {
-        MatchList matches = modelManager.getAllMatches();
-        for (int i = 0; i < matches.size(); i++)
-        {
-          allMatchesList.getItems().add(matches.get(i));
-        }
-      }
-      else if (matchDateComboBox.getSelectionModel().getSelectedItem()
-          .equals("Today"))
-      {
-        MatchList matches = modelManager.getAllMatchesToday();
-        for (int i = 0; i < matches.size(); i++)
-        {
-          allMatchesList.getItems().add(matches.get(i));
-        }
-      }
-      else if (matchDateComboBox.getSelectionModel().getSelectedItem()
-          .equals("Past"))
-      {
-        MatchList matches = modelManager.getAllMatchesPast();
-        for (int i = 0; i < matches.size(); i++)
-        {
-          allMatchesList.getItems().add(matches.get(i));
-        }
-      }
-      else if (matchDateComboBox.getSelectionModel().getSelectedItem()
-          .equals("Future"))
-      {
-        MatchList matches = modelManager.getAllFutureMatches();
-
-        for (int i = 0; i < matches.size(); i++)
-        {
-          allMatchesList.getItems().add(matches.get(i));
-        }
-      }
-      else
-      {
-        searchMatchList();
-      }
-    }
-  }
-
-  /**
    * Updates the data displayed when changing tabs
    *
    * @param e the targeted event
@@ -605,7 +560,7 @@ public class MainViewController
 
     else if (matchListTab.isSelected())
     {
-      updateMatchList();
+      searchMatchList();
       disableMatchButtons();
     }
   }
