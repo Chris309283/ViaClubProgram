@@ -159,6 +159,7 @@ public class AddPlayerViewController
         saveButton.setDisable(false);
       }
     }
+
     else if (e.getSource() == numberBox)
     {
       if (nameField.getText().length() > 0 && numberBox.getValue() != null)
