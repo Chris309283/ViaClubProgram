@@ -120,7 +120,6 @@ public class MainViewController
     if (e.getSource() == addPlayerButton)
     {
       viewHandler.openView("AddPlayerView");
-      viewHandler.getAddPlayerViewController().reset();
     }
 
     else if (e.getSource() == editPlayerButton)

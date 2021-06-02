@@ -104,6 +104,10 @@ public class AddPlayerViewController
       positionsBox.getItems().clear();
       updatePositionsBox();
       addButton.setDisable(true);
+      if (nameField.getText().length() > 0 && numberBox.getValue() != null)
+      {
+        saveButton.setDisable(false);
+      }
     }
 
     else if (e.getSource() == removeButton)
@@ -148,10 +152,6 @@ public class AddPlayerViewController
       viewHandler.getMainViewController().reset();
     }
 
-    else if (e.getSource() == positionsBox)
-    {
-
-    }
     else if (e.getSource() == nameField)
     {
       if (nameField.getText().length() > 0 && numberBox.getValue() != null)
@@ -208,9 +208,11 @@ public class AddPlayerViewController
   public void setNumberBox()
   {
     ArrayList<Integer> usedNumbers = new ArrayList<Integer>();
-    for (int i = 0; i < modelManager.getAllPlayers().size(); i++)
+    PlayerList temp = modelManager.getAllPlayers();
+    numberBox.getItems().clear();
+    for (int i = 0; i < temp.size(); i++)
     {
-      usedNumbers.add(modelManager.getAllPlayers().get(i).getNumber());
+      usedNumbers.add(temp.get(i).getNumber());
     }
     for (int i = 0; i < 99; i++)
     {

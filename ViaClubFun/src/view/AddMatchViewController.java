@@ -92,6 +92,7 @@ public class AddMatchViewController
    */
   public void reset()
   {
+    editMatch=null;
     datePicker.setValue(LocalDate.now());
     opponentField.clear();
     tempBench.clear();
@@ -120,7 +121,10 @@ public class AddMatchViewController
 
     if (e.getSource() == searchButton)
     {
-      searchPlayerList();
+      if (!searchField.getText().equals(""))
+      {
+        searchPlayerList();
+      }
     }
 
     if (e.getSource() == searchBox)
