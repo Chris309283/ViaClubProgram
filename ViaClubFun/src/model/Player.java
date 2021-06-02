@@ -162,14 +162,6 @@ public class Player implements Serializable
   }
 
   /**
-   * Increments the number of games benched in a row
-   */
-  public void incrementBenchedInARow()
-  {
-    benchedInARow++;
-  }
-
-  /**
    * Compares the name, the number, the positions and the unavailabilities of two players
    *
    * @param obj the object to compare with
