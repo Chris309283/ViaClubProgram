@@ -50,7 +50,7 @@ public class AddPlayerViewController
    *
    * @param viewHandler links the views
    * @param modelManager single access point for the funcuinality
-   * @param root
+   * @param root the main layout of the window
    */
   public void init(ViewHandler viewHandler, ViaClubModelManager modelManager,
       Region root)

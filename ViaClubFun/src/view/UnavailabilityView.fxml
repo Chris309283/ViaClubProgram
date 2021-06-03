@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/16" userData="VIA Club Management System" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.UnavailabilityViewController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" userData="VIA Club Management System" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.UnavailabilityViewController">
    <children>
       <MenuBar>
         <menus>
@@ -39,7 +39,7 @@
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
          <children>
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Player:" textOrigin="CENTER" />
-            <TextField fx:id="nameField" />
+            <TextField fx:id="nameField" editable="false" />
             <Button fx:id="forceAvailableButton" mnemonicParsing="false" onAction="#handleActions" text="Force Available" />
          </children>
       </HBox>

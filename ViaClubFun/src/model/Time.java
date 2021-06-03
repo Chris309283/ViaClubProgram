@@ -54,7 +54,7 @@ public class Time implements Serializable
   /**
    * Gets the minute of the hour
    *
-   * @return
+   * @return the minute of the hour
    */
   public int getMinute()
   {

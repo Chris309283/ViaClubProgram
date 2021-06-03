@@ -47,7 +47,7 @@ public class UnavailabilityViewController
    *
    * @param viewHandler links the views
    * @param modelManager a single access point for the functionality
-   * @param root
+   * @param root the main layout of the window
    */
   public void init(ViewHandler viewHandler, ViaClubModelManager modelManager,
       Region root)
